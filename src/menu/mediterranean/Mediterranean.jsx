@@ -29,7 +29,7 @@ function Mediterranean() {
     );
   return (
     <FoodPage>
-      <H1>Mediterranean food menu</H1>
+      <H1 $foodPageTitle={true}>Mediterranean food menu</H1>
 
       <FoodContainer>
         {sortedMediterranean?.map((p, i) => (

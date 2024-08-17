@@ -30,7 +30,7 @@ const TotalForItem = styled.span`
 const PriceQuantity = styled.div``;
 
 function OrderItem({ item }) {
-  console.log(item);
+  // console.log(item);
 
   return (
     <StyledOrderItem>

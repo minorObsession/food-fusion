@@ -107,9 +107,14 @@ export const Button = styled.button`
   }
 `;
 
-function ButtonUI({ children, onClick, className, disabled }) {
+function ButtonUI({ children, onClick, className, disabled, onMouseEnter }) {
   return (
-    <Button $className={className} disabled={disabled} onClick={onClick}>
+    <Button
+      onMouseEnter={onMouseEnter}
+      $className={className}
+      disabled={disabled}
+      onClick={onClick}
+    >
       {children}
     </Button>
   );

@@ -14,6 +14,8 @@ export async function getFood(queryKey) {
 }
 
 export async function updateFood(updatedFoodObject, foodType) {
+  console.log(updatedFoodObject, foodType);
+
   let { data: updatedFood, error } = await supabase
     .from(foodType)
     .update({ ...updatedFoodObject })

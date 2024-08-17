@@ -101,7 +101,6 @@ function Homepage() {
           </DIV>
         </>
       )}
-
       {!currentAccount && (
         <>
           <DIV $title={true}>

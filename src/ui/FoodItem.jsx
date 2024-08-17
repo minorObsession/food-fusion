@@ -28,6 +28,7 @@ import { useDeleteFood } from "../menu/useDeleteFood";
 import FileInput from "./FileInput";
 import { supabaseUrl } from "../services/supabase";
 import { NavLink } from "react-router-dom";
+import { updateFood } from "../services/apiFood";
 
 const Div = styled.div`
   align-self: flex-end;
@@ -122,6 +123,7 @@ function FoodItem({ foodType }) {
     if (!isEditing) toggleEditMode();
     if (foodType) {
       foodType.soldOut = true;
+      updateFood(foodType, foodTypeFromUrl);
       toggleEditMode();
     }
   }
@@ -187,6 +189,7 @@ function FoodItem({ foodType }) {
             />
           </>
         ) : (
+          // ! not editing
           <>
             <Name>{foodType.name}</Name>
             <Ingredients>{foodType.ingredients.join(", ")}</Ingredients>
@@ -194,7 +197,6 @@ function FoodItem({ foodType }) {
           </>
         )}
       </NameIngPriceDiv>
-
       {currentAccount?.typeOfUser === "customer" ? (
         itemInCart ? (
           <Div>
@@ -223,7 +225,6 @@ function FoodItem({ foodType }) {
           </Div>
         )
       ) : (
-        // !! when current account = 'admin'
         (currentAccount?.typeOfUser === "admin" && (
           <Div>
             {isEditing ? (

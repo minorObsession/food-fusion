@@ -37,15 +37,20 @@ const OrdersBox = styled.div`
 `;
 
 function Orders() {
+  const { currentAccount } = useSelector((store) => store.accounts);
+
   const { orders } = useSelector((store) => store.order);
   console.log(orders);
+
+  if (currentAccount?.typeOfUser !== "admin") return;
+
   return (
     <StyledOrders>
       <H1>ORDERS</H1>
       <OrdersBox>
         {" "}
         {orders.map((o) => (
-          <Order order={o} key={o.orderId} />
+          <Order order={o} key={Math.random() + +o.orderID} />
         ))}
       </OrdersBox>
     </StyledOrders>

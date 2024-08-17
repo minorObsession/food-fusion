@@ -1,11 +1,13 @@
 import styled from "styled-components";
 import { CiCircleChevDown } from "react-icons/ci";
 import { IoCheckmarkDone } from "react-icons/io5";
+import { FaCheck } from "react-icons/fa";
 
 import { Button } from "./ButtonUI";
 import { formatDate } from "../helpers/helperFunctions";
 import OrderItem from "./OrderItem";
 import { useState } from "react";
+import toast from "react-hot-toast";
 
 const StyledOrder = styled.div`
   /* background-color: ; */
@@ -54,9 +56,16 @@ const DescriptionDiv = styled.div`
 `;
 
 function Order({ order }) {
+  console.log(order);
   const [isOrderCollapsed, setIsOrderCollapsed] = useState(false);
 
-  console.log(order);
+  // console.log(order);
+
+  function showActionDescription(e) {
+    console.log(e);
+  }
+
+  function handleMarkAsCompleted() {}
 
   return (
     <StyledOrder $isOrderCollapsed={isOrderCollapsed}>
@@ -74,8 +83,12 @@ function Order({ order }) {
           >
             &#11165;
           </Button>
-          <Button $className="small">
-            <IoCheckmarkDone />
+          <Button
+            onClick={handleMarkAsCompleted}
+            onMouseEnter={showActionDescription}
+            $className="small"
+          >
+            &#10004;
           </Button>
         </>
       ) : (

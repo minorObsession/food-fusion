@@ -3,10 +3,10 @@ import ButtonUI, { Button } from "./ButtonUI";
 import { NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { CiRuler } from "react-icons/ci";
 
 const StyledLoginSignupBox = styled.div`
   position: absolute;
-  width: 50vw;
   top: 5%;
   left: 50%;
 
