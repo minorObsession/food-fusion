@@ -7,7 +7,7 @@ import { clearCart } from "../features/cartSlice";
 import { createNewOrder } from "../features/orderSlice";
 import { formatCurrency, formatDate } from "../helpers/helperFunctions";
 import { createStoreNewOrder } from "../services/apiOrders";
-import { useCreateNewOrder } from "../menu/useCreateNewOrder";
+import { useCreateNewOrder } from "../hooks/useCreateNewOrder";
 
 const CartPage = styled.div`
   width: 80%;

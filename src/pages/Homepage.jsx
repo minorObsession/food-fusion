@@ -37,8 +37,21 @@ const DIV = styled.div`
 `;
 
 const HomepageBtn = styled.button`
+  border: 2px solid var(--color-grey-300);
+
   padding: 1.7rem;
-  font-weight: 600;
+
+  &:active,
+  &:focus {
+    box-shadow: var(--shadow-md);
+    background-color: var(--color-brand-500);
+    font-weight: 600;
+    outline: 2px solid var(--color-brand-300);
+  }
+
+  &:hover {
+    background-color: var(--color-brand-500);
+  }
 `;
 
 function Homepage() {

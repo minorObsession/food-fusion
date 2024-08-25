@@ -10,11 +10,10 @@ import Cart from "./pages/Cart";
 import Order from "./pages/Order";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./ui/AppLayout";
-import Pizza from "./menu/pizza/Pizza";
-import Pasta from "./menu/pasta/Pasta";
 import Modal from "./ui/Modal";
-import Mediterranean from "./menu/mediterranean/Mediterranean";
+
 import Orders from "./pages/Orders";
+import FoodProductPage from "./pages/FoodPage";
 
 function App() {
   const queryClient = new QueryClient({
@@ -41,9 +40,18 @@ function App() {
               />
               <Route path="signup" element={<Modal type="signup" />} />
 
-              <Route path="pizza" element={<Pizza />} />
-              <Route path="pasta" element={<Pasta />} />
-              <Route path="mediterranean" element={<Mediterranean />} />
+              <Route
+                path="pizza"
+                element={<FoodProductPage queryKey="pizza" />}
+              />
+              <Route
+                path="pasta"
+                element={<FoodProductPage queryKey="pasta" />}
+              />
+              <Route
+                path="mediterranean"
+                element={<FoodProductPage queryKey="mediterranean" />}
+              />
 
               <Route path="cart" element={<Cart />} />
               <Route path="order/:orderID" element={<Order />} />

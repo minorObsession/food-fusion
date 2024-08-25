@@ -16,15 +16,15 @@ import {
   StyledFoodItem,
 } from "../styles/reusableStyles";
 
-import ButtonUI, { Button } from "./ButtonUI";
+import { Button } from "./ButtonUI";
 
 import { DeleteBtn, ModifyQuantityBtn, ModifyQuantityDiv } from "./CartItem";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { Input } from "./Input";
 
-import { useEditFood } from "../menu/useEditFood";
-import { useDeleteFood } from "../menu/useDeleteFood";
+import { useEditFood } from "../hooks/useEditFood";
+import { useDeleteFood } from "../hooks/useDeleteFood";
 import FileInput from "./FileInput";
 import { supabaseUrl } from "../services/supabase";
 import { NavLink } from "react-router-dom";
@@ -78,54 +78,17 @@ function FoodItem({ foodType }) {
     (item) => item.name === foodType.name
   )?.quantity;
 
-  // Local state for edit mode
-  const [isEditing, setIsEditing] = useState(false);
-  const [editedFoodType, setEditedFoodType] = useState(foodType);
-
+  // ? edit/delete
   const { isEditingItem, modifyFoodItem } = useEditFood();
   const { isDeletingItem, deleteFoodItem } = useDeleteFood();
 
+  const [editedFoodType, setEditedFoodType] = useState(foodType);
+  const [isEditing, setIsEditing] = useState(false);
   const inStock = !foodType.soldOut;
   const isSoldOut = foodType.soldOut;
 
   function toggleEditMode() {
     setIsEditing(!isEditing);
-  }
-
-  function handleInputChange(e) {
-    const { name, value } = e.target;
-    setEditedFoodType({ ...editedFoodType, [name]: value });
-  }
-
-  function handleImageUpload(e) {
-    const file = e.target.files[0];
-
-    // ! I WAS HERE WORKING ON THE IMAGE PATH
-    const filePath = `${supabaseUrl}/storage/v1/object/public/${foodTypeFromUrl}-photos/${file.name}`;
-    // ("https://ioefjkssfcuhmvvolteu.supabase.co/storage/v1/object/public/pizza-photos/Eggplant Parmesan.jpg");
-
-    setEditedFoodType({ ...editedFoodType, image: filePath });
-  }
-
-  function handleBackInStock() {
-    if (inStock) return;
-
-    if (!isEditing) toggleEditMode();
-    if (foodType) return (foodType.soldOut = false);
-  }
-
-  // ? https://ioefjkssfcuhmvvolteu.supabase.co/storage/v1/object/public/pizza-photos/Margherita.jpg?t=2024-08-14T21%3A21%3A28.994Z
-  // ? https://ioefjkssfcuhmvvolteu.supabase.co/storage/v1/object/public/pizza-photos/Hawaiian.jpg?t=2024-08-14T21%3A21%3A39.106Z
-
-  function handleOutOfStock() {
-    if (!inStock) return;
-
-    if (!isEditing) toggleEditMode();
-    if (foodType) {
-      foodType.soldOut = true;
-      updateFood(foodType, foodTypeFromUrl);
-      toggleEditMode();
-    }
   }
 
   function saveChanges(e) {
@@ -137,6 +100,43 @@ function FoodItem({ foodType }) {
     setTimeout(() => {
       setIsEditing(false);
     }, 1000);
+  }
+
+  //
+
+  function handleInputChange(e) {
+    const { name, value } = e.target;
+    setEditedFoodType({ ...editedFoodType, [name]: value });
+  }
+
+  function handleImageUpload(e) {
+    const file = e.target.files[0];
+
+    const filePath = `${supabaseUrl}/storage/v1/object/public/${foodTypeFromUrl}-photos/${file.name}`;
+
+    setEditedFoodType({ ...editedFoodType, image: filePath });
+  }
+
+  function handleBackInStock() {
+    if (inStock) return;
+
+    if (!isEditing) toggleEditMode();
+    if (foodType) {
+      foodType.soldOut = false;
+      updateFood(foodType, foodTypeFromUrl);
+      toggleEditMode();
+    }
+  }
+
+  function handleOutOfStock() {
+    if (!inStock) return;
+
+    if (!isEditing) toggleEditMode();
+    if (foodType) {
+      foodType.soldOut = true;
+      updateFood(foodType, foodTypeFromUrl);
+      toggleEditMode();
+    }
   }
 
   function deleteFood() {
@@ -219,9 +219,9 @@ function FoodItem({ foodType }) {
           </Div>
         ) : (
           <Div>
-            <ButtonUI onClick={() => dispatch(addItemToCart(foodType))}>
+            <Button onClick={() => dispatch(addItemToCart(foodType))}>
               Add to cart
-            </ButtonUI>
+            </Button>
           </Div>
         )
       ) : (
@@ -229,15 +229,19 @@ function FoodItem({ foodType }) {
           <Div>
             {isEditing ? (
               <Div $isEditing={isEditing}>
-                <ButtonUI onClick={deleteFood}>Delete</ButtonUI>
-                <ButtonUI onClick={handleOutOfStock}>Out of Stock</ButtonUI>
-                <ButtonUI onClick={toggleEditMode}>Cancel</ButtonUI>
-                <ButtonUI onClick={saveChanges}>Save</ButtonUI>
+                <Button disabled={isDeletingItem} onClick={deleteFood}>
+                  Delete
+                </Button>
+                <Button onClick={handleOutOfStock}>Out of Stock</Button>
+                <Button onClick={toggleEditMode}>Cancel</Button>
+                <Button $className="main" onClick={saveChanges}>
+                  Save
+                </Button>
               </Div>
             ) : isSoldOut ? (
-              <ButtonUI onClick={handleBackInStock}>Make available</ButtonUI>
+              <Button onClick={handleBackInStock}>Make available</Button>
             ) : (
-              <ButtonUI onClick={toggleEditMode}>Edit Product</ButtonUI>
+              <Button onClick={toggleEditMode}>Edit Product</Button>
             )}
           </Div>
         )) ||

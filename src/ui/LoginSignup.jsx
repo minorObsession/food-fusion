@@ -28,12 +28,9 @@ const StyledLoginSignupBox = styled.div`
 
 function LoginSignup() {
   const { currentAccount } = useSelector((store) => store.accounts);
-  // if (isCurrentPageHomepage) return null;
+
   const location = useLocation();
-  console.log(location);
   const pathname = location.pathname.length > 1;
-  // console.log(pathname);
-  // const [isHomepage, setIsHomepage] = useState();
 
   if (!pathname || currentAccount) return null;
 

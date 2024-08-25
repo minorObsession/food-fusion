@@ -1,7 +1,6 @@
 import supabase from "./supabase";
 
 export async function createNewAccount(accountObject) {
-  console.log(accountObject);
   let { data: accounts, error } = await supabase
     .from("accounts")
     .insert([accountObject])
@@ -11,8 +10,6 @@ export async function createNewAccount(accountObject) {
     console.error(error.message);
     throw new Error("Account couldn't be created");
   }
-
-  console.log(accounts);
 
   return accounts;
 }

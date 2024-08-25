@@ -23,7 +23,7 @@ const StyledSidebar = styled.div`
   background-color: var(--color-brand-200);
 
   padding: ${({ $collapsed }) =>
-    $collapsed === true ? "15rem 1.5rem" : "15rem 2rem"};
+    $collapsed === true ? "15rem 1.5rem" : "15rem 5rem"};
 
   height: 100vh !important;
   max-width: 20%;
@@ -38,7 +38,7 @@ const StyledSidebar = styled.div`
   @media (min-width: 480px) {
     /* max-width: 6vw; */
     padding: ${({ $collapsed }) =>
-      $collapsed === true ? "15rem 2rem" : "15rem 6rem"};
+      $collapsed === true ? "15rem 2rem" : "15rem 8rem"};
   }
 
   @media (min-width: 1024px) {

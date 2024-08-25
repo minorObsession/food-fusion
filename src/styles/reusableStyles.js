@@ -5,8 +5,8 @@ export const H1 = styled.h1`
   font-size: 28px;
   margin-bottom: 2rem;
 
-  margin-bottom: ${({ $foodPageTitle }) =>
-    $foodPageTitle === true ? "8rem" : "2rem"};
+  padding: ${({ $foodPageTitle }) =>
+    $foodPageTitle === true ? "5rem" : "2rem"};
 `;
 
 export const H2 = styled.h2`
@@ -16,14 +16,18 @@ export const H2 = styled.h2`
 `;
 
 export const FoodPage = styled.div`
+  /* padding-top: 10rem; */
   width: 100vw;
   padding: 1rem;
 
+  display: flex;
+  flex-direction: column;
+
   @media (min-width: 480px) {
-    padding: 5rem;
+    padding: 3rem;
   }
   @media (min-width: 1024px) {
-    padding: 7rem;
+    padding: 5rem;
   }
 
   background-color: var(--color-grey-100);
@@ -34,7 +38,7 @@ export const FoodContainer = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
+  gap: 2.5rem;
 `;
 
 export const StyledFoodItem = styled.div`
@@ -69,6 +73,7 @@ export const Img = styled.img`
   height: 9rem;
   border-radius: 1.5rem;
   display: inline;
+
   /* 
   @media (min-width: 480px) {
     width: 12rem;
@@ -115,35 +120,35 @@ export const Price = styled.span`
   font-size: 15px;
 `;
 
-export const AddToCart = styled.button`
-  width: 10rem;
-  height: 3rem;
-  font-size: 14px;
-  padding: 1.8rem 7rem;
-  background-color: var(--color-brand-200);
-  font-weight: 600;
-  letter-spacing: 0.8px;
-  align-self: flex-end;
-  text-transform: uppercase;
+// export const AddToCart = styled.button`
+//   width: 10rem;
+//   height: 3rem;
+//   font-size: 14px;
+//   padding: 1.8rem 7rem;
+//   background-color: var(--color-brand-200);
+//   font-weight: 600;
+//   letter-spacing: 0.8px;
+//   align-self: flex-end;
+//   text-transform: uppercase;
 
-  display: flex;
-  justify-content: center;
-  align-items: center;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
 
-  &:hover,
-  &:visited {
-    font-weight: 600;
-    background-color: var(--color-brand-300);
-  }
+//   &:hover,
+//   &:visited {
+//     font-weight: 600;
+//     background-color: var(--color-brand-300);
+//   }
 
-  @media (min-width: 480px) {
-    /* padding: 2rem; */
-  }
+//   @media (min-width: 480px) {
+//     /* padding: 2rem; */
+//   }
 
-  @media (min-width: 1024px) {
-    width: 12rem;
-    height: 3.5rem;
-    font-size: 16px;
-    /* padding: 2rem; */
-  }
-`;
+//   @media (min-width: 1024px) {
+//     width: 12rem;
+//     height: 3.5rem;
+//     font-size: 16px;
+//     /* padding: 2rem; */
+//   }
+// `;

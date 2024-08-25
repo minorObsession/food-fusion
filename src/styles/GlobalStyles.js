@@ -97,10 +97,10 @@ button {
   
   letter-spacing: 1.1px;
   border-radius: 20px;
-  border: solid 2px var(--color-grey-600);
+  /* border: solid 2px var(--color-grey-600); */
   height: 3rem;
   background-color: var(--color-brand-200);
-font-weight: 700;
+    font-weight: 700;
   white-space: nowrap;
   display: flex;
   justify-content: center;
@@ -128,15 +128,15 @@ font-weight: 700;
 
 select:disabled,
 input:disabled {
-  background-color: var(--color-grey-200);
-  color: var(--color-grey-500);  // ! ADJUST THIS
+  background-color: var(--color-grey-500);
+  color: var(--color-grey-100);  
 }
 
 input:focus,
 button:focus,
 select:focus {
-  outline: 2px solid var(--color-grey-600);
-  outline-offset: -1px;
+  outline: 2px solid var(--color-brand-300);
+  outline-offset: 1px;
 }
 
 a {
