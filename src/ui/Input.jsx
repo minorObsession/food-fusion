@@ -5,7 +5,7 @@ export const Input = styled.input`
   background-color: var(--color-grey-50);
   padding: 0.2rem 1rem;
   box-shadow: var(--shadow-sm);
-  width: 75%;
+  width: 100%;
   border-radius: var(--border-radius-md);
   filter: ${({ disabled }) => (disabled === true ? "grayscale(80%)" : "none")};
 
@@ -22,7 +22,7 @@ export const Input = styled.input`
   }
 `;
 export const Option = styled.option`
-  width: 75%;
+  width: 100%;
   border: 1px solid var(--color-grey-300);
   background-color: var(--color-grey-50);
   border-radius: var(--border-radius-sm);
@@ -31,7 +31,7 @@ export const Option = styled.option`
 `;
 
 export const Select = styled.select`
-  width: 75%;
+  width: 100%;
   border: 1px solid var(--color-grey-300);
   background-color: var(--color-grey-50);
   border-radius: var(--border-radius-md);

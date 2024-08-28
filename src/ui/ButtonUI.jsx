@@ -1,10 +1,13 @@
 import styled from "styled-components";
 
 export const Button = styled.button`
-  background-color: ${({ $className }) =>
+  background-color: ${({ $className, value, $sortCriteria }) =>
     ($className === "main" && "var(--color-brand-500) !important ") ||
     ($className === "signup" && "var(--color-brand-100) !important ") ||
     ($className === "login" && "var(--color-grey-50) !important ") ||
+    ($sortCriteria === value &&
+      $className === undefined &&
+      "var(--color-brand-500) !important ") ||
     "inherit"};
   color: ${({ $className }) =>
     ($className === "main" && "var(--color-grey-900) !important ") ||
@@ -51,6 +54,7 @@ export const Button = styled.button`
     $className === "small" ? "flex-end" : "flex-end"};
   margin-top: ${({ $className }) =>
     $className === "submitFormBtn" ? "2rem" : "auto"};
+
   min-width: ${({ $className }) =>
     $className === "submitFormBtn" || $className === "main" ? "80%" : "auto"};
   max-width: ${({ $className }) => ($className === "small" ? "10%" : "auto")};

@@ -1,7 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 
 export function useFood(queryKey, queryFN) {
-  const { isLoading, data, error } = useQuery({
+  const {
+    isPending: isLoading,
+    data,
+    error,
+  } = useQuery({
     queryKey: [queryKey],
     queryFn: queryFN,
   });

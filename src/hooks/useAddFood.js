@@ -5,16 +5,17 @@ import { useForm } from "react-hook-form";
 
 export function useAddFood() {
   const foodTypeFromUrl = window.location.pathname.slice(1);
+
+  const { register, handleSubmit, reset, formState, getValues } = useForm();
+  const { errors } = formState;
+
   const queryClient = useQueryClient();
-
-  const { register, handleSubmit, reset } = useForm();
-
-  const { mutate: addNewFoodItem, isLoading: isCreating } = useMutation({
+  const { mutate: addNewFoodItem, isPending: isCreating } = useMutation({
     mutationFn: addNewFoodAPI,
     onSuccess: () => {
       toast.success("Food successfully added to the menu!");
       queryClient.invalidateQueries({ queryKey: [foodTypeFromUrl] });
-      // reset();
+      reset();
     },
     onError: (err) => {
       console.error(err);
@@ -27,5 +28,7 @@ export function useAddFood() {
     register,
     handleSubmit,
     foodTypeFromUrl,
+    getValues,
+    errors,
   };
 }

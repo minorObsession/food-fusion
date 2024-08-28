@@ -14,6 +14,7 @@ import Modal from "./ui/Modal";
 
 import Orders from "./pages/Orders";
 import FoodProductPage from "./pages/FoodPage";
+import FAQ from "./pages/FAQ";
 
 function App() {
   const queryClient = new QueryClient({
@@ -54,6 +55,7 @@ function App() {
               />
 
               <Route path="cart" element={<Cart />} />
+              <Route path="faq" element={<FAQ />} />
               <Route path="order/:orderID" element={<Order />} />
               <Route path="orders" element={<Orders />}></Route>
             </Route>

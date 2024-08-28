@@ -44,7 +44,7 @@ const HomepageBtn = styled.button`
   &:active,
   &:focus {
     box-shadow: var(--shadow-md);
-    background-color: var(--color-brand-500);
+    background-color: var(--color-brand -500);
     font-weight: 600;
     outline: 2px solid var(--color-brand-300);
   }

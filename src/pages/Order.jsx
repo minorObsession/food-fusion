@@ -82,7 +82,6 @@ const GrandTotalBreakdown = styled.div`
 `;
 
 function Order() {
-  // ! read params
   const { orderID } = useParams();
   const { orders } = useSelector((store) => store.order);
   const { currentAccount } = useSelector((store) => store.accounts);
@@ -90,15 +89,6 @@ function Order() {
   const order = orders?.find((o) => +o.orderID === +orderID);
   const orderItems = order?.orderObject;
   console.log(order);
-
-  const totalOrder = orderItems?.reduce(
-    (acm, item) => (acm += item.unitPrice * item.quantity),
-    0
-  );
-
-  const tax = (totalOrder * 0.18).toFixed(2);
-  const grandTotal = totalOrder + +tax;
-
   if (!order)
     return (
       <FoodPage>
@@ -118,7 +108,7 @@ function Order() {
       {/* // ! 2/3 ORDER BREAKDOWN */}
       <OrderSummary>
         {orderItems?.map((orderItem) => (
-          <StyledOrderItem key={orderItem.id}>
+          <StyledOrderItem key={Math.random() + orderItem.id}>
             <QuantityName>
               <Quantity>{orderItem.quantity} x</Quantity>
               <Name>{orderItem.name}</Name>
@@ -131,9 +121,7 @@ function Order() {
 
       {/* // ! 3/3 GRAND TOTAL BREAKDOWN */}
       <GrandTotalBreakdown>
-        <h4>Total order: {formatCurrency(totalOrder)}</h4>
-        <h4>Tax: {formatCurrency(tax)}</h4>
-        <h3>GrandTotal: {formatCurrency(grandTotal)}</h3>
+        <h4>To pay on delivery: {formatCurrency(order?.grandTotal)}</h4>
       </GrandTotalBreakdown>
     </FoodPage>
   );

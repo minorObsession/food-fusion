@@ -1,5 +1,15 @@
-export function sortFoodBySoldOut(foodArray) {
-  const sortedFood = foodArray?.sort((a, b) => a.soldOut - b.soldOut);
+export function sortFood(foodArray, sortBy = "soldOut") {
+  let sortedFood;
+
+  if (sortBy === "soldOut")
+    sortedFood = foodArray?.slice().sort((a, b) => a.soldOut - b.soldOut);
+
+  if (sortBy === "name")
+    sortedFood = foodArray?.slice().sort((a, b) => a.name - b.name);
+
+  if (sortBy === "unitPrice")
+    sortedFood = foodArray?.slice().sort((a, b) => a.unitPrice - b.unitPrice);
+
   return sortedFood;
 }
 
@@ -41,6 +51,7 @@ async function reverseGeocodingCurrentPosition(latitude, longitude) {
       zipCode,
       state: principalSubdivisionCode.slice(-2),
     };
+
     return address;
   } catch (err) {
     console.error("Error with reverse geocoding:", err.message);

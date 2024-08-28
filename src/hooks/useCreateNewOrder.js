@@ -5,7 +5,7 @@ import toast from "react-hot-toast";
 export function useCreateNewOrder() {
   const queryClient = useQueryClient();
 
-  const { mutate: createOrder, isLoading: isCreating } = useMutation({
+  const { mutate: createOrder, isPending: isCreating } = useMutation({
     mutationFn: createStoreNewOrder,
     onSuccess: () => {
       toast.success("Order successfully created");

@@ -20,7 +20,7 @@ export async function addNewFood(newFoodObject) {
   let imagePath = `${supabaseUrl}/storage/v1/object/public/${newFoodObject.foodType}-photos/${imageName}`;
 
   const preparedFoodObject = { ...newFoodObject, image: imagePath };
-  console.log("preparedFoodObject:", preparedFoodObject);
+  // console.log("preparedFoodObject:", preparedFoodObject);
 
   // ! uploading food object to Supabase
   const { data: newFoodItem, error } = await supabase
@@ -35,7 +35,7 @@ export async function addNewFood(newFoodObject) {
 
   imagePath = `${preparedFoodObject.foodType}-photos/${imageName}`;
 
-  console.log("imagePath", imagePath);
+  // console.log("imagePath", imagePath);
 
   if (!(imageFile instanceof File)) {
     throw new Error("Uploaded file is not valid");
@@ -54,7 +54,7 @@ export async function addNewFood(newFoodObject) {
 }
 
 export async function updateFood(updatedFoodObject, foodType) {
-  console.log(updatedFoodObject, foodType);
+  // console.log(updatedFoodObject, foodType);
 
   let { data: updatedFood, error } = await supabase
     .from(foodType)
@@ -71,7 +71,7 @@ export async function updateFood(updatedFoodObject, foodType) {
 }
 
 export async function deleteFood(foodObjectToDelete, foodType) {
-  console.log(foodObjectToDelete, foodType);
+  // console.log(foodObjectToDelete, foodType);
 
   let { data, error } = await supabase
     .from(foodType)

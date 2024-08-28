@@ -14,7 +14,7 @@ export function useDeleteFood() {
   }, []);
 
   const queryClient = useQueryClient();
-  const { mutate: deleteFoodItem, isLoading: isDeletingItem } = useMutation({
+  const { mutate: deleteFoodItem, isPending: isDeletingItem } = useMutation({
     mutationFn: ({ foodObjectToDelete, foodTypeFromUrl }) =>
       apiDeleteFood(foodObjectToDelete, foodTypeFromUrl),
     onSuccess: () => {

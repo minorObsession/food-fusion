@@ -2,12 +2,12 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 ("react-icons/md");
-import { FiCoffee } from "react-icons/fi";
 import { MdOutlineLocalPizza } from "react-icons/md";
 import { LiaPastafarianismSolid } from "react-icons/lia";
 import { RiLogoutBoxLine } from "react-icons/ri";
 import { BiFoodMenu } from "react-icons/bi";
 
+import { FaQuestion } from "react-icons/fa6";
 import {
   IoCartOutline,
   IoNewspaperOutline,
@@ -28,7 +28,7 @@ const StyledSidebar = styled.div`
   height: 100vh !important;
   max-width: 20%;
   border-right: 2px solid var(--color-grey-300);
-  transition: all 0.15s ease-in-out;
+  transition: all 0.4s ease-in-out;
 
   display: flex;
   flex-direction: column;
@@ -121,8 +121,7 @@ const UsernameSidebar = styled.span`
 
 function Sidebar() {
   const [collapsed, setCollapsed] = useState(true);
-  const { currentAccount, accounts } = useSelector((store) => store.accounts);
-  // console.log(accounts);
+  const { currentAccount } = useSelector((store) => store.accounts);
   const dispatch = useDispatch();
 
   function logOut() {
@@ -163,6 +162,11 @@ function Sidebar() {
         {collapsed ? <BiFoodMenu /> : "Mediterranean"}
       </StyledNavLink>
 
+      {currentAccount?.typeOfUser === "customer" && (
+        <StyledNavLink to="faq">
+          {collapsed ? <FaQuestion /> : "FAQ"}
+        </StyledNavLink>
+      )}
       {currentAccount?.typeOfUser === "customer" && (
         <StyledNavLink to="cart">
           {collapsed ? <IoCartOutline /> : "Cart"}

@@ -7,7 +7,7 @@ const rotate = keyframes`
 `;
 
 const Spinner = styled.div`
-  margin: 2rem auto;
+  margin: 15rem auto;
 
   width: 10rem;
   aspect-ratio: 1;

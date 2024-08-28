@@ -6,7 +6,7 @@ export const H1 = styled.h1`
   margin-bottom: 2rem;
 
   padding: ${({ $foodPageTitle }) =>
-    $foodPageTitle === true ? "5rem" : "2rem"};
+    $foodPageTitle === true ? "2rem" : "2rem"};
 `;
 
 export const H2 = styled.h2`
@@ -18,20 +18,20 @@ export const H2 = styled.h2`
 export const FoodPage = styled.div`
   /* padding-top: 10rem; */
   width: 100vw;
-  padding: 1rem;
+  padding: 3rem;
 
   display: flex;
   flex-direction: column;
 
   @media (min-width: 480px) {
-    padding: 3rem;
+    /* padding: 3rem; */
   }
   @media (min-width: 1024px) {
-    padding: 5rem;
+    /* padding: 5rem; */
   }
 
-  background-color: var(--color-grey-100);
   overflow-y: scroll;
+  scroll-behavior: smooth;
 `;
 
 export const FoodContainer = styled.div`

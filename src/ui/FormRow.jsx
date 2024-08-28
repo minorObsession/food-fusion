@@ -1,35 +1,43 @@
 import styled from "styled-components";
+// import { Span } from "./Input";
 
 const StyledFormRow = styled.div`
-  width: 30rem;
+  width: 80%;
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: space-between;
   flex-grow: 1;
-  gap: 1rem;
+  /* gap: 1rem; */
+  grid-column: -1;
 
   @media (min-width: 1024px) {
     gap: 1.5rem;
   }
 `;
 
-const Label = styled.label`
+const Span = styled.span`
   font-weight: 600;
-  text-align: start;
+  width: 20rem;
 `;
 
-{
-  /* <Label htmlFor="password">Password</Label>; */
-}
-function FormRow({ children, label, errors }) {
-  return (
-    <StyledFormRow>
-      {label && <Label htmlFor={label}>{label}</Label>}
+const Error = styled.span`
+  font-size: 1.3rem;
+  color: var(--color-red-700);
+`;
 
-      {children}
-      {/* {errors} */}
-    </StyledFormRow>
+function FormRow({ children, span, errorMessage }) {
+  return (
+    <>
+      <StyledFormRow>
+        {span && <Span htmlFor={span}>{span}</Span>}
+
+        {children}
+      </StyledFormRow>
+      {errorMessage && <Error>{errorMessage}</Error>}
+    </>
   );
 }
 
 export default FormRow;
+
+/* <Label htmlFor="password">Password</Label>; */

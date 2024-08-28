@@ -7,7 +7,7 @@ import { useDispatch } from "react-redux";
 // import { useNavigate } from "react-router";
 
 import ButtonUI from "./ButtonUI";
-import FormRow from "./FormRow";
+import LoginFormRow from "./LoginFormRow";
 import { Input, Option, Select, Span } from "./Input";
 import { getPosition } from "../helpers/helperFunctions";
 import { createNewAccount } from "../services/apiAccounts";
@@ -302,7 +302,7 @@ function Modal({
         <FormLogin onSubmit={handleSubmit(onLoginFormSubmit, onError)}>
           <Div>
             <H2>Log back into your account</H2>
-            <FormRow label="username">
+            <LoginFormRow label="username">
               <Input
                 type="text"
                 id="username"
@@ -310,8 +310,8 @@ function Modal({
                   required: "required field",
                 })}
               ></Input>
-            </FormRow>
-            <FormRow label="password">
+            </LoginFormRow>
+            <LoginFormRow label="password">
               <Input
                 type="password"
                 id="password"
@@ -319,7 +319,7 @@ function Modal({
                   required: "required field",
                 })}
               ></Input>
-            </FormRow>
+            </LoginFormRow>
           </Div>
           <ButtonUI disabled={false}>LOG IN</ButtonUI>
         </FormLogin>
@@ -332,7 +332,7 @@ function Modal({
         <FormLogin onSubmit={handleSubmit(onLoginFormSubmit, onError)}>
           <Div>
             <H2>Log back into your account</H2>
-            <FormRow label="username">
+            <LoginFormRow label="username">
               <Input
                 type="text"
                 id="username"
@@ -340,8 +340,8 @@ function Modal({
                   required: "required field",
                 })}
               ></Input>
-            </FormRow>
-            <FormRow label="password">
+            </LoginFormRow>
+            <LoginFormRow label="password">
               <Input
                 type="password"
                 id="password"
@@ -349,7 +349,7 @@ function Modal({
                   required: "required field",
                 })}
               ></Input>
-            </FormRow>
+            </LoginFormRow>
           </Div>
           <ButtonUI disabled={false}>LOG IN</ButtonUI>
         </FormLogin>

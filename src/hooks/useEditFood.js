@@ -14,7 +14,7 @@ export function useEditFood() {
   }, []);
 
   const queryClient = useQueryClient();
-  const { mutate: modifyFoodItem, isLoading: isEditingItem } = useMutation({
+  const { mutate: modifyFoodItem, isPending: isEditingItem } = useMutation({
     mutationFn: ({ editedFoodType, foodTypeFromUrl }) =>
       apiUpdateFood(editedFoodType, foodTypeFromUrl),
     onSuccess: () => {

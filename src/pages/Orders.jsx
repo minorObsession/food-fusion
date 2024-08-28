@@ -40,7 +40,8 @@ function Orders() {
   const { currentAccount } = useSelector((store) => store.accounts);
 
   const { orders } = useSelector((store) => store.order);
-  console.log(orders);
+  // ! most recent orders first
+  const sortedOrders = orders.slice().reverse();
 
   if (currentAccount?.typeOfUser !== "admin") return;
 
@@ -48,8 +49,7 @@ function Orders() {
     <StyledOrders>
       <H1>ORDERS</H1>
       <OrdersBox>
-        {" "}
-        {orders.map((o) => (
+        {sortedOrders.map((o) => (
           <Order order={o} key={Math.random() + +o.orderID} />
         ))}
       </OrdersBox>
