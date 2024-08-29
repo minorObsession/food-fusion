@@ -38,7 +38,7 @@ const H1 = styled.h1`
 const CartContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 5rem;
+  gap: 2rem;
   padding-bottom: 3rem;
 
   @media (min-width: 1024px) {

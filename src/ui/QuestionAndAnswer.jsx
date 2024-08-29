@@ -32,11 +32,23 @@ const Question = styled.div`
 `;
 
 const Answer = styled.div`
-  padding: 1rem 3rem;
+  padding: ${({ $isExpanded }) => ($isExpanded ? "1rem 3rem" : "0 3rem")};
   text-align: start;
-  max-height: ${({ $isExpanded }) => ($isExpanded ? "200px" : "0px")};
+  max-height: ${({ $isExpanded }) => ($isExpanded ? "200px" : "0")};
+  overflow: hidden;
   opacity: ${({ $isExpanded }) => ($isExpanded ? "1" : "0")};
-  transition: all 0.3s ease-in-out;
+  transition: all 0.25s ease-in-out;
+  font-size: 14px;
+
+  @media (min-width: 480px) {
+    /* padding: 3rem; */
+
+    font-size: 16px;
+  }
+  @media (min-width: 1024px) {
+    /* padding: 5rem; */
+    font-size: 18px;
+  }
 `;
 
 function QuestionAndAnswer({

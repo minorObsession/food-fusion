@@ -7,17 +7,25 @@ const Accordion = styled.div`
   margin: 0 auto;
   width: 100%;
   display: flex;
-  gap: 3rem;
+  gap: 1rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 
   box-shadow: 5px 7px 28px var(--color-grey-500);
   border-radius: 18px;
-  padding: 3rem;
+  padding: 1rem;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 480px) {
+    /* width: 60vw; */
+    padding: 2rem;
+  }
+  @media (min-width: 768px) {
     width: 60vw;
+    padding: 3rem;
+  }
+  @media (min-width: 1024px) {
+    width: 70vw;
   }
 `;
 

@@ -26,7 +26,7 @@ const StyledSidebar = styled.div`
     $collapsed === true ? "15rem 1.5rem" : "15rem 5rem"};
 
   height: 100vh !important;
-  max-width: 20%;
+  max-width: 15%;
   border-right: 2px solid var(--color-grey-300);
   transition: all 0.4s ease-in-out;
 
@@ -39,10 +39,8 @@ const StyledSidebar = styled.div`
     /* max-width: 6vw; */
     padding: ${({ $collapsed }) =>
       $collapsed === true ? "15rem 2rem" : "15rem 8rem"};
-  }
 
-  @media (min-width: 1024px) {
-    max-width: 15vw;
+    max-width: 20%;
   }
 `;
 
@@ -75,6 +73,10 @@ const CollapseBtn = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  @media (max-width: 480px) {
+    display: none;
+  }
 `;
 
 const LogoutBtn = styled.button`

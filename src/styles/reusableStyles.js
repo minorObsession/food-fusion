@@ -2,17 +2,35 @@ import styled from "styled-components";
 
 export const H1 = styled.h1`
   text-align: center;
-  font-size: 28px;
+  font-size: 22px;
   margin-bottom: 2rem;
 
   padding: ${({ $foodPageTitle }) =>
     $foodPageTitle === true ? "2rem" : "2rem"};
+
+  @media (min-width: 480px) {
+    /* padding: 3rem; */
+    font-size: 28px;
+  }
+  @media (min-width: 1024px) {
+    /* padding: 5rem; */
+    font-size: 32px;
+  }
 `;
 
 export const H2 = styled.h2`
   text-align: center;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
+
+  @media (min-width: 480px) {
+    /* padding: 3rem; */
+    font-size: 18px;
+  }
+  @media (min-width: 1024px) {
+    /* padding: 5rem; */
+    font-size: 22px;
+  }
 `;
 
 export const FoodPage = styled.div`
@@ -55,11 +73,17 @@ export const StyledFoodItem = styled.div`
   grid-template-columns: 10rem auto;
 
   @media (min-width: 480px) {
-    grid-template-columns: 12rem 30vw auto;
+    grid-template-columns: 11rem auto;
     column-gap: 2rem;
   }
+
+  @media (min-width: 768px) {
+    grid-template-columns: 12rem auto auto;
+    column-gap: 3rem;
+  }
+
   @media (min-width: 1024px) {
-    grid-template-columns: 15rem 6fr auto;
+    grid-template-columns: 15rem auto auto;
     column-gap: 4rem;
   }
 
@@ -95,11 +119,14 @@ export const NameIngPriceDiv = styled.div`
 
 export const Name = styled.h2`
   text-align: left;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 600;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 480px) {
     font-size: 20px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 22px;
   }
 `;
 
@@ -108,8 +135,12 @@ export const Ingredients = styled.p`
   font-style: italic;
   font-size: 12px;
 
+  @media (min-width: 480px) {
+    font-size: 16px;
+  }
+
   @media (min-width: 1024px) {
-    font-size: 14px;
+    font-size: 18px;
   }
 `;
 
@@ -118,6 +149,13 @@ export const Price = styled.span`
   justify-self: flex-end;
   font-weight: 500;
   font-size: 15px;
+
+  @media (min-width: 480px) {
+    font-size: 18px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 22px;
+  }
 `;
 
 // export const AddToCart = styled.button`

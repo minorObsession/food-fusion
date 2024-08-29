@@ -14,10 +14,20 @@ import AddProductForm from "../ui/AddProductForm";
 const SortBox = styled.div`
   display: flex;
   gap: 0.5rem;
-  justify-content: flex-end;
   align-items: center;
+  flex-direction: column;
+  justify-content: center;
 
+  margin-bottom: 1rem;
   scale: calc(0.9);
+
+  @media (min-width: 480px) {
+    flex-direction: row;
+  }
+
+  @media (min-width: 768px) {
+    justify-content: flex-end;
+  }
 `;
 
 function FoodProductPage({ queryKey }) {
@@ -37,6 +47,7 @@ function FoodProductPage({ queryKey }) {
   useEffect(() => {
     if (!foodData) return;
     setSortedFood(sortFood(foodData, "soldOut"));
+    setSortCriteria("soldOut");
   }, [foodData]);
 
   // ? auto scroll to form
@@ -47,16 +58,16 @@ function FoodProductPage({ queryKey }) {
     }
   }, [isFormOpen]);
 
-  //  defaults :
-  // color: var(--color-grey-50);
-
-  // background-color: var(--color-grey-500);
-
   function handleSortFood(e) {
     const newSortCriteria = e.target.value;
 
-    setSortedFood(sortFood(foodData, newSortCriteria));
-    setSortCriteria(newSortCriteria);
+    if (sortCriteria === newSortCriteria) {
+      setSortCriteria("soldOut");
+      setSortedFood(sortFood(foodData, "soldOut"));
+    } else {
+      setSortCriteria(newSortCriteria);
+      setSortedFood(sortFood(foodData, newSortCriteria));
+    }
   }
 
   function handleOpenProductForm() {

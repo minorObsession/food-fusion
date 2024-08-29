@@ -35,12 +35,17 @@ const Div = styled.div`
   display: flex;
   flex-direction: ${({ $isEditing }) => ($isEditing === true ? "column" : "")};
   gap: 1rem;
-  grid-column: 2;
+  grid-column: 1;
 
   @media (min-width: 480px) {
     /* grid-template-columns: 30% 35% 35%; */
-    grid-column: 3;
+    grid-column: 2;
     justify-self: end;
+  }
+
+  /* // ? random (specific) media query */
+  @media (min-width: 600px) {
+    grid-column: 3;
   }
 `;
 
@@ -48,15 +53,25 @@ const SmallerDiv = styled.div`
   align-self: flex-end;
   display: flex;
   flex-direction: column;
+
   /* flex-direction: ${({ $isEditing }) =>
     $isEditing === true ? "column" : ""}; */
   gap: 1rem;
-  grid-column: 2;
+  grid-column: 1 / span 2;
+  justify-self: center;
 
   @media (min-width: 480px) {
     /* grid-template-columns: 30% 35% 35%; */
-    grid-column: 3;
+    flex-direction: row;
+
     justify-self: end;
+  }
+  @media (min-width: 768px) {
+    /* grid-template-columns: 30% 35% 35%; */
+    flex-direction: column;
+
+    grid-column: 3;
+    /* justify-self: end; */
   }
 `;
 

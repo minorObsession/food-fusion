@@ -7,6 +7,7 @@ export const Button = styled.button`
     ($className === "login" && "var(--color-grey-50) !important ") ||
     ($sortCriteria === value &&
       $className === undefined &&
+      value !== undefined &&
       "var(--color-brand-500) !important ") ||
     "inherit"};
   color: ${({ $className }) =>
