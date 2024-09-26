@@ -75,7 +75,7 @@ const Overlay = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2); // Dark semi-transparent background
+  background-color: rgba(0, 0, 0, 0.35); // Dark semi-transparent background
   backdrop-filter: blur(5px); // Apply blur effect
   z-index: 1; // Ensure it's on top of other content
   display: flex;
@@ -85,7 +85,7 @@ const Overlay = styled.div`
 
 const H2 = styled.h2`
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 `;
 
 const FormLogin = styled.form`
@@ -115,42 +115,39 @@ const FormLogin = styled.form`
 
 const FormSignup = styled.form`
   position: relative;
-  width: 95%;
+  width: 90%;
   height: 80%;
   background-color: rgba(255, 236, 153, 0.85);
   border-radius: 12px;
   text-align: center;
   overflow-y: scroll;
-  /* overflow: hidden; */
   box-shadow: 5px 5px 15px var(--color-grey-400);
 
   display: flex;
-  gap: 2rem;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  gap: 3rem;
 
   @media (min-width: 1024px) {
     width: 60%;
     height: 80%;
-    padding-top: 8rem;
   }
 `;
 
 const Div = styled.div`
-  margin-bottom: 2rem;
-  width: 80%;
+  padding-bottom: 2rem;
+  width: 75%;
   display: flex;
   gap: 1rem;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 3rem;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
   @media (min-width: 1024px) {
+    /* // ? when signup form uses this div - padding-top 10rem */
+    padding-top: ${({ $login }) => ($login === true ? "0rem" : "10rem")};
+
     width: 70%;
     gap: 1.5rem;
   }
@@ -300,10 +297,11 @@ function Modal({
     return (
       <Overlay>
         <FormLogin onSubmit={handleSubmit(onLoginFormSubmit, onError)}>
-          <Div>
+          <Div $login={true}>
             <H2>Log back into your account</H2>
             <LoginFormRow label="username">
               <Input
+                $login={true}
                 type="text"
                 id="username"
                 {...register("username", {
@@ -313,6 +311,7 @@ function Modal({
             </LoginFormRow>
             <LoginFormRow label="password">
               <Input
+                $login={true}
                 type="password"
                 id="password"
                 {...register("password", {
@@ -330,10 +329,11 @@ function Modal({
     return (
       <Overlay>
         <FormLogin onSubmit={handleSubmit(onLoginFormSubmit, onError)}>
-          <Div>
+          <Div $login={true}>
             <H2>Log back into your account</H2>
             <LoginFormRow label="username">
               <Input
+                $login={true}
                 type="text"
                 id="username"
                 {...register("username", {
@@ -343,6 +343,7 @@ function Modal({
             </LoginFormRow>
             <LoginFormRow label="password">
               <Input
+                $login={true}
                 type="password"
                 id="password"
                 {...register("password", {
@@ -364,6 +365,7 @@ function Modal({
             <p></p>
             <p></p>
             <p></p>
+
             <p></p>
             <p></p>
             <p></p>

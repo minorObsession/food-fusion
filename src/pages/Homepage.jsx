@@ -124,19 +124,19 @@ function Homepage() {
             </H2>
           </DIV>
           <DIV>
-            <h3>New customer?</h3>
+            <H2>New customer?</H2>
             <HomepageBtn onClick={() => setIsOpenModalSignup(true)}>
               MAKE NEW ACCOUNT
             </HomepageBtn>
           </DIV>
           <DIV>
-            <h3>Already have an account?</h3>
+            <H2>Already have an account?</H2>
             <HomepageBtn onClick={() => setIsOpenModalLoginC(true)}>
               USER LOGIN
             </HomepageBtn>
           </DIV>
           <DIV $store={true}>
-            <h3>Store member login</h3>
+            <H2>Store member login</H2>
             <HomepageBtn onClick={() => setIsOpenModalLoginA(true)}>
               ADMIN LOGIN
             </HomepageBtn>

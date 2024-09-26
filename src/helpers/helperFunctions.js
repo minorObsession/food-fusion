@@ -1,11 +1,14 @@
 export function sortFood(foodArray, sortBy = "soldOut") {
   let sortedFood;
+  console.log(foodArray);
 
   if (sortBy === "soldOut")
     sortedFood = foodArray?.slice().sort((a, b) => a.soldOut - b.soldOut);
 
   if (sortBy === "name")
-    sortedFood = foodArray?.slice().sort((a, b) => a.name - b.name);
+    sortedFood = foodArray
+      ?.slice()
+      .sort((a, b) => a.name.localeCompare(b.name));
 
   if (sortBy === "unitPrice")
     sortedFood = foodArray?.slice().sort((a, b) => a.unitPrice - b.unitPrice);

@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const H1 = styled.h1`
   text-align: center;
-  font-size: 22px;
+  font-size: 35px;
   margin-bottom: 2rem;
 
   padding: ${({ $foodPageTitle }) =>
@@ -21,7 +21,7 @@ export const H1 = styled.h1`
 export const H2 = styled.h2`
   text-align: center;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 700;
 
   @media (min-width: 480px) {
     /* padding: 3rem; */
@@ -97,6 +97,8 @@ export const Img = styled.img`
   height: 9rem;
   border-radius: 1.5rem;
   display: inline;
+
+  filter: grayscale(8%);
 
   /* 
   @media (min-width: 480px) {

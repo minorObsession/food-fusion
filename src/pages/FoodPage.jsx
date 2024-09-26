@@ -60,7 +60,7 @@ function FoodProductPage({ queryKey }) {
 
   function handleSortFood(e) {
     const newSortCriteria = e.target.value;
-
+    console.log(newSortCriteria);
     if (sortCriteria === newSortCriteria) {
       setSortCriteria("soldOut");
       setSortedFood(sortFood(foodData, "soldOut"));

@@ -74,17 +74,59 @@ html {
 }
 
 body {
+  background-image: linear-gradient(to left, rgba(255, 243, 191, 0.85)
+
+
+  , rgba(249, 250, 251, 0.6)
+
+),
+                  url('https://ioefjkssfcuhmvvolteu.supabase.co/storage/v1/object/public/other-photos/background-photo.jpg');
+
+                  background-size: cover;
+
+
+  background-position: center;
+  /* Centers the image */
+  background-repeat: no-repeat;
+  /* Prevents the image from repeating */
+  background-attachment: fixed;
+  /* Fixes the image position */
+
   font-family: "Poppins", sans-serif;
   color: var(--color-grey-700);
-  background-color: var(--color-grey-100);
+  /* background-color: var(--color-grey-100); */
 
   transition: color 0.3s, background-color 0.3s;
   min-height: 100vh;
   min-width: 100vw;
+  letter-spacing: 1.05px;
   line-height: 1.5;
   font-size: 1.6rem;
 }
 
+
+.background-image {
+  /* height: calc(100vh - 5rem); */
+  /* margin: 2rem; */
+  background-image: linear-gradient(
+      rgba(36, 42, 46, 0.7),
+      rgba(36, 42, 46, 0.6)
+    ),
+    url("./img/depositphotos_92868544-stock-photo-healthy-food-background.jpg");
+  background-size: cover;
+  background-position: center;
+  /* Centers the image */
+  background-repeat: no-repeat;
+  /* Prevents the image from repeating */
+  background-attachment: fixed;
+  /* Fixes the image position */
+  /* padding: 2.5rem 3rem; */
+  width: 100%;
+  height: 100%;
+  /* display: flex;
+  justify-content: center;
+  align-items: center; */
+}
 input,
 button,
 select {

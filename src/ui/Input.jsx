@@ -5,7 +5,8 @@ export const Input = styled.input`
   background-color: var(--color-grey-50);
   padding: 0.2rem 1rem;
   box-shadow: var(--shadow-sm);
-  width: 100%;
+  width: ${({ $login }) => ($login === true ? "90%" : "75%")};
+  line-height: 1.5;
   border-radius: var(--border-radius-md);
   filter: ${({ disabled }) => (disabled === true ? "grayscale(80%)" : "none")};
 
@@ -20,7 +21,12 @@ export const Input = styled.input`
   &:hover {
     background-color: var(--color-grey-100);
   }
+
+  @media (min-width: 1024px) {
+    line-height: 1.6;
+  }
 `;
+
 export const Option = styled.option`
   width: 100%;
   border: 1px solid var(--color-grey-300);
