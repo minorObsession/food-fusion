@@ -142,7 +142,7 @@ button {
   /* border: solid 2px var(--color-grey-600); */
   height: 3rem;
   background-color: var(--color-brand-200);
-    font-weight: 700;
+    font-weight: 800;
   white-space: nowrap;
   display: flex;
   justify-content: center;

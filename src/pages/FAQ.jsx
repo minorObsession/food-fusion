@@ -21,7 +21,7 @@ const Accordion = styled.div`
     padding: 2rem;
   }
   @media (min-width: 768px) {
-    width: 60vw;
+    width: 75vw;
     padding: 3rem;
   }
   @media (min-width: 1024px) {

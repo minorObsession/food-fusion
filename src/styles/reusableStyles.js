@@ -21,7 +21,7 @@ export const H1 = styled.h1`
 export const H2 = styled.h2`
   text-align: center;
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 800;
 
   @media (min-width: 480px) {
     /* padding: 3rem; */
@@ -122,7 +122,7 @@ export const NameIngPriceDiv = styled.div`
 export const Name = styled.h2`
   text-align: left;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 700;
 
   @media (min-width: 480px) {
     font-size: 20px;
@@ -149,7 +149,7 @@ export const Ingredients = styled.p`
 export const Price = styled.span`
   align-self: flex-start;
   justify-self: flex-end;
-  font-weight: 500;
+  font-weight: 600;
   font-size: 15px;
 
   @media (min-width: 480px) {

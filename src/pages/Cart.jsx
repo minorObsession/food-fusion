@@ -10,10 +10,9 @@ import { useCreateNewOrder } from "../hooks/useCreateNewOrder";
 import { Span } from "../ui/Input";
 
 const CartPage = styled.div`
-  width: 80%;
   margin: 0 auto;
-  overflow: hidden;
   overflow-y: scroll;
+  scroll-behavior: smooth;
 
   display: flex;
   flex-direction: column;
@@ -27,6 +26,15 @@ const CartPage = styled.div`
     padding: 3rem;
     font-size: 20px;
   }
+
+  /* Hide the scrollbar when there's nothing to scroll */
+  &::-webkit-scrollbar {
+    width: 0; /* Hides the scrollbar */
+    height: 0;
+  }
+
+  /* Optional: For Firefox */
+  scrollbar-width: none; /* Hides scrollbar in Firefox */
 `;
 
 const H1 = styled.h1`
@@ -47,7 +55,7 @@ const CartContainer = styled.div`
 `;
 const CartDiv = styled.div`
   width: 100%;
-  background-color: var(--color-grey-100);
+  background-color: var(--color-brand-200);
   box-shadow: 5px 7px 28px var(--color-grey-500);
   border-radius: 18px;
   padding: 2rem;
@@ -62,7 +70,7 @@ const CartDiv = styled.div`
 `;
 
 const GrandTotalDiv = styled.div`
-  background-color: var(--color-grey-100);
+  background-color: var(--color-brand-200);
 
   text-align: end;
   align-items: end;

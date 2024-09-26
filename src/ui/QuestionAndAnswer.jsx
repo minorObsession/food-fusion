@@ -6,10 +6,12 @@ import { useEffect, useRef } from "react";
 const QuestionAnswerDiv = styled.div`
   width: 100%;
   display: flex;
+  padding: 0.5rem;
+  /* gap: 1rem; */
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: var(--color-grey-100);
+  background-color: var(--color-brand-100);
   border-radius: var(--border-radius-md);
   box-shadow: 5px 7px 15px var(--color-grey-400);
 
@@ -17,7 +19,7 @@ const QuestionAnswerDiv = styled.div`
 
   &:hover,
   &:active {
-    background-color: var(--color-grey-200);
+    background-color: var(--color-brand-200);
   }
 `;
 

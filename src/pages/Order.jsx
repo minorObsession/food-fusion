@@ -73,6 +73,7 @@ const GrandTotalBreakdown = styled.div`
   background-color: var(--color-grey-200);
   padding: 2rem;
   border-radius: 7px;
+  font-size: 2.2rem;
 
   display: flex;
   gap: 1rem;
@@ -81,6 +82,9 @@ const GrandTotalBreakdown = styled.div`
   /* justify-content: space-between; */
 `;
 
+const OrderContainer = styled.div`
+  /* background-color: var(--color-grey-400); */
+`;
 function Order() {
   const { orderID } = useParams();
   const { orders } = useSelector((store) => store.order);
@@ -99,30 +103,32 @@ function Order() {
 
   return (
     <FoodPage>
-      <H1>ORDER #{order?.orderID}</H1>
-      {/* // ! 1/3 - HOW LONG IS LEFT FOR DELIVERY */}
-      <TimeLeftUntilDelivery>
-        <h2> Delivery to {currentAccount?.streetAddress}</h2>
-        <p>estimated: ETA</p>
-      </TimeLeftUntilDelivery>
-      {/* // ! 2/3 ORDER BREAKDOWN */}
-      <OrderSummary>
-        {orderItems?.map((orderItem) => (
-          <StyledOrderItem key={Math.random() + orderItem.id}>
-            <QuantityName>
-              <Quantity>{orderItem.quantity} x</Quantity>
-              <Name>{orderItem.name}</Name>
-            </QuantityName>
-            <Ingredients>{orderItem.ingredients.join(", ")}</Ingredients>
-            <Price>${orderItem.unitPrice * orderItem.quantity}</Price>
-          </StyledOrderItem>
-        ))}
-      </OrderSummary>
+      <OrderContainer>
+        <H1>ORDER #{order?.orderID}</H1>
+        {/* // ! 1/3 - HOW LONG IS LEFT FOR DELIVERY */}
+        <TimeLeftUntilDelivery>
+          <h2> Delivery to {currentAccount?.streetAddress}</h2>
+          <p>estimated: ETA</p>
+        </TimeLeftUntilDelivery>
+        {/* // ! 2/3 ORDER BREAKDOWN */}
+        <OrderSummary>
+          {orderItems?.map((orderItem) => (
+            <StyledOrderItem key={Math.random() + orderItem.id}>
+              <QuantityName>
+                <Quantity>{orderItem.quantity} x</Quantity>
+                <Name>{orderItem.name}</Name>
+              </QuantityName>
+              <Ingredients>{orderItem.ingredients.join(", ")}</Ingredients>
+              <Price>${orderItem.unitPrice * orderItem.quantity}</Price>
+            </StyledOrderItem>
+          ))}
+        </OrderSummary>
 
-      {/* // ! 3/3 GRAND TOTAL BREAKDOWN */}
-      <GrandTotalBreakdown>
-        <h4>To pay on delivery: {formatCurrency(order?.grandTotal)}</h4>
-      </GrandTotalBreakdown>
+        {/* // ! 3/3 GRAND TOTAL BREAKDOWN */}
+        <GrandTotalBreakdown>
+          <h4>To pay on delivery: {formatCurrency(order?.grandTotal)}</h4>
+        </GrandTotalBreakdown>
+      </OrderContainer>
     </FoodPage>
   );
 }

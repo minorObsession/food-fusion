@@ -16,6 +16,14 @@ const StyledCartItem = styled.div`
   grid-template-rows: 4rem;
   gap: 1rem;
   align-items: center;
+  padding-bottom: 0.5rem;
+  font-size: 16px;
+
+  border-bottom: 1px solid var(--color-brand-600);
+
+  &:last-child {
+    border-bottom: none;
+  }
 `;
 
 const NameAndQuantity = styled.div`
@@ -54,16 +62,19 @@ export const ModifyQuantityDiv = styled.div`
 
   @media (min-width: 480px) {
     /* grid-column: span 2; */
-    gap: 1rem;
+    gap: 2rem;
   }
 
   @media (min-width: 1024px) {
     gap: 3rem;
+    font-size: 20px;
   }
 `;
 
 const Price = styled.span`
   width: 3rem;
+  font-weight: 500;
+  font-style: italic;
 `;
 
 export const ModifyQuantityBtn = styled.button`
