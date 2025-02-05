@@ -8,7 +8,11 @@ import { useLocation } from "react-router";
 import { useModalContext } from "../ui/useModalContext";
 import { useDispatch, useSelector } from "react-redux";
 import { capitalize } from "../helpers/helperFunctions";
-import { logOutOfAccount } from "../features/accountsSlice";
+import {
+  fakeLogin,
+  logIntoAccount,
+  logOutOfAccount,
+} from "../features/accountsSlice";
 
 const StyledHomepage = styled.div`
   position: relative;
@@ -53,6 +57,96 @@ const HomepageBtn = styled.button`
     background-color: var(--color-brand-500);
   }
 `;
+
+const DemoDiv = styled.div`
+  position: absolute;
+  bottom: 6rem;
+  right: 6rem;
+  background-color: var(--color-brand-100);
+  color: var(--color-grey-900);
+  padding: 2rem;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+`;
+
+// const DemoBtnAdmin = styled.button`
+//   background-color: var(--color-brand-500);
+//   color: var(--color-grey-900);
+//   padding: 2.5rem 5rem;
+//   border: none;
+//   border-radius: var(--border-radius-md);
+//   font-size: 2rem;
+//   font-weight: 600;
+//   cursor: pointer;
+//   transition: all 0.3s ease;
+//   box-shadow: var(--shadow-md);
+
+//   &:hover {
+//     background-color: var(--color-brand-600);
+//     box-shadow: var(--shadow-lg);
+//   }
+
+//   &:active {
+//     background-color: var(--color-brand-700);
+//     transform: scale(0.98);
+//   }
+// `;
+
+// const DemoBtnCustomer = styled.button`
+//   background-color: var(--color-brand-500);
+//   color: var(--color-grey-900);
+//   padding: 2.5rem 5rem;
+//   border: none;
+//   border-radius: var(--border-radius-md);
+//   font-size: 2rem;
+//   font-weight: 600;
+//   cursor: pointer;
+//   transition: all 0.3s ease;
+//   box-shadow: var(--shadow-md);
+
+//   &:hover {
+//     background-color: var(--color-brand-600);
+//     box-shadow: var(--shadow-lg);
+//   }
+
+//   &:active {
+//     background-color: var(--color-brand-700);
+//     transform: scale(0.98);
+//   }
+// `;
+const BaseButton = styled.button`
+  background-color: var(--color-brand-500);
+  color: var(--color-grey-900);
+  padding: 2.5rem 5rem;
+  width: 100%; /* Ensures all buttons take the same width */
+  max-width: 80%; /* Optional: Set a maximum width for consistency */
+  border: none;
+  border-radius: var(--border-radius-md);
+  font-size: 2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: var(--shadow-md);
+  text-align: center;
+
+  &:hover {
+    background-color: var(--color-brand-600);
+    box-shadow: var(--shadow-lg);
+  }
+
+  &:active {
+    background-color: var(--color-brand-700);
+    transform: scale(0.98);
+  }
+`;
+
+const DemoBtnAdmin = styled(BaseButton)``;
+const DemoBtnCustomer = styled(BaseButton)``;
 
 function Homepage() {
   const { currentAccount } = useSelector((store) => store.accounts);
@@ -141,6 +235,36 @@ function Homepage() {
               ADMIN LOGIN
             </HomepageBtn>
           </DIV>
+
+          <DemoDiv>
+            <H2>JUST WANT TO TEST THE APP?</H2>
+            <DemoBtnAdmin
+              onClick={() => {
+                navigate("pizza");
+                dispatch(
+                  fakeLogin({
+                    username: "admin",
+                    password: "pass",
+                  })
+                );
+              }}
+            >
+              DEMO ADMIN
+            </DemoBtnAdmin>
+            <DemoBtnCustomer
+              onClick={() => {
+                navigate("faq");
+                dispatch(
+                  fakeLogin({
+                    username: "customer",
+                    password: "passw",
+                  })
+                );
+              }}
+            >
+              DEMO CUSTOMER
+            </DemoBtnCustomer>
+          </DemoDiv>
         </>
       )}
     </StyledHomepage>

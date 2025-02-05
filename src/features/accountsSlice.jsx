@@ -38,6 +38,20 @@ const accountsSlice = createSlice({
       toast.success("Login successful");
     },
 
+    fakeLogin(state, action) {
+      // ! find if account exists
+      const account = state.accounts.find(
+        (acc) =>
+          acc.username === action.payload.username &&
+          +acc.password === +action.payload.password
+      );
+
+      // ! make it current
+      state.currentAccount = account;
+
+      toast.success("Login successful");
+    },
+
     logOutOfAccount(state) {
       state.currentAccount = null;
       toast.success("You've successfully logged out");
@@ -45,7 +59,7 @@ const accountsSlice = createSlice({
   },
 });
 
-export const { newAccount, logIntoAccount, logOutOfAccount } =
+export const { newAccount, logIntoAccount, logOutOfAccount, fakeLogin } =
   accountsSlice.actions;
 
 export default accountsSlice.reducer;
