@@ -31,7 +31,7 @@ import { NavLink } from "react-router-dom";
 import { updateFood } from "../services/apiFood";
 import { useKeyPress } from "../hooks/useKeyPress";
 
-const Div = styled.div`
+const ButtonsDiv = styled.div`
   align-self: flex-end;
   justify-self: end;
 
@@ -40,36 +40,30 @@ const Div = styled.div`
   gap: 1rem;
   grid-column: 1 / span 2;
 
+  & button {
+  }
+
   ${({ $isEditing }) =>
     $isEditing &&
     css`
-      /* flex-direction: row; */
       grid-column: 1 / 3;
       margin: 0 auto;
-
-      & button {
-        width: 100%;
-      }
     `}
 
   @media (min-width: 480px) {
-    /* grid-template-columns: 30% 35% 35%; */
   }
 
   @media (min-width: 768px) {
+    grid-column: 3/4;
   }
 
   @media (min-width: 1024px) {
-    grid-column: 3/4;
     /* grid-row: 1; */
-    margin: 0;
-
-    & button {
-    }
+    margin: auto;
   }
 `;
 
-const SmallerDiv = styled.div`
+const LoginSignupDiv = styled.div`
   /* align-self: flex-end; */
   display: flex;
   /* flex-direction: column; */
@@ -125,7 +119,7 @@ function FoodItem({ foodType }) {
   const { isEditingItem, modifyFoodItem } = useEditFood();
   const { isDeletingItem, deleteFoodItem } = useDeleteFood();
   const [editedFoodType, setEditedFoodType] = useState(foodType);
-  const [isEditing, setIsEditing] = useState(true);
+  const [isEditing, setIsEditing] = useState(false);
 
   useKeyPress("Escape", () => setIsEditing(false));
 
@@ -248,7 +242,7 @@ function FoodItem({ foodType }) {
       </NameIngPriceDiv>
       {currentAccount?.typeOfUser === "customer" ? (
         itemInCart ? (
-          <Div>
+          <ButtonsDiv>
             <ModifyQuantityDiv>
               <ModifyQuantityBtn
                 onClick={() => dispatch(decreaseItemQuantity(foodType))}
@@ -265,19 +259,19 @@ function FoodItem({ foodType }) {
                 <IoTrashOutline />
               </DeleteBtn>
             </ModifyQuantityDiv>
-          </Div>
+          </ButtonsDiv>
         ) : (
-          <Div>
+          <ButtonsDiv>
             <Button onClick={() => dispatch(addItemToCart(foodType))}>
               Add to cart
             </Button>
-          </Div>
+          </ButtonsDiv>
         )
       ) : (
         (currentAccount?.typeOfUser === "admin" && (
-          <Div $isEditing={isEditing}>
+          <ButtonsDiv $isEditing={isEditing}>
             {isEditing ? (
-              <Div $isEditing={isEditing}>
+              <ButtonsDiv $isEditing={isEditing}>
                 <Button disabled={isDeletingItem} onClick={deleteFood}>
                   Delete
                 </Button>
@@ -286,23 +280,23 @@ function FoodItem({ foodType }) {
                 <Button $className="main" onClick={saveChanges}>
                   Save
                 </Button>
-              </Div>
+              </ButtonsDiv>
             ) : isSoldOut ? (
               <Button onClick={handleBackInStock}>Make available</Button>
             ) : (
               <Button onClick={toggleEditMode}>Edit Product</Button>
             )}
-          </Div>
+          </ButtonsDiv>
         )) ||
         (!currentAccount && (
-          <SmallerDiv>
+          <LoginSignupDiv>
             <NavLink to="/loginCustomer">
               <Button $className="">Log In</Button>
             </NavLink>
             <NavLink to="/signup">
               <Button $className="">Sign Up</Button>
             </NavLink>
-          </SmallerDiv>
+          </LoginSignupDiv>
         ))
       )}
     </StyledFoodItem>

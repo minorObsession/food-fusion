@@ -9,28 +9,32 @@ export const H1 = styled.h1`
 
   @media (min-width: 480px) {
     /* padding: 3rem; */
-    font-size: 28px;
-    margin-bottom: 2rem;
+    font-size: 4rem;
+    margin-bottom: 1rem;
   }
   @media (min-width: 1024px) {
     /* padding: 5rem; */
-    font-size: 32px;
+    font-size: 4.5rem;
+    margin-bottom: 2rem;
   }
 `;
 
 export const H2 = styled.h2`
   text-align: center;
-  font-size: 3rem;
+  font-size: 2.4rem;
   font-weight: 800;
+  line-height: 3.2rem;
   margin-bottom: 2rem;
 
   @media (min-width: 480px) {
     /* padding: 3rem; */
-    font-size: 3.5rem;
+    font-size: 2.6rem;
+    /* margin-bottom: 1rem; */
   }
   @media (min-width: 1024px) {
     /* padding: 5rem; */
-    font-size: 4rem;
+    font-size: 3rem;
+    margin-bottom: 3rem;
   }
 `;
 
@@ -62,6 +66,7 @@ export const FoodContainer = styled.div`
 
 export const StyledFoodItem = styled.article`
   width: 100%;
+
   max-height: ${({ $isEditing }) => $isEditing && "fit-content"};
   padding-bottom: 2rem;
   border-bottom: 2px dotted var(--color-brand-500);
@@ -86,14 +91,13 @@ export const StyledFoodItem = styled.article`
       margin: 0 auto;
 
       @media (min-width: 768px) {
-        grid-template-columns: 1fr 1.5fr !important;
-        column-gap: 3rem;
+        grid-template-columns: 1fr 2fr 1fr !important;
+        grid-template-rows: 1fr !important;
+
+        /* column-gap: 3rem; */
         /* grid-template-rows: 1fr; */
       }
       @media (min-width: 1024px) {
-        grid-template-columns: 1fr 2fr 2fr !important;
-
-        grid-template-rows: 1fr !important;
         /* grid-template-rows: 1fr; */
       }
     `}
@@ -105,7 +109,7 @@ export const StyledFoodItem = styled.article`
   }
 
   @media (min-width: 768px) {
-    grid-template-columns: 1fr 1.5fr;
+    grid-template-columns: 1fr 1.5fr 1fr;
     /* column-gap: 3rem; */
     grid-template-rows: 1fr;
   }
@@ -143,7 +147,6 @@ export const Img = styled.img`
   }
 
   @media (min-width: 768px) {
-    margin: 0;
   }
 `;
 

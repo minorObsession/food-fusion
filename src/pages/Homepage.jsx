@@ -7,24 +7,34 @@ import { useModalContext } from "../ui/useModalContext";
 import { useDispatch, useSelector } from "react-redux";
 import { capitalize } from "../helpers/helperFunctions";
 import { fakeLogin, logOutOfAccount } from "../features/accountsSlice";
+import { useScreenWidthPx } from "../hooks/useScreenWidthPx";
 
 const StyledHomepage = styled.div`
   position: relative;
   width: 100vw;
+  height: 100%;
+  overflow-y: hidden;
+  overflow-x: hidden;
   margin: 0 auto;
   padding: 5rem;
+  padding-top: 7rem;
 
   display: flex;
   gap: 2rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+
+  @media (min-width: 480px) {
+    padding-top: 0;
+  }
 `;
 
 const DIV = styled.div`
   /* margin-bottom: 1rem; */
+
   display: flex;
-  gap: 1rem;
+  gap: 2rem;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -32,72 +42,42 @@ const DIV = styled.div`
 
 const HomepageBtn = styled.button`
   border: 2px solid var(--color-grey-300);
-
-  padding: 1.7rem;
-
+  font-size: 1.3rem;
+  padding: 1.5rem;
+  text-align: center;
+  min-width: 100px;
   &:active,
   &:focus {
     box-shadow: var(--shadow-md);
-    background-color: var(--color-brand -500);
-    font-weight: 600;
+    background-color: var(--color-brand-500);
+
     outline: 2px solid var(--color-brand-300);
   }
 
   &:hover {
     background-color: var(--color-brand-500);
   }
-`;
 
-const DemoDiv = styled.div`
-  position: absolute;
-  bottom: 6rem;
-  right: 6rem;
-  background-color: var(--color-brand-100);
-  color: var(--color-grey-900);
-  padding: 2rem;
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-lg);
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-`;
-
-//
-const BaseButton = styled.button`
-  background-color: var(--color-brand-500);
-  color: var(--color-grey-900);
-  padding: 2.5rem 5rem;
-  width: 100%; /* Ensures all buttons take the same width */
-  max-width: 80%; /* Optional: Set a maximum width for consistency */
-  border: none;
-  border-radius: var(--border-radius-md);
-  font-size: 2rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: var(--shadow-md);
-  text-align: center;
-
-  &:hover {
-    background-color: var(--color-brand-600);
-    box-shadow: var(--shadow-lg);
+  @media (min-width: 480px) {
+    font-size: 1.5rem;
+    padding: 1.6rem;
   }
 
-  &:active {
-    background-color: var(--color-brand-700);
-    transform: scale(0.98);
+  @media (min-width: 768px) {
+    font-size: 1.8rem;
+    padding: 1.8rem;
+    min-width: 200px;
+  }
+  @media (min-width: 1024px) {
+    font-size: 2rem;
+    padding: 2rem;
   }
 `;
-
-const DemoBtnAdmin = styled(BaseButton)``;
-const DemoBtnCustomer = styled(BaseButton)``;
 
 function Homepage() {
   const { currentAccount } = useSelector((store) => store.accounts);
-
   const dispatch = useDispatch();
+  const screenSize = useScreenWidthPx();
 
   function logOut() {
     const confirmLogout = confirm("are you sure?");
@@ -157,11 +137,13 @@ function Homepage() {
       {!currentAccount && (
         <>
           <DIV $title={true}>
-            <H1>FOOD FUSION</H1>
-            <H2>
-              Fresh selections of mediterranean food, delivered right to your
-              door!{" "}
-            </H2>
+            <H1 style={{ whiteSpace: "nowrap" }}>FOOD FUSION</H1>
+            {screenSize > 768 && (
+              <H2 style={{ marginBottom: "3rem" }}>
+                Fresh selections of mediterranean food, delivered right to your
+                door!
+              </H2>
+            )}
           </DIV>
           <DIV>
             <H2>New customer?</H2>
@@ -171,46 +153,46 @@ function Homepage() {
           </DIV>
           <DIV>
             <H2>Already have an account?</H2>
-            <HomepageBtn onClick={() => setIsOpenModalLoginC(true)}>
-              USER LOGIN
-            </HomepageBtn>
+            <DIV style={{ flexDirection: "row" }}>
+              <HomepageBtn onClick={() => setIsOpenModalLoginC(true)}>
+                USER LOGIN
+              </HomepageBtn>
+              <HomepageBtn
+                onClick={() => {
+                  navigate("faq");
+                  dispatch(
+                    fakeLogin({
+                      username: "customer",
+                      password: "passw",
+                    })
+                  );
+                }}
+              >
+                DEMO USER
+              </HomepageBtn>
+            </DIV>
           </DIV>
           <DIV $store={true}>
             <H2>Store member login</H2>
-            <HomepageBtn onClick={() => setIsOpenModalLoginA(true)}>
-              ADMIN LOGIN
-            </HomepageBtn>
+            <DIV style={{ flexDirection: "row" }}>
+              <HomepageBtn onClick={() => setIsOpenModalLoginA(true)}>
+                ADMIN LOGIN
+              </HomepageBtn>
+              <HomepageBtn
+                onClick={() => {
+                  navigate("pizza");
+                  dispatch(
+                    fakeLogin({
+                      username: "admin",
+                      password: "pass",
+                    })
+                  );
+                }}
+              >
+                DEMO ADMIN
+              </HomepageBtn>
+            </DIV>
           </DIV>
-
-          <DemoDiv>
-            <H2>JUST WANT TO TEST THE APP?</H2>
-            <DemoBtnAdmin
-              onClick={() => {
-                navigate("pizza");
-                dispatch(
-                  fakeLogin({
-                    username: "admin",
-                    password: "pass",
-                  })
-                );
-              }}
-            >
-              DEMO ADMIN
-            </DemoBtnAdmin>
-            <DemoBtnCustomer
-              onClick={() => {
-                navigate("faq");
-                dispatch(
-                  fakeLogin({
-                    username: "customer",
-                    password: "passw",
-                  })
-                );
-              }}
-            >
-              DEMO CUSTOMER
-            </DemoBtnCustomer>
-          </DemoDiv>
         </>
       )}
     </StyledHomepage>

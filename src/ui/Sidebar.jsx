@@ -99,20 +99,15 @@ const StyledNavLink = styled(NavLink)`
   font-weight: 600;
   display: flex;
   align-items: center;
-  /* justify-content: center; */
   border-radius: var(--border-radius-lg);
   padding: 0.5rem 1rem;
+  padding-left: 3rem;
   width: 100%;
-
-  @media (max-width: 480px) {
-    width: auto;
-  }
 
   /* // ! manually set so icons don't move/shake */
   svg {
     font-size: 2rem;
     min-width: 2rem;
-    filter: saturate(1.5);
   }
 
   span {
@@ -136,6 +131,16 @@ const StyledNavLink = styled(NavLink)`
     font-weight: 800;
     background-color: var(--color-grey-500);
     color: var(--color-grey-50);
+  }
+
+  @media (min-width: 375px) {
+    padding-left: 3.5rem;
+  }
+  @media (min-width: 425px) {
+    padding-left: 4rem;
+  }
+  @media (min-width: 480px) {
+    padding-left: 1.2rem;
   }
 `;
 

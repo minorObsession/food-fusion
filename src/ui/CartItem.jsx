@@ -55,18 +55,22 @@ const PriceModifyDelete = styled.div`
 
 export const ModifyQuantityDiv = styled.div`
   display: flex;
-  gap: 0.5rem;
+  gap: 0.8rem;
   align-items: end;
   justify-self: center;
   align-self: center;
+  font-weight: 500;
+  background-color: var(--color-brand-200);
+  padding: 0.6rem 1.2rem;
 
+  border-radius: 25px;
   @media (min-width: 480px) {
     /* grid-column: span 2; */
-    gap: 2rem;
+    gap: 1rem;
   }
 
   @media (min-width: 1024px) {
-    gap: 3rem;
+    gap: 1.5rem;
     font-size: 20px;
   }
 `;
@@ -97,7 +101,7 @@ export const DeleteBtn = styled.button`
   font-size: 18px;
   color: var(--color-grey-50);
   background-color: var(--color-grey-700);
-  margin-left: 2rem;
+  margin-left: 1rem;
   font-weight: 800;
   letter-spacing: 0.8px;
   align-self: flex-end;

@@ -1,10 +1,9 @@
 import { Outlet } from "react-router-dom";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
 
 const StyledMain = styled.main`
   display: flex;
-  width: 100%;
+  width: 100vw;
 
   transition: margin-left 0.3s ease;
 
@@ -15,10 +14,8 @@ const StyledMain = styled.main`
 `;
 
 function Main() {
-  const [sidebarWidth, setSidebarWidth] = useState(0);
-
   return (
-    <StyledMain $sidebarWidth={sidebarWidth}>
+    <StyledMain>
       <Outlet />
     </StyledMain>
   );

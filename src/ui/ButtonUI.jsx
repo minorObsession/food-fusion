@@ -41,8 +41,7 @@ export const Button = styled.button`
   padding: ${({ $className }) =>
     ($className === "small" ? "1.4rem " : "1.8rem 7rem") ||
     $className === "login" ||
-    ($className === "signup" && "1.8rem 2rem") ||
-    ($className === "main" && "2rem")};
+    ($className === "signup" && "1.8rem 2rem")};
 
   letter-spacing: 0.8px;
   align-self: ${({ $className }) =>
@@ -56,17 +55,13 @@ export const Button = styled.button`
   margin-top: ${({ $className }) =>
     $className === "submitFormBtn" ? "2rem" : "auto"};
 
-  min-width: ${({ $className }) =>
-    $className === "submitFormBtn" || $className === "main" ? "80%" : "auto"};
+  min-width: ${({ $className }) => $className === "submitFormBtn" && "80%"};
   max-width: ${({ $className }) => ($className === "small" ? "10%" : "auto")};
   color: var(--color-grey-50);
   font-weight: 800;
-  margin: ${({ $className }) => $className === "main" && "0 auto"};
   background-color: var(--color-grey-500);
 
-  grid-column: ${({ $className }) =>
-    ($className === "small" ? "5 / span 2 " : "") ||
-    ($className === "main" && "span 2")};
+  grid-column: ${({ $className }) => $className === "small" && "5 / span 2 "};
   z-index: 2;
   text-transform: uppercase;
 
@@ -94,8 +89,7 @@ export const Button = styled.button`
     /* width: 10rem; */
     max-width: ${({ $className }) => ($className === "small" ? "10%" : "auto")};
     padding: ${({ $className }) =>
-      ($className === "small" ? "1.4rem " : "1.8rem 7.5rem") ||
-      ($className === "main" && "2rem")};
+      $className === "small" ? "1.4rem " : "1.8rem 7.5rem"};
     align-self: ${({ $className }) =>
       $className === "submitFormBtn" ||
       $className === "backButton" ||

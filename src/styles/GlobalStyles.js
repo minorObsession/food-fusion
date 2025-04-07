@@ -95,6 +95,7 @@ body,#root {
 
                   background-size: cover;
 
+                  /* overflow: hidden; */
  background-position: center;
   /* Centers the image */
   background-repeat: no-repeat;
