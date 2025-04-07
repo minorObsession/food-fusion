@@ -1,9 +1,8 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const H1 = styled.h1`
   text-align: center;
-  font-size: 35px;
-  margin-bottom: 2rem;
+  font-size: 3.5rem;
 
   padding: ${({ $foodPageTitle }) =>
     $foodPageTitle === true ? "2rem" : "2rem"};
@@ -11,6 +10,7 @@ export const H1 = styled.h1`
   @media (min-width: 480px) {
     /* padding: 3rem; */
     font-size: 28px;
+    margin-bottom: 2rem;
   }
   @media (min-width: 1024px) {
     /* padding: 5rem; */
@@ -20,32 +20,33 @@ export const H1 = styled.h1`
 
 export const H2 = styled.h2`
   text-align: center;
-  font-size: 16px;
+  font-size: 3rem;
   font-weight: 800;
+  margin-bottom: 2rem;
 
   @media (min-width: 480px) {
     /* padding: 3rem; */
-    font-size: 18px;
+    font-size: 3.5rem;
   }
   @media (min-width: 1024px) {
     /* padding: 5rem; */
-    font-size: 22px;
+    font-size: 4rem;
   }
 `;
 
-export const FoodPage = styled.div`
-  /* padding-top: 10rem; */
+export const FoodPage = styled.section`
   width: 100vw;
-  padding: 3rem;
+  padding: 1rem;
+  padding-top: 5rem;
 
   display: flex;
   flex-direction: column;
 
   @media (min-width: 480px) {
-    /* padding: 3rem; */
+    padding: 3rem;
+    padding-top: 1rem;
   }
   @media (min-width: 1024px) {
-    /* padding: 5rem; */
   }
 
   overflow-y: scroll;
@@ -59,8 +60,9 @@ export const FoodContainer = styled.div`
   gap: 2.5rem;
 `;
 
-export const StyledFoodItem = styled.div`
+export const StyledFoodItem = styled.article`
   width: 100%;
+  max-height: ${({ $isEditing }) => $isEditing && "fit-content"};
   padding-bottom: 2rem;
   border-bottom: 2px dotted var(--color-brand-500);
 
@@ -70,20 +72,50 @@ export const StyledFoodItem = styled.div`
   display: grid;
   column-gap: 1.5rem;
   row-gap: 2rem;
-  grid-template-columns: 10rem auto;
+  grid-template-columns: 1fr 1.5fr;
+  grid-template-rows: 3fr 1fr;
+
+  ${({ $isEditing }) =>
+    $isEditing &&
+    css`
+      /* flex-direction: row; */
+      align-items: center;
+      justify-content: center;
+      grid-template-columns: 1fr !important;
+      grid-template-rows: auto auto auto;
+      margin: 0 auto;
+
+      @media (min-width: 768px) {
+        grid-template-columns: 1fr 1.5fr !important;
+        column-gap: 3rem;
+        /* grid-template-rows: 1fr; */
+      }
+      @media (min-width: 1024px) {
+        grid-template-columns: 1fr 2fr 2fr !important;
+
+        grid-template-rows: 1fr !important;
+        /* grid-template-rows: 1fr; */
+      }
+    `}
 
   @media (min-width: 480px) {
-    grid-template-columns: 11rem auto;
+    grid-template-columns: 1fr 1.5fr;
+    grid-template-rows: auto;
     column-gap: 2rem;
   }
 
   @media (min-width: 768px) {
-    grid-template-columns: 12rem auto auto;
-    column-gap: 3rem;
+    grid-template-columns: 1fr 1.5fr;
+    /* column-gap: 3rem; */
+    grid-template-rows: 1fr;
   }
 
   @media (min-width: 1024px) {
-    grid-template-columns: 15rem auto auto;
+    grid-template-columns: 1fr 2fr 1fr;
+    /* column-gap: 4rem; */
+  }
+  @media (min-width: 1300px) {
+    grid-template-columns: 1fr 3fr 1fr;
     column-gap: 4rem;
   }
 
@@ -93,22 +125,25 @@ export const StyledFoodItem = styled.div`
 `;
 
 export const Img = styled.img`
-  width: 14rem;
-  height: 9rem;
+  /* width: 14rem; */
+  width: clamp(8rem, 100%, 20rem);
+  height: 10rem;
+  /* max-height: 100%; */
+  margin: 0 auto;
   border-radius: 1.5rem;
   display: inline;
+  object-fit: cover;
 
   filter: grayscale(8%);
 
-  /* 
-  @media (min-width: 480px) {
-    width: 12rem;
-    height: 9rem;
-  } */
+  transition: all 0.3s ease;
 
-  @media (min-width: 1024px) {
-    width: 18rem;
+  @media (min-width: 480px) {
     height: 12rem;
+  }
+
+  @media (min-width: 768px) {
+    margin: 0;
   }
 `;
 
@@ -116,7 +151,25 @@ export const NameIngPriceDiv = styled.div`
   display: flex;
   gap: 0.2rem;
   flex-direction: column;
+  /* align-items: center; */
   justify-content: space-between;
+
+  transition: all 0.2s ease;
+
+  ${({ $isEditing }) =>
+    $isEditing &&
+    css`
+      grid-column: 1 / span 2;
+      margin: 0 auto;
+
+      @media (min-width: 768px) {
+        grid-column: 2;
+        margin: 0;
+      }
+      @media (min-width: 1024px) {
+        grid-column: 2;
+      }
+    `}
 `;
 
 export const Name = styled.h2`

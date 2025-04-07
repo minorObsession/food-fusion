@@ -13,7 +13,6 @@ function AppLayout() {
   return (
     <StyledAppLayout>
       <Sidebar />
-      {/* <LoginSignup /> */}
       <Main />
     </StyledAppLayout>
   );

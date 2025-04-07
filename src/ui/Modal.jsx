@@ -120,15 +120,17 @@ const FormSignup = styled.form`
   background-color: rgba(255, 236, 153, 0.85);
   border-radius: 12px;
   text-align: center;
-  overflow-y: scroll;
+  overflow-y: auto;
   box-shadow: 5px 5px 15px var(--color-grey-400);
 
   display: flex;
+  justify-content: center;
+  align-items: center;
   gap: 3rem;
 
   @media (min-width: 1024px) {
     width: 60%;
-    height: 80%;
+    /* height: 80%; */
   }
 `;
 
@@ -139,16 +141,9 @@ const Div = styled.div`
   gap: 1rem;
   flex-direction: column;
   align-items: center;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 
   @media (min-width: 1024px) {
-    /* // ? when signup form uses this div - padding-top 10rem */
-    padding-top: ${({ $login }) => ($login === true ? "0rem" : "10rem")};
-
-    width: 70%;
+    /* width: 70%; */
     gap: 1.5rem;
   }
 `;
@@ -362,13 +357,6 @@ function Modal({
       <Overlay>
         <FormSignup onSubmit={handleSubmit(onSignupFormSubmit, onError)}>
           <Div>
-            <p></p>
-            <p></p>
-            <p></p>
-
-            <p></p>
-            <p></p>
-            <p></p>
             <H2>Let&apos;s get you set up!</H2>
             <Label htmlFor="username">Choose username</Label>
             <Input

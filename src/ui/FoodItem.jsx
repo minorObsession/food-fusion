@@ -19,7 +19,7 @@ import {
 import { Button } from "./ButtonUI";
 
 import { DeleteBtn, ModifyQuantityBtn, ModifyQuantityDiv } from "./CartItem";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { useEffect, useState } from "react";
 import { Input } from "./Input";
 
@@ -29,33 +29,51 @@ import FileInput from "./FileInput";
 import { supabaseUrl } from "../services/supabase";
 import { NavLink } from "react-router-dom";
 import { updateFood } from "../services/apiFood";
+import { useKeyPress } from "../hooks/useKeyPress";
 
 const Div = styled.div`
   align-self: flex-end;
+  justify-self: end;
+
   display: flex;
-  flex-direction: ${({ $isEditing }) => ($isEditing === true ? "column" : "")};
+  flex-direction: column;
   gap: 1rem;
-  grid-column: 1;
+  grid-column: 1 / span 2;
+
+  ${({ $isEditing }) =>
+    $isEditing &&
+    css`
+      /* flex-direction: row; */
+      grid-column: 1 / 3;
+      margin: 0 auto;
+
+      & button {
+        width: 100%;
+      }
+    `}
 
   @media (min-width: 480px) {
     /* grid-template-columns: 30% 35% 35%; */
-    grid-column: 2;
-    justify-self: end;
   }
 
-  /* // ? random (specific) media query */
-  @media (min-width: 600px) {
-    grid-column: 3;
+  @media (min-width: 768px) {
+  }
+
+  @media (min-width: 1024px) {
+    grid-column: 3/4;
+    /* grid-row: 1; */
+    margin: 0;
+
+    & button {
+    }
   }
 `;
 
 const SmallerDiv = styled.div`
-  align-self: flex-end;
+  /* align-self: flex-end; */
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
 
-  /* flex-direction: ${({ $isEditing }) =>
-    $isEditing === true ? "column" : ""}; */
   gap: 1rem;
   grid-column: 1 / span 2;
   justify-self: center;
@@ -73,6 +91,16 @@ const SmallerDiv = styled.div`
     grid-column: 3;
     /* justify-self: end; */
   }
+`;
+
+const EditContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+
+  grid-row: 2 / span 2;
 `;
 
 function FoodItem({ foodType }) {
@@ -96,9 +124,11 @@ function FoodItem({ foodType }) {
   // ? edit/delete
   const { isEditingItem, modifyFoodItem } = useEditFood();
   const { isDeletingItem, deleteFoodItem } = useDeleteFood();
-
   const [editedFoodType, setEditedFoodType] = useState(foodType);
-  const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(true);
+
+  useKeyPress("Escape", () => setIsEditing(false));
+
   const inStock = !foodType.soldOut;
   const isSoldOut = foodType.soldOut;
 
@@ -107,7 +137,7 @@ function FoodItem({ foodType }) {
   }
 
   function saveChanges(e) {
-    // console.log(e.target);
+    console.log(e);
     handleInputChange(e);
     // Dispatch an action to update the foodType
     modifyFoodItem({ editedFoodType, foodTypeFromUrl });
@@ -159,11 +189,15 @@ function FoodItem({ foodType }) {
   }
 
   return (
-    <StyledFoodItem className="food-item" $soldOut={foodType.soldOut}>
+    <StyledFoodItem
+      className="food-item"
+      $soldOut={foodType.soldOut}
+      $isEditing={isEditing}
+    >
       <Img src={foodType.image} alt={`image of ${foodType.name}`} />
-      <NameIngPriceDiv>
+      <NameIngPriceDiv $isEditing={isEditing}>
         {isEditing ? (
-          <>
+          <EditContainer $isEditing={isEditing}>
             <FileInput
               name="image"
               id="image"
@@ -202,7 +236,7 @@ function FoodItem({ foodType }) {
               $editInput={true}
               disabled={isEditingItem}
             />
-          </>
+          </EditContainer>
         ) : (
           // ! not editing
           <>
@@ -241,7 +275,7 @@ function FoodItem({ foodType }) {
         )
       ) : (
         (currentAccount?.typeOfUser === "admin" && (
-          <Div>
+          <Div $isEditing={isEditing}>
             {isEditing ? (
               <Div $isEditing={isEditing}>
                 <Button disabled={isDeletingItem} onClick={deleteFood}>
@@ -266,7 +300,6 @@ function FoodItem({ foodType }) {
               <Button $className="">Log In</Button>
             </NavLink>
             <NavLink to="/signup">
-              {" "}
               <Button $className="">Sign Up</Button>
             </NavLink>
           </SmallerDiv>

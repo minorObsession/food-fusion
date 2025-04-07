@@ -1,18 +1,12 @@
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import { useCallback, useEffect, useState } from "react";
-import Modal from "../ui/Modal";
+import { useEffect } from "react";
 import { H1, H2 } from "../styles/reusableStyles";
-import { useKeyPress } from "../helpers/useKeyPress";
-import { useLocation } from "react-router";
+
 import { useModalContext } from "../ui/useModalContext";
 import { useDispatch, useSelector } from "react-redux";
 import { capitalize } from "../helpers/helperFunctions";
-import {
-  fakeLogin,
-  logIntoAccount,
-  logOutOfAccount,
-} from "../features/accountsSlice";
+import { fakeLogin, logOutOfAccount } from "../features/accountsSlice";
 
 const StyledHomepage = styled.div`
   position: relative;
@@ -28,11 +22,7 @@ const StyledHomepage = styled.div`
 `;
 
 const DIV = styled.div`
-  position: ${({ $store }) => $store === true && "absolute"};
-  top: ${({ $store }) => $store === true && "2rem"};
-  right: ${({ $store }) => $store === true && "3rem"};
-  padding-bottom: ${({ $title }) => $title === true && "3rem"};
-  margin-bottom: 1rem;
+  /* margin-bottom: 1rem; */
   display: flex;
   gap: 1rem;
   flex-direction: column;
@@ -74,51 +64,7 @@ const DemoDiv = styled.div`
   gap: 1rem;
 `;
 
-// const DemoBtnAdmin = styled.button`
-//   background-color: var(--color-brand-500);
-//   color: var(--color-grey-900);
-//   padding: 2.5rem 5rem;
-//   border: none;
-//   border-radius: var(--border-radius-md);
-//   font-size: 2rem;
-//   font-weight: 600;
-//   cursor: pointer;
-//   transition: all 0.3s ease;
-//   box-shadow: var(--shadow-md);
-
-//   &:hover {
-//     background-color: var(--color-brand-600);
-//     box-shadow: var(--shadow-lg);
-//   }
-
-//   &:active {
-//     background-color: var(--color-brand-700);
-//     transform: scale(0.98);
-//   }
-// `;
-
-// const DemoBtnCustomer = styled.button`
-//   background-color: var(--color-brand-500);
-//   color: var(--color-grey-900);
-//   padding: 2.5rem 5rem;
-//   border: none;
-//   border-radius: var(--border-radius-md);
-//   font-size: 2rem;
-//   font-weight: 600;
-//   cursor: pointer;
-//   transition: all 0.3s ease;
-//   box-shadow: var(--shadow-md);
-
-//   &:hover {
-//     background-color: var(--color-brand-600);
-//     box-shadow: var(--shadow-lg);
-//   }
-
-//   &:active {
-//     background-color: var(--color-brand-700);
-//     transform: scale(0.98);
-//   }
-// `;
+//
 const BaseButton = styled.button`
   background-color: var(--color-brand-500);
   color: var(--color-grey-900);

@@ -1,7 +1,7 @@
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import toast, { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 import { ModalProvider } from "./ui/useModalContext";
 import GlobalStyles from "./styles/GlobalStyles";
@@ -15,6 +15,17 @@ import Modal from "./ui/Modal";
 import Orders from "./pages/Orders";
 import FoodProductPage from "./pages/FoodPage";
 import FAQ from "./pages/FAQ";
+
+// ! to improve
+// * HPAGE - UNTIL IMAGE IS LOADED DON'T SHOW ANYTHING!
+// * homepage make responsive (DEMO login especially)
+// * persist user in LS after page reload
+// * style edit better
+// * signup from to fit on screen
+// ! sync cart, customer etc. with local storage
+
+// ! FAQ - clik on button - scroll margin top!
+// ! sort buttons to look different
 
 function App() {
   const queryClient = new QueryClient({
@@ -67,7 +78,6 @@ function App() {
         position="top-center"
         reverseOrder={false}
         gutter={50}
-        // containerClassName=""
         containerStyle={{ margin: "50px" }}
         toastOptions={{
           // Define default options

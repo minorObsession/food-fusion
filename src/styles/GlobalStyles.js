@@ -1,4 +1,14 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, keyframes } from "styled-components";
+
+export const lightTheme = {
+  color: "#1A1A1A",
+  background: "#FFFFFF",
+};
+
+export const darkTheme = {
+  color: "#F5F5F5",
+  background: "#000000",
+};
 
 const GlobalStyles = createGlobalStyle`
 
@@ -58,6 +68,7 @@ const GlobalStyles = createGlobalStyle`
   --image-opacity: 100%;
 }
 
+
 *,
 *::before,
 *::after {
@@ -73,7 +84,7 @@ html {
   font-size: 62.5%;
 }
 
-body {
+body,#root {
   background-image: linear-gradient(to left, rgba(255, 243, 191, 0.85)
 
 
@@ -84,8 +95,7 @@ body {
 
                   background-size: cover;
 
-
-  background-position: center;
+ background-position: center;
   /* Centers the image */
   background-repeat: no-repeat;
   /* Prevents the image from repeating */
@@ -97,11 +107,13 @@ body {
   /* background-color: var(--color-grey-100); */
 
   transition: color 0.3s, background-color 0.3s;
-  min-height: 100vh;
-  min-width: 100vw;
+  height: 100%; 
+  max-width:100%;
   letter-spacing: 1.05px;
   line-height: 1.5;
-  font-size: 1.6rem;
+  font-size: 1.6rem; 
+  overflow-x: hidden;
+  margin: 0 auto;
 }
 
 

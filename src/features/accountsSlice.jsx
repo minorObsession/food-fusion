@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import { getAccounts } from "../services/apiAccounts";
 import toast from "react-hot-toast";
 
@@ -39,11 +39,10 @@ const accountsSlice = createSlice({
     },
 
     fakeLogin(state, action) {
-      // ! find if account exists
       const account = state.accounts.find(
         (acc) =>
           acc.username === action.payload.username &&
-          +acc.password === +action.payload.password
+          acc.password === action.payload.password
       );
 
       // ! make it current

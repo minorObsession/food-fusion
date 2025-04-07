@@ -40,7 +40,7 @@ async function reverseGeocodingCurrentPosition(latitude, longitude) {
     if (!res.ok) throw new Error("Couldn't get your position");
 
     const data = await res.json();
-    console.log(data);
+
     const {
       locality: city,
       countryCode: country,

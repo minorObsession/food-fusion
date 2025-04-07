@@ -7,12 +7,12 @@ import { useDispatch } from "react-redux";
 // import { useNavigate } from "react-router";
 
 import ButtonUI from "./ButtonUI";
-import FormRow from "./FormRow";
+import LoginFormRow from "./LoginFormRow";
 import { Input, Option, Select, Span } from "./Input";
 import { getPosition } from "../helpers/helperFunctions";
 import { createNewAccount } from "../services/apiAccounts";
 import { logIntoAccount, newAccount } from "../features/accountsSlice";
-import { useNavigate } from "react-router";
+import { useModalContext } from "./useModalContext";
 
 // prettier-ignore
 const states = [
@@ -75,7 +75,7 @@ const Overlay = styled.div`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2); // Dark semi-transparent background
+  background-color: rgba(0, 0, 0, 0.35); // Dark semi-transparent background
   backdrop-filter: blur(5px); // Apply blur effect
   z-index: 1; // Ensure it's on top of other content
   display: flex;
@@ -85,12 +85,12 @@ const Overlay = styled.div`
 
 const H2 = styled.h2`
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 `;
 
 const FormLogin = styled.form`
   position: relative;
-  width: 50%;
+  width: 70%;
   /* height: 0%; */
   height: 60%;
   padding: 2rem;
@@ -115,42 +115,40 @@ const FormLogin = styled.form`
 
 const FormSignup = styled.form`
   position: relative;
-  width: 70%;
+  width: 90%;
   height: 80%;
   background-color: rgba(255, 236, 153, 0.85);
   border-radius: 12px;
   text-align: center;
-  overflow-y: scroll;
-  /* overflow: hidden; */
+  overflow-y: auto;
   box-shadow: 5px 5px 15px var(--color-grey-400);
 
   display: flex;
-  gap: 2rem;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
+  gap: 3rem;
 
   @media (min-width: 1024px) {
     width: 60%;
-    height: 80%;
-    padding-top: 8rem;
+    /* height: 80%; */
   }
 `;
 
 const Div = styled.div`
-  margin-bottom: 2rem;
-  width: 80%;
+  padding-bottom: 2rem;
+  width: 75%;
   display: flex;
   gap: 1rem;
   flex-direction: column;
   align-items: center;
-  padding-bottom: 3rem;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
   @media (min-width: 1024px) {
+    /* // ? when signup form uses this div - padding-top 10rem */
+    padding-top: ${({ $login }) => ($login === true ? "0rem" : "10rem")};
+
     width: 70%;
     gap: 1.5rem;
   }
@@ -214,12 +212,18 @@ const AdminCheckbox = styled.input`
   }
 `;
 
-function Modal({ type = "loginCustomer", closeAnyModal, isAnyModalOpen }) {
+function Modal({
+  type = "loginCustomer",
+  // closeAnyModal,
+  isAnyModalOpen = true,
+  navigate,
+  location,
+}) {
   const [currentAddress, setCurrentAddress] = useState(null);
+  const { closeAnyModal } = useModalContext();
+
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
   const { register, handleSubmit, reset } = useForm();
-  // const navigate = useNavigate();
   const { mutate: createAccount, isLoading: isSubmitting } = useMutation({
     mutationFn: createNewAccount,
     onSuccess: () => {
@@ -247,9 +251,10 @@ function Modal({ type = "loginCustomer", closeAnyModal, isAnyModalOpen }) {
 
   function onLoginFormSubmit(data) {
     reset();
+
     closeAnyModal();
     dispatch(logIntoAccount(data));
-    // navigate;
+    // navigate();
     // ! clear inputs and close form
   }
 
@@ -284,32 +289,37 @@ function Modal({ type = "loginCustomer", closeAnyModal, isAnyModalOpen }) {
       document.removeEventListener("mousedown", clickOutsideToCloseModal);
   }, [closeAnyModal, isAnyModalOpen]);
 
-  // ! i was working here refactoring to FormRows. ..
+  // ! autofocus on username field
+  useEffect(() => {
+    document.getElementById("username").focus();
+  }, []);
 
   if (type === "loginCustomer")
     return (
       <Overlay>
         <FormLogin onSubmit={handleSubmit(onLoginFormSubmit, onError)}>
-          <Div>
+          <Div $login={true}>
             <H2>Log back into your account</H2>
-            <FormRow label="username">
+            <LoginFormRow label="username">
               <Input
+                $login={true}
                 type="text"
                 id="username"
                 {...register("username", {
                   required: "required field",
                 })}
               ></Input>
-            </FormRow>
-            <FormRow label="password">
+            </LoginFormRow>
+            <LoginFormRow label="password">
               <Input
+                $login={true}
                 type="password"
                 id="password"
                 {...register("password", {
                   required: "required field",
                 })}
               ></Input>
-            </FormRow>
+            </LoginFormRow>
           </Div>
           <ButtonUI disabled={false}>LOG IN</ButtonUI>
         </FormLogin>
@@ -320,26 +330,28 @@ function Modal({ type = "loginCustomer", closeAnyModal, isAnyModalOpen }) {
     return (
       <Overlay>
         <FormLogin onSubmit={handleSubmit(onLoginFormSubmit, onError)}>
-          <Div>
+          <Div $login={true}>
             <H2>Log back into your account</H2>
-            <FormRow label="username">
+            <LoginFormRow label="username">
               <Input
+                $login={true}
                 type="text"
                 id="username"
                 {...register("username", {
                   required: "required field",
                 })}
               ></Input>
-            </FormRow>
-            <FormRow label="password">
+            </LoginFormRow>
+            <LoginFormRow label="password">
               <Input
+                $login={true}
                 type="password"
                 id="password"
                 {...register("password", {
                   required: "required field",
                 })}
               ></Input>
-            </FormRow>
+            </LoginFormRow>
           </Div>
           <ButtonUI disabled={false}>LOG IN</ButtonUI>
         </FormLogin>
@@ -351,12 +363,6 @@ function Modal({ type = "loginCustomer", closeAnyModal, isAnyModalOpen }) {
       <Overlay>
         <FormSignup onSubmit={handleSubmit(onSignupFormSubmit, onError)}>
           <Div>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
-            <p></p>
             <H2>Let&apos;s get you set up!</H2>
             <Label htmlFor="username">Choose username</Label>
             <Input

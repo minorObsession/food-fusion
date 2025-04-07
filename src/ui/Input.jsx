@@ -2,13 +2,19 @@ import styled from "styled-components";
 
 export const Input = styled.input`
   border: 1px solid var(--color-grey-300);
-  background-color: var(--color-grey-50);
+  background-color: ${($edit) =>
+    $edit ? "var(--color-brand-200)" : "var(--color-grey-50)"};
   padding: 0.2rem 1rem;
   box-shadow: var(--shadow-sm);
   width: ${({ $login }) => ($login === true ? "90%" : "75%")};
   line-height: 1.5;
   border-radius: var(--border-radius-md);
   filter: ${({ disabled }) => (disabled === true ? "grayscale(80%)" : "none")};
+
+  width: 95%;
+  @media (min-width: 768px) {
+    width: 100%;
+  }
 
   &:active,
   &:focus {

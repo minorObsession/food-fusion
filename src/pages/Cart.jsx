@@ -7,7 +7,6 @@ import { clearCart } from "../features/cartSlice";
 import { createNewOrder } from "../features/orderSlice";
 import { formatCurrency, formatDate } from "../helpers/helperFunctions";
 import { useCreateNewOrder } from "../hooks/useCreateNewOrder";
-import { Span } from "../ui/Input";
 
 const CartPage = styled.div`
   margin: 0 auto;
@@ -147,12 +146,12 @@ const DiscountDiv = styled.div`
 `;
 
 function Cart() {
+  // ! sync cart with local storage
   const { cart } = useSelector((store) => store.cart);
   const { orders } = useSelector((store) => store.order);
   const { currentAccount } = useSelector((store) => store.accounts);
   const dispatch = useDispatch();
   const navigate = useNavigate();
-
   const orderTotal = cart.reduce(
     (acm, item) => (acm += item.unitPrice * item.quantity),
     0

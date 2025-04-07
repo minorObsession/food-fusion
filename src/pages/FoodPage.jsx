@@ -15,17 +15,17 @@ const SortBox = styled.div`
   display: flex;
   gap: 0.5rem;
   align-items: center;
-  flex-direction: column;
   justify-content: center;
 
   margin-bottom: 1rem;
-  scale: calc(0.9);
 
   @media (min-width: 480px) {
     flex-direction: row;
   }
 
   @media (min-width: 768px) {
+    /* flex-direction: column; */
+
     justify-content: flex-end;
   }
 `;
@@ -90,9 +90,9 @@ function FoodProductPage({ queryKey }) {
 
   return (
     <FoodPage>
-      <H1 $foodPageTitle={true}>
+      <H2 $foodPageTitle={true}>
         {foodType[0].toUpperCase() + foodType.slice(1)} Menu
-      </H1>
+      </H2>
       <FoodContainer>
         <SortBox>
           <Button
