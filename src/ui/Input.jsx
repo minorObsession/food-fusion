@@ -12,7 +12,7 @@ export const Input = styled.input`
   filter: ${({ disabled }) => (disabled === true ? "grayscale(80%)" : "none")};
 
   /* // ! maybe this messes something up */
-  width: ${({ $formInput }) => ($formInput ? "70" : "95%")};
+  width: ${({ $formInput }) => ($formInput ? "70" : "100%")};
   @media (min-width: 768px) {
     width: 100%;
   }
@@ -44,8 +44,9 @@ export const Option = styled.option`
 `;
 
 export const Select = styled.select`
+  width: ${({ $signupFormSelect }) => ($signupFormSelect ? "75%" : "100%")};
   /* width: 100%; */
-  width: 75%;
+  /* width: 75%; */
   border: 1px solid var(--color-grey-300);
   background-color: var(--color-brand-200);
   border-radius: var(--border-radius-md);

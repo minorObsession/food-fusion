@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { IoLanguage, IoTrashOutline } from "react-icons/io5";
+import { IoTrashOutline } from "react-icons/io5";
 import {
   addItemToCart,
   deleteItemFromCart,

@@ -1,25 +1,31 @@
 import styled from "styled-components";
-import { Input, Option, Select, Span } from "./Input";
+import { Input, Option, Select } from "./Input";
 import FileInput from "./FileInput";
-import { useForm } from "react-hook-form";
 
 import { Button } from "./ButtonUI";
 import { useAddFood } from "../hooks/useAddFood";
 import React from "react";
-import LoginFormRow from "./LoginFormRow";
 import FormRow from "./FormRow";
+import { useKeyPress } from "../hooks/useKeyPress";
 
 const StyledAddProductForm = styled.form`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  /* flex-wrap: wrap; */
+  width: 100%;
   gap: 1.5rem;
-  padding: 3rem;
+  padding: 1rem;
 
   scroll-behavior: smooth;
 
+  @media (min-width: 1024px) {
+    width: 80%;
+  }
+  @media (min-width: 1300px) {
+    width: 60%;
+  }
   button {
     margin-top: 3rem; /* Adjust the margin top as needed */
   }
@@ -27,7 +33,7 @@ const StyledAddProductForm = styled.form`
 
 const InlineInput = styled.input`
   border: 1px solid var(--color-grey-200);
-  background-color: var(--color-grey-0);
+  background-color: var(--color-brand-200);
   border-radius: var(--border-radius-sm);
   padding: 0.2rem 0.5rem;
   box-shadow: var(--shadow-sm);
@@ -67,7 +73,6 @@ const AddProductForm = React.forwardRef(({ setIsFormOpen }, ref) => {
     handleSubmit,
     foodTypeFromUrl,
     errors,
-    getValues,
   } = useAddFood();
 
   function formSubmit(data) {
@@ -77,10 +82,12 @@ const AddProductForm = React.forwardRef(({ setIsFormOpen }, ref) => {
     }, 2000);
   }
 
+  useKeyPress("Enter", handleSubmit(formSubmit));
+  useKeyPress("NumpadEnter", handleSubmit(formSubmit));
+
   return (
     <StyledAddProductForm ref={ref} onSubmit={handleSubmit(formSubmit)}>
       <FormRow span="name" errorMessage={errors?.name?.message}>
-        {/* <Span>name</Span> */}
         <Input
           type="text"
           id="name"
@@ -88,7 +95,7 @@ const AddProductForm = React.forwardRef(({ setIsFormOpen }, ref) => {
             required: "Dish needs to have a name",
           })}
           disabled={isCreating}
-        ></Input>
+        />
       </FormRow>
       <FormRow span="category" errorMessage={errors?.category?.message}>
         <Select
@@ -110,7 +117,7 @@ const AddProductForm = React.forwardRef(({ setIsFormOpen }, ref) => {
             {...register("ingredients[0]", {
               required: "There needs to be at least 3 ingredients",
             })}
-          ></InlineInput>
+          />
           <InlineInput
             type="text"
             id="ing2"
@@ -118,7 +125,7 @@ const AddProductForm = React.forwardRef(({ setIsFormOpen }, ref) => {
             {...register("ingredients[1]", {
               required: "There needs to be at least 3 ingredients",
             })}
-          ></InlineInput>
+          />
           <InlineInput
             type="text"
             id="ing3"
@@ -126,7 +133,7 @@ const AddProductForm = React.forwardRef(({ setIsFormOpen }, ref) => {
             {...register("ingredients[2]", {
               required: "There needs to be at least 3 ingredients",
             })}
-          ></InlineInput>
+          />
           <InlineInput
             type="text"
             id="ing4"
@@ -134,13 +141,13 @@ const AddProductForm = React.forwardRef(({ setIsFormOpen }, ref) => {
             {...register("ingredients[3]", {
               required: false,
             })}
-          ></InlineInput>
+          />
           <InlineInput
             type="text"
             id="ing5"
             disabled={isCreating}
             {...register("ingredients[4]", { required: false })}
-          ></InlineInput>
+          />
           <InlineInput
             type="text"
             id="ing6"
@@ -148,7 +155,7 @@ const AddProductForm = React.forwardRef(({ setIsFormOpen }, ref) => {
             {...register("ingredients[5]", {
               required: false,
             })}
-          ></InlineInput>
+          />
         </IngredientsDiv>
       </FormRow>
       <FormRow span="price" errorMessage={errors?.unitPrice?.message}>
@@ -163,7 +170,7 @@ const AddProductForm = React.forwardRef(({ setIsFormOpen }, ref) => {
             },
           })}
           disabled={isCreating}
-        ></Input>
+        />
       </FormRow>
       <FormRow span="image" errorMessage={errors?.image?.message}>
         <FileInput
@@ -175,7 +182,9 @@ const AddProductForm = React.forwardRef(({ setIsFormOpen }, ref) => {
           })}
         />
       </FormRow>
-      <Button $className="main">Add product</Button>
+      <Button style={{ width: "80%", margin: "0 auto" }} $className="main">
+        Add product
+      </Button>
     </StyledAddProductForm>
   );
 });

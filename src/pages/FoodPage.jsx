@@ -123,7 +123,10 @@ function FoodProductPage({ queryKey }) {
       </FoodContainer>
       {currentAccount?.typeOfUser === "admin" && (
         <>
-          <Button onClick={handleOpenProductForm} $className="submitFormBtn">
+          <Button
+            style={{ alignSelf: "center", width: "50%" }}
+            onClick={handleOpenProductForm}
+          >
             {isFormOpen ? "Hide Form" : "Add new Dish"}
           </Button>
           {isFormOpen && (

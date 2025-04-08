@@ -443,7 +443,7 @@ function Modal({
             </SmallerContainer>
             <SmallerContainer>
               <Label>State</Label>
-              <Select defaultValue={currentAddress?.state}>
+              <Select $signupFormSelect defaultValue={currentAddress?.state}>
                 {states.map((s) => (
                   <Option key={s}>{currentAddress?.state || s}</Option>
                 ))}
