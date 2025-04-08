@@ -19,6 +19,7 @@ export function useAddFood() {
     },
     onError: (err) => {
       console.error(err);
+      toast.error("Couldn create new dish");
     },
   });
 

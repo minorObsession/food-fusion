@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { IoTrashOutline } from "react-icons/io5";
+import { IoLanguage, IoTrashOutline } from "react-icons/io5";
 import {
   addItemToCart,
   deleteItemFromCart,
@@ -26,7 +26,6 @@ import { Input } from "./Input";
 import { useEditFood } from "../hooks/useEditFood";
 import { useDeleteFood } from "../hooks/useDeleteFood";
 import FileInput from "./FileInput";
-import { supabaseUrl } from "../services/supabase";
 import { NavLink } from "react-router-dom";
 import { updateFood } from "../services/apiFood";
 import { useKeyPress } from "../hooks/useKeyPress";
@@ -36,30 +35,30 @@ const ButtonsDiv = styled.div`
   justify-self: end;
 
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   gap: 1rem;
   grid-column: 1 / span 2;
-
-  & button {
-  }
 
   ${({ $isEditing }) =>
     $isEditing &&
     css`
       grid-column: 1 / 3;
       margin: 0 auto;
-    `}
 
-  @media (min-width: 480px) {
-  }
+      @media (min-width: 768px) {
+        margin: 0;
+      }
+
+      & button {
+        width: 100%;
+        /* padding: ; */
+      }
+    `}
 
   @media (min-width: 768px) {
     grid-column: 3/4;
-  }
-
-  @media (min-width: 1024px) {
-    /* grid-row: 1; */
-    /* margin: auto; */
   }
 `;
 
@@ -119,7 +118,7 @@ function FoodItem({ foodType }) {
   // ? edit/delete
   const { isEditingItem, modifyFoodItem } = useEditFood();
   const { isDeletingItem, deleteFoodItem } = useDeleteFood();
-  const [editedFoodType, setEditedFoodType] = useState(foodType);
+  const [editedFood, setEditedFood] = useState(foodType);
   const [isEditing, setIsEditing] = useState(false);
 
   useKeyPress("Escape", () => setIsEditing(false));
@@ -132,29 +131,28 @@ function FoodItem({ foodType }) {
   }
 
   function saveChanges(e) {
-    console.log(e);
     handleInputChange(e);
     // Dispatch an action to update the foodType
-    modifyFoodItem({ editedFoodType, foodTypeFromUrl });
+    modifyFoodItem({ editedFood, foodTypeFromUrl });
     // Turn off editing mode
     setTimeout(() => {
       setIsEditing(false);
     }, 1000);
   }
 
-  //
-
   function handleInputChange(e) {
     const { name, value } = e.target;
-    setEditedFoodType({ ...editedFoodType, [name]: value });
+    setEditedFood({ ...editedFood, [name]: value });
   }
 
   function handleImageUpload(e) {
     const file = e.target.files[0];
+    console.log(file.name);
+    // const imageName = `${supabaseUrl}/storage/v1/object/public/${foodTypeFromUrl}-photos/${file.name}`;
 
-    const filePath = `${supabaseUrl}/storage/v1/object/public/${foodTypeFromUrl}-photos/${file.name}`;
+    // console.log(file);
 
-    setEditedFoodType({ ...editedFoodType, image: filePath });
+    setEditedFood({ ...editedFood, image: file });
   }
 
   function handleBackInStock() {
@@ -196,8 +194,9 @@ function FoodItem({ foodType }) {
             <FileInput
               name="image"
               id="image"
+              type="file"
               accept="image/*"
-              // value={editedFoodType.image}
+              // value={editedFood.image}
               onChange={handleImageUpload}
               $editInput={true}
               disabled={isEditingItem}
@@ -205,7 +204,7 @@ function FoodItem({ foodType }) {
             <Input
               type="text"
               name="name"
-              value={editedFoodType.name}
+              value={editedFood.name}
               onChange={handleInputChange}
               $editInput={true}
               disabled={isEditingItem}
@@ -213,10 +212,10 @@ function FoodItem({ foodType }) {
             <Input
               type="object"
               name="ingredients"
-              value={editedFoodType.ingredients.join(", ")}
+              value={editedFood.ingredients.join(", ")}
               onChange={(e) =>
-                setEditedFoodType({
-                  ...editedFoodType,
+                setEditedFood({
+                  ...editedFood,
                   ingredients: e.target.value.split(", "),
                 })
               }
@@ -226,7 +225,7 @@ function FoodItem({ foodType }) {
             <Input
               type="number"
               name="unitPrice"
-              value={editedFoodType.unitPrice}
+              value={editedFood.unitPrice}
               onChange={handleInputChange}
               $editInput={true}
               disabled={isEditingItem}

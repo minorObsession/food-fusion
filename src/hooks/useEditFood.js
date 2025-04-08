@@ -15,15 +15,15 @@ export function useEditFood() {
 
   const queryClient = useQueryClient();
   const { mutate: modifyFoodItem, isPending: isEditingItem } = useMutation({
-    mutationFn: ({ editedFoodType, foodTypeFromUrl }) =>
-      apiUpdateFood(editedFoodType, foodTypeFromUrl),
+    mutationFn: ({ editedFood, foodTypeFromUrl }) =>
+      apiUpdateFood(editedFood, foodTypeFromUrl),
     onSuccess: () => {
       toast.success("Item was updated");
       queryClient.invalidateQueries({ queryKey: [foodTypeFromUrl] });
     },
     onError: (error) => {
       console.error(error.message);
-      toast.error("Couldn't update item");
+      toast.error("Couldn't update dish");
     },
   });
 

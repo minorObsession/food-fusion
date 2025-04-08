@@ -173,7 +173,7 @@ const AddProductForm = React.forwardRef(({ setIsFormOpen }, ref) => {
           {...register("image", {
             required: "Dish needs to have an image",
           })}
-        ></FileInput>
+        />
       </FormRow>
       <Button $className="main">Add product</Button>
     </StyledAddProductForm>

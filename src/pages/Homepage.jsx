@@ -10,7 +10,6 @@ import { fakeLogin, logOutOfAccount } from "../features/accountsSlice";
 import { useScreenWidthPx } from "../hooks/useScreenWidthPx";
 import { setCart } from "../features/cartSlice";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import { Button } from "../ui/ButtonUI";
 
 const StyledHomepage = styled.div`
   position: relative;
@@ -49,17 +48,6 @@ const HomepageBtn = styled.button`
   padding: 1.5rem;
   text-align: center;
   min-width: 100px;
-  &:active,
-  &:focus {
-    box-shadow: var(--shadow-md);
-    background-color: var(--color-brand-500);
-
-    outline: 2px solid var(--color-brand-300);
-  }
-
-  &:hover {
-    background-color: var(--color-brand-500);
-  }
 
   @media (min-width: 480px) {
     font-size: 1.5rem;
@@ -73,7 +61,7 @@ const HomepageBtn = styled.button`
   }
   @media (min-width: 1024px) {
     font-size: 2rem;
-    padding: 2rem;
+    padding: 2rem 4rem;
   }
 `;
 

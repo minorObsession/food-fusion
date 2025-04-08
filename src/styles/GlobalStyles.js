@@ -152,7 +152,7 @@ button {
   
   letter-spacing: 1.1px;
   border-radius: 20px;
-  /* border: solid 2px var(--color-grey-600); */
+  border: solid 2px var(--color-grey-600);
   height: 3rem;
   background-color: var(--color-brand-200);
     font-weight: 800;
@@ -161,17 +161,17 @@ button {
   justify-content: center;
   align-items: center;
 
+  transition: all 0.15s ease-in-out;
 
   &:hover,
-  &:visited {
-    font-weight: 900;
-    letter-spacing: 1.2px;
+  &:active {
 
-    box-shadow: 0 0 10px var(--color-grey-500); 
+
+    box-shadow: 0 0 10px var(--color-grey-500);
     outline: 2px solid var(--color-brand-500);
 
-    background-color: var(--color-brand-300);
-    color: var(--color-grey-800);
+    background-color: var(--color-brand-500);
+
   }
 
 
@@ -190,8 +190,9 @@ input:disabled {
 input:focus,
 button:focus,
 select:focus {
-  outline: 2px solid var(--color-brand-300);
   outline-offset: 1px;
+      outline: 3px solid var(--color-brand-500);
+
 }
 
 a {
