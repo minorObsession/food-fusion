@@ -75,6 +75,7 @@ const LoginSignupDiv = styled.div`
   @media (min-width: 480px) {
     /* grid-template-columns: 30% 35% 35%; */
     flex-direction: row;
+    align-self: end;
 
     justify-self: end;
   }

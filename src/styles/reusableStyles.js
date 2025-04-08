@@ -106,6 +106,7 @@ export const StyledFoodItem = styled.article`
     grid-template-columns: 1fr 1.5fr;
     grid-template-rows: auto;
     column-gap: 2rem;
+    align-self: end;
   }
 
   @media (min-width: 768px) {

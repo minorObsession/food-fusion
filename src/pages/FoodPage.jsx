@@ -50,15 +50,10 @@ function FoodProductPage({ queryKey }) {
   );
 
   function handleSortFood(e) {
-    const newSortCriteria = e.target.value;
+    e.target.blur();
+    const newSort = e.target.value;
 
-    if (sortCriteria === newSortCriteria) {
-      setSortCriteria("soldOut");
-      setSortedFood(sortFood(foodData, "soldOut"));
-    } else {
-      setSortCriteria(newSortCriteria);
-      setSortedFood(sortFood(foodData, newSortCriteria));
-    }
+    setSortCriteria((prev) => (prev === newSort ? "soldOut" : newSort));
   }
 
   // ? initialize food
@@ -77,6 +72,7 @@ function FoodProductPage({ queryKey }) {
   function handleOpenProductForm() {
     setIsFormOpen((s) => !s);
   }
+
   // ? auto scroll to form
   const formRef = useRef(null);
   useEffect(() => {

@@ -21,6 +21,8 @@ import FAQ from "./pages/FAQ";
 // ! ALL BTNS TO HAVE SAME HOVER EFFECT
 // ! FAQ - clik on button - scroll margin top!
 // * REACT QUERY LOADING!!! DOESN'T WORK AT ALL
+// * CART MOBILE (LAYOUT SHIFT WHEN HOVERING ACTION BTNS!!!1)
+// * FORM SUBMIT MOBILE!!
 
 function App() {
   const queryClient = new QueryClient({
