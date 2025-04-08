@@ -28,12 +28,13 @@ const CartContainer = styled.article`
     width: 60%;
   }
 `;
+
 const CartDiv = styled.div`
   width: 100%;
   background-color: var(--color-brand-200);
   box-shadow: 5px 7px 28px var(--color-grey-500);
-  border-radius: 10px;
   padding: 1rem;
+  border-radius: 10px;
   border: 2px solid var(--color-brand-500);
 
   display: flex;
@@ -149,14 +150,15 @@ function Cart() {
     orders.filter((o) => o.customerName === currentAccount?.username)?.length ||
     0;
   const discountPercentage =
-    previousOrdersForCustomer > 0 && previousOrdersForCustomer * 5;
+    previousOrdersForCustomer > 0 && previousOrdersForCustomer * 1;
+
   const discount = (discountPercentage / 100) * orderTotal;
   const grandTotal = orderTotal - discount;
   const deliveryFee = orderTotal < 50 ? 5 : 0;
 
   function handleSubmitOrder() {
     const newOrder = {
-      orderID: Math.trunc(Math.random() * 100),
+      orderID: Math.trunc(Math.random() * 4564651),
       orderTotal,
       discount,
       grandTotal,
@@ -165,9 +167,6 @@ function Cart() {
       customerName: currentAccount?.username,
     };
 
-    // * navigate to order page with new orderID
-    navigate(`/order/${newOrder.orderID}`);
-
     // ! don't go there if failed upload to SUPA
     setTimeout(() => {
       // * dispatch order to reducer
@@ -175,6 +174,9 @@ function Cart() {
 
       // * supabase submit order
       createOrder(newOrder);
+
+      // * navigate to order page with new orderID
+      navigate(`/order/${newOrder.orderID}`);
     }, 500);
   }
 

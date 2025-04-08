@@ -7,7 +7,7 @@ import { ModalProvider } from "./ui/useModalContext";
 import GlobalStyles from "./styles/GlobalStyles";
 import Homepage from "./pages/Homepage";
 import Cart from "./pages/Cart";
-import Order from "./pages/Order";
+import Order from "./pages/OrderPage";
 import PageNotFound from "./pages/PageNotFound";
 import AppLayout from "./ui/AppLayout";
 import Modal from "./ui/Modal";

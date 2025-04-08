@@ -18,7 +18,7 @@ import {
 
 import { Button } from "./ButtonUI";
 
-import { DeleteBtn, ModifyQuantityBtn, ModifyQuantityDiv } from "./CartItem";
+import { DeleteBtn, ModifyButton, ModifyDiv } from "./CartItem";
 import styled, { css } from "styled-components";
 import { useEffect, useState } from "react";
 import { Input } from "./Input";
@@ -243,22 +243,22 @@ function FoodItem({ foodType }) {
       {currentAccount?.typeOfUser === "customer" ? (
         itemInCart ? (
           <ButtonsDiv>
-            <ModifyQuantityDiv>
-              <ModifyQuantityBtn
+            <ModifyDiv>
+              <ModifyButton
                 onClick={() => dispatch(decreaseItemQuantity(foodType))}
               >
                 -
-              </ModifyQuantityBtn>
-              {quantityInCart}
-              <ModifyQuantityBtn
+              </ModifyButton>
+              {ModifyDiv}
+              <ModifyButton
                 onClick={() => dispatch(increaseItemQuantity(foodType))}
               >
                 +
-              </ModifyQuantityBtn>
-              <DeleteBtn onClick={() => dispatch(deleteItemFromCart(foodType))}>
+              </ModifyButton>
+              <ModifyDiv onClick={() => dispatch(deleteItemFromCart(foodType))}>
                 <IoTrashOutline />
-              </DeleteBtn>
-            </ModifyQuantityDiv>
+              </ModifyDiv>
+            </ModifyDiv>
           </ButtonsDiv>
         ) : (
           <ButtonsDiv>

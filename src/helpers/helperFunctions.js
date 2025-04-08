@@ -28,6 +28,9 @@ export const formatDate = (date) =>
     month: "short",
     year: "numeric",
     weekday: "short",
+    time: "short",
+    hour: "numeric",
+    minute: "numeric",
   }).format(new Date(date));
 
 async function reverseGeocodingCurrentPosition(latitude, longitude) {

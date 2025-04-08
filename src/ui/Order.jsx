@@ -1,13 +1,9 @@
 import styled from "styled-components";
-import { CiCircleChevDown } from "react-icons/ci";
-import { IoCheckmarkDone } from "react-icons/io5";
-import { FaCheck } from "react-icons/fa";
 
 import { Button } from "./ButtonUI";
 import { formatDate } from "../helpers/helperFunctions";
 import OrderItem from "./OrderItem";
 import { useState } from "react";
-import toast from "react-hot-toast";
 
 const StyledOrder = styled.div`
   /* background-color: ; */
