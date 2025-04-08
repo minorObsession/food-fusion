@@ -19,9 +19,7 @@ import FAQ from "./pages/FAQ";
 // ! to improve:
 
 // ! * SIDEBAR PADDING
-// ! ALL BTNS TO HAVE SAME HOVER EFFECT - THE HOMEPAGE HOVER EFFECT
 // ! FAQ - clik on button - scroll margin top!
-// * EDIT LAYOUT WEIRD
 // * REACT QUERY LOADING!!! DOESN'T WORK WELL
 // * CART MOBILE (LAYOUT SHIFT WHEN HOVERING ACTION BTNS!!!
 // * FORM SUBMIT MOBILE!!

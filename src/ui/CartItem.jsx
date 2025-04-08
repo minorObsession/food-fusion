@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { IoTrashOutline } from "react-icons/io5";
 
 import {
-  addItemToCart,
   deleteItemFromCart,
   increaseItemQuantity,
   decreaseItemQuantity,
@@ -12,8 +11,8 @@ import { useDispatch } from "react-redux";
 
 const StyledCartItem = styled.div`
   display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: 4rem;
+  grid-template-columns: 1fr 1fr;
+  /* grid-template-rows: 1fr 1fr; */
   gap: 1rem;
   align-items: center;
   padding-bottom: 0.5rem;
@@ -24,48 +23,58 @@ const StyledCartItem = styled.div`
   &:last-child {
     border-bottom: none;
   }
+
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+  }
 `;
 
 const NameAndQuantity = styled.div`
   display: flex;
   gap: 1rem;
   align-items: center;
+  flex-basis: 40%;
+  grid-column: span 2;
+  justify-content: center;
 
+  @media (min-width: 768px) {
+    /* width */
+    gap: 1.5rem;
+    justify-content: start;
+  }
   @media (min-width: 1024px) {
     gap: 2rem;
   }
 `;
 
-const Quantity = styled.span``;
+const Quantity = styled.span`
+  font-weight: 600;
+`;
 
 const Name = styled.h4`
-  font-weight: 500;
+  font-weight: 600;
+  grid-column: 2/3;
 `;
 
-const PriceModifyDelete = styled.div`
+export const ModifyDiv = styled.div`
   display: flex;
-  gap: 2rem;
-  align-items: center;
-  justify-self: end;
 
-  @media (min-width: 1024px) {
-    gap: 3rem;
-  }
-`;
-
-export const ModifyQuantityDiv = styled.div`
-  display: flex;
-  gap: 0.8rem;
+  gap: 1rem;
   align-items: end;
-  justify-self: center;
   align-self: center;
-  font-weight: 500;
+  font-weight: 600;
   background-color: var(--color-brand-200);
   padding: 0.6rem 1.2rem;
 
   border-radius: 25px;
+
   @media (min-width: 480px) {
-    /* grid-column: span 2; */
+  }
+
+  @media (min-width: 768px) {
+    justify-self: center;
     gap: 1rem;
   }
 
@@ -76,12 +85,19 @@ export const ModifyQuantityDiv = styled.div`
 `;
 
 const Price = styled.span`
-  width: 3rem;
-  font-weight: 500;
+  font-weight: 700;
+  letter-spacing: 1.8px;
   font-style: italic;
+
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: end;
+  align-self: end;
+
+  padding: 0.6rem 1.2rem;
 `;
 
-export const ModifyQuantityBtn = styled.button`
+export const ModifyButton = styled.button`
   border-radius: 50%;
   /* color: var(--color-grey-800); */
   width: 3rem;
@@ -125,28 +141,19 @@ function CartItem({ item }) {
         <Quantity>{item.quantity}x</Quantity>
         <Name>{item.name}</Name>
       </NameAndQuantity>
-      <PriceModifyDelete>
-        <div>
-          <Price>${item.quantity * item.unitPrice}</Price>
-        </div>
-        <ModifyQuantityDiv>
-          <ModifyQuantityBtn
-            onClick={() => dispatch(decreaseItemQuantity(item))}
-          >
-            -
-          </ModifyQuantityBtn>
-          <span style={{ width: "1rem" }}>{item.quantity}</span>
-          <ModifyQuantityBtn
-            onClick={() => dispatch(increaseItemQuantity(item))}
-          >
-            +
-          </ModifyQuantityBtn>
-        </ModifyQuantityDiv>
-
+      <Price>${item.quantity * item.unitPrice}</Price>
+      <ModifyDiv>
+        <ModifyButton onClick={() => dispatch(decreaseItemQuantity(item))}>
+          -
+        </ModifyButton>
+        <span style={{ width: "1rem" }}>{item.quantity}</span>
+        <ModifyButton onClick={() => dispatch(increaseItemQuantity(item))}>
+          +
+        </ModifyButton>
         <DeleteBtn onClick={() => dispatch(deleteItemFromCart(item))}>
           <IoTrashOutline />
         </DeleteBtn>
-      </PriceModifyDelete>
+      </ModifyDiv>
     </StyledCartItem>
   );
 }

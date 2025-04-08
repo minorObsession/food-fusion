@@ -4,7 +4,7 @@ export const Button = styled.button`
   /* Base styles */
   height: 4rem;
   width: fit-content;
-  padding: 1rem 2rem;
+  padding: 1rem 1.5rem;
   font-size: 1.3rem;
   /* letter-spacing: 0.8px; */
 

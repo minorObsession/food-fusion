@@ -44,12 +44,15 @@ export const FoodPage = styled.section`
   padding-top: 5rem;
 
   display: flex;
+  /* justify-content: center; */
+  align-items: center;
   flex-direction: column;
 
   @media (min-width: 480px) {
     padding: 3rem;
     padding-top: 1rem;
   }
+
   @media (min-width: 1024px) {
   }
 

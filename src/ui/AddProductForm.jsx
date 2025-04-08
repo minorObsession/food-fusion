@@ -15,7 +15,7 @@ const StyledAddProductForm = styled.form`
   align-items: center;
   /* flex-wrap: wrap; */
   width: 100%;
-  gap: 1.5rem;
+  gap: 2rem;
   padding: 1rem;
 
   scroll-behavior: smooth;
