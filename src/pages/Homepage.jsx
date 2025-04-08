@@ -1,13 +1,16 @@
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { useEffect } from "react";
 import { H1, H2 } from "../styles/reusableStyles";
 
 import { useModalContext } from "../ui/useModalContext";
 import { useDispatch, useSelector } from "react-redux";
-import { capitalize } from "../helpers/helperFunctions";
+import { capitalize, fakeCart } from "../helpers/helperFunctions";
 import { fakeLogin, logOutOfAccount } from "../features/accountsSlice";
 import { useScreenWidthPx } from "../hooks/useScreenWidthPx";
+import { setCart } from "../features/cartSlice";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import { Button } from "../ui/ButtonUI";
 
 const StyledHomepage = styled.div`
   position: relative;
@@ -20,7 +23,7 @@ const StyledHomepage = styled.div`
   padding-top: 7rem;
 
   display: flex;
-  gap: 2rem;
+  gap: 3rem;
   flex-direction: column;
   justify-content: center;
   align-items: center;
@@ -76,13 +79,19 @@ const HomepageBtn = styled.button`
 
 function Homepage() {
   const { currentAccount } = useSelector((store) => store.accounts);
+  const { cart } = useSelector((store) => store.cart);
   const dispatch = useDispatch();
   const screenSize = useScreenWidthPx();
+
+  const [_, setAccountFromLS] = useLocalStorage(null, "currentAccount");
 
   function logOut() {
     const confirmLogout = confirm("are you sure?");
     setTimeout(() => {
-      if (confirmLogout === true) dispatch(logOutOfAccount());
+      if (confirmLogout === true) {
+        dispatch(logOutOfAccount());
+        setAccountFromLS(null);
+      }
     }, 1000);
   }
 
@@ -96,6 +105,13 @@ function Homepage() {
   } = useModalContext();
 
   const navigate = useNavigate();
+
+  // ! sync account w redux state
+  useEffect(() => {
+    if (!currentAccount) return;
+    console.log("settingAccountINLS...");
+    setAccountFromLS({ ...currentAccount, cart: cart });
+  }, [currentAccount, setAccountFromLS, cart]);
 
   useEffect(() => {
     if (isOpenModalLoginA) {
@@ -120,16 +136,30 @@ function Homepage() {
       {currentAccount && (
         <>
           {currentAccount.typeOfUser === "admin" && (
-            <H2>Check upcoming orders</H2>
+            <>
+              <H2>
+                Check upcoming orders, {capitalize(currentAccount.username)}{" "}
+              </H2>
+              <HomepageBtn>
+                <NavLink to="/orders">VIEW ORDERS</NavLink>
+              </HomepageBtn>
+            </>
             // ! navLink for Orders
           )}
           {currentAccount.typeOfUser === "customer" && (
-            <H2>Get back to ordering, {capitalize(currentAccount.username)}</H2>
-            // ! navLink for ... ?
+            <>
+              <H2>
+                Get back to ordering, {capitalize(currentAccount.username)}
+                {/* // ! navLink for cart */}
+              </H2>{" "}
+              <HomepageBtn>
+                <NavLink to="/cart">GO TO CART</NavLink>
+              </HomepageBtn>{" "}
+            </>
           )}
 
           <DIV $store={true}>
-            <h3>{capitalize(currentAccount.username)}</h3>
+            <h3>{capitalize(currentAccount.typeOfUser)}</h3>
             <HomepageBtn onClick={logOut}>LOGOUT</HomepageBtn>
           </DIV>
         </>
@@ -147,23 +177,35 @@ function Homepage() {
           </DIV>
           <DIV>
             <H2>New customer?</H2>
-            <HomepageBtn onClick={() => setIsOpenModalSignup(true)}>
+            <HomepageBtn
+              onClick={() => {
+                setIsOpenModalSignup(true);
+              }}
+            >
               MAKE NEW ACCOUNT
             </HomepageBtn>
           </DIV>
           <DIV>
             <H2>Already have an account?</H2>
             <DIV style={{ flexDirection: "row" }}>
-              <HomepageBtn onClick={() => setIsOpenModalLoginC(true)}>
+              <HomepageBtn
+                onClick={() => {
+                  setIsOpenModalLoginC(true);
+                }}
+              >
                 USER LOGIN
               </HomepageBtn>
               <HomepageBtn
                 onClick={() => {
-                  navigate("faq");
                   dispatch(
                     fakeLogin({
-                      username: "customer",
+                      username: "christina",
                       password: "passw",
+                    })
+                  );
+                  dispatch(
+                    setCart({
+                      cart: fakeCart,
                     })
                   );
                 }}
@@ -175,15 +217,19 @@ function Homepage() {
           <DIV $store={true}>
             <H2>Store member login</H2>
             <DIV style={{ flexDirection: "row" }}>
-              <HomepageBtn onClick={() => setIsOpenModalLoginA(true)}>
+              <HomepageBtn
+                onClick={() => {
+                  setIsOpenModalLoginA(true);
+                }}
+              >
                 ADMIN LOGIN
               </HomepageBtn>
               <HomepageBtn
                 onClick={() => {
-                  navigate("pizza");
+                  // navigate("pizza");
                   dispatch(
                     fakeLogin({
-                      username: "admin",
+                      username: "michael",
                       password: "pass",
                     })
                   );

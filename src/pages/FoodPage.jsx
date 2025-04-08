@@ -10,6 +10,7 @@ import { sortFood } from "../helpers/helperFunctions";
 import { useFood } from "../hooks/useFood";
 import { Button } from "../ui/ButtonUI";
 import AddProductForm from "../ui/AddProductForm";
+import { useSearchParams } from "react-router-dom";
 
 const SortBox = styled.div`
   display: flex;
@@ -31,36 +32,26 @@ const SortBox = styled.div`
 `;
 
 function FoodProductPage({ queryKey }) {
-  const foodType = window.location.pathname.slice(1);
-  const { currentAccount } = useSelector((store) => store.accounts);
-  const [isFormOpen, setIsFormOpen] = useState(false);
   const { data: foodData, isLoading } = useFood(queryKey, () =>
     getFood(queryKey)
   );
-  const [sortCriteria, setSortCriteria] = useState("soldOut");
+  const foodType = window.location.pathname.slice(1);
+  const { currentAccount } = useSelector((store) => store.accounts);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [sortCriteria, setSortCriteria] = useState(
+    localStorage.getItem("sort") || "soldOut"
+  );
 
   const [sortedFood, setSortedFood] = useState(
     sortFood(foodData, sortCriteria)
   );
-
-  // ? on initial render - sort by soldOut
-  useEffect(() => {
-    if (!foodData) return;
-    setSortedFood(sortFood(foodData, "soldOut"));
-    setSortCriteria("soldOut");
-  }, [foodData]);
-
-  // ? auto scroll to form
-  const formRef = useRef(null);
-  useEffect(() => {
-    if (isFormOpen && formRef.current) {
-      formRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  }, [isFormOpen]);
+  const [params, setParams] = useSearchParams(
+    localStorage.getItem("sort") || "soldOut"
+  );
 
   function handleSortFood(e) {
     const newSortCriteria = e.target.value;
-    console.log(newSortCriteria);
+
     if (sortCriteria === newSortCriteria) {
       setSortCriteria("soldOut");
       setSortedFood(sortFood(foodData, "soldOut"));
@@ -70,9 +61,29 @@ function FoodProductPage({ queryKey }) {
     }
   }
 
+  // ? initialize food
+  useEffect(() => {
+    if (!foodData) return;
+    setSortedFood(sortFood(foodData, sortCriteria));
+    // setSortCriteria("soldOut");
+  }, [foodData, sortCriteria]);
+
+  // ? sync with url
+  useEffect(() => {
+    setParams({ sort: sortCriteria });
+    localStorage.setItem("sort", sortCriteria);
+  }, [sortCriteria, setParams, foodData]);
+
   function handleOpenProductForm() {
     setIsFormOpen((s) => !s);
   }
+  // ? auto scroll to form
+  const formRef = useRef(null);
+  useEffect(() => {
+    if (isFormOpen && formRef.current) {
+      formRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [isFormOpen]);
 
   if (isLoading)
     return (
@@ -90,7 +101,7 @@ function FoodProductPage({ queryKey }) {
 
   return (
     <FoodPage>
-      <H2 $foodPageTitle={true}>
+      <H2 style={{ marginBottom: "3rem" }} $foodPageTitle={true}>
         {foodType[0].toUpperCase() + foodType.slice(1)} Menu
       </H2>
       <FoodContainer>

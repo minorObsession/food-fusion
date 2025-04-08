@@ -16,16 +16,11 @@ import Orders from "./pages/Orders";
 import FoodProductPage from "./pages/FoodPage";
 import FAQ from "./pages/FAQ";
 
-// ! to improve
+// ! to improve:
 // * HPAGE - UNTIL IMAGE IS LOADED DON'T SHOW ANYTHING!
-// * homepage make responsive (DEMO login especially)
-// * persist user in LS after page reload
-// * style edit better
-// * signup from to fit on screen
-// ! sync cart, customer etc. with local storage
-
+// ! ALL BTNS TO HAVE SAME HOVER EFFECT
 // ! FAQ - clik on button - scroll margin top!
-// ! sort buttons to look different
+// * REACT QUERY LOADING!!! DOESN'T WORK AT ALL
 
 function App() {
   const queryClient = new QueryClient({

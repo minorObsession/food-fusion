@@ -8,9 +8,14 @@ const StyledFormRow = styled.div`
   flex-grow: 1;
   gap: 1rem;
   /* grid-column: span 2; */
-  width: 70%;
+  width: 90%;
+
+  @media (min-width: 768px) {
+    width: 70%;
+  }
 
   @media (min-width: 1024px) {
+    /* width: 50%; */
     gap: 1.5rem;
   }
 `;

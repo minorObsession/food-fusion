@@ -24,7 +24,7 @@ export const H2 = styled.h2`
   font-size: 2.4rem;
   font-weight: 800;
   line-height: 3.2rem;
-  margin-bottom: 2rem;
+  /* margin-bottom: 1rem; */
 
   @media (min-width: 480px) {
     /* padding: 3rem; */
@@ -34,7 +34,7 @@ export const H2 = styled.h2`
   @media (min-width: 1024px) {
     /* padding: 5rem; */
     font-size: 3rem;
-    margin-bottom: 3rem;
+    /* margin-bottom: 3rem; */
   }
 `;
 

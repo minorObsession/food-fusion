@@ -1,4 +1,10 @@
-import { createContext, useContext, useState, useCallback } from "react";
+import {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 import { useKeyPress } from "../helpers/useKeyPress";
 import { useNavigate } from "react-router-dom";
 
@@ -19,7 +25,12 @@ export function ModalProvider({ children }) {
   }
 
   const isAnyModalOpen =
-    isOpenModalLoginC || isOpenModalSignup || isOpenModalLoginA;
+    isOpenModalLoginC ||
+    isOpenModalSignup ||
+    isOpenModalLoginA ||
+    window.location.pathname === "/loginCustomer" ||
+    window.location.pathname === "/loginAdmin" ||
+    window.location.pathname === "/signup";
 
   useKeyPress("Escape", () => {
     if (!isAnyModalOpen) return;
@@ -27,6 +38,14 @@ export function ModalProvider({ children }) {
       closeAnyModal();
       navigate("/");
     }
+  });
+
+  // ! hide sidebar when opening modals
+  useEffect(() => {
+    const sidebarEl = document.getElementById("sidebar");
+
+    if (isAnyModalOpen) sidebarEl.style.opacity = 0;
+    else sidebarEl.style.opacity = 1;
   });
 
   return (

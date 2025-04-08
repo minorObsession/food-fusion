@@ -15,7 +15,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { capitalize } from "../helpers/helperFunctions";
 import { logOutOfAccount } from "../features/accountsSlice";
 
-const StyledSidebar = styled.div`
+const StyledSidebar = styled.nav`
   display: flex;
   position: fixed;
   top: 0;

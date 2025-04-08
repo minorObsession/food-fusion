@@ -11,7 +11,8 @@ export const Input = styled.input`
   border-radius: var(--border-radius-md);
   filter: ${({ disabled }) => (disabled === true ? "grayscale(80%)" : "none")};
 
-  width: 95%;
+  /* // ! maybe this messes something up */
+  width: ${({ $formInput }) => ($formInput ? "70" : "95%")};
   @media (min-width: 768px) {
     width: 100%;
   }
@@ -43,9 +44,10 @@ export const Option = styled.option`
 `;
 
 export const Select = styled.select`
-  width: 100%;
+  /* width: 100%; */
+  width: 75%;
   border: 1px solid var(--color-grey-300);
-  background-color: var(--color-grey-50);
+  background-color: var(--color-brand-200);
   border-radius: var(--border-radius-md);
   padding: 0.3rem;
   box-shadow: var(--shadow-sm);
@@ -53,10 +55,15 @@ export const Select = styled.select`
   &:focus {
     outline: 2px solid var(--color-brand-300);
     /* outline-offset: 2px;? */
+    background-color: var(--color-grey-100);
   }
 
   &:hover {
     background-color: var(--color-grey-100);
+  }
+
+  @media (min-width: 768px) {
+    width: 100%;
   }
 `;
 

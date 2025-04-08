@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 
 const initialState = {
   accounts: (await getAccounts()) || [],
-  currentAccount: null,
+  currentAccount: JSON.parse(localStorage.getItem("currentAccount")) || null,
 };
 
 const accountsSlice = createSlice({
@@ -53,6 +53,8 @@ const accountsSlice = createSlice({
 
     logOutOfAccount(state) {
       state.currentAccount = null;
+      localStorage.removeItem("currentAccount");
+      console.log("removed");
       toast.success("You've successfully logged out");
     },
   },

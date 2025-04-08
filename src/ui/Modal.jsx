@@ -90,9 +90,9 @@ const H2 = styled.h2`
 
 const FormLogin = styled.form`
   position: relative;
-  width: 70%;
+  width: 90%;
   /* height: 0%; */
-  height: 60%;
+  /* height: 60%; */
   padding: 2rem;
   background-color: rgba(255, 236, 153, 0.85);
   border-radius: 12px;
@@ -106,9 +106,14 @@ const FormLogin = styled.form`
   justify-content: space-around;
   align-items: center;
 
+  @media (min-width: 768px) {
+    width: 60%;
+    /* height: 70%; */
+    padding: 3rem;
+  }
   @media (min-width: 1024px) {
     width: 40%;
-    height: 70%;
+
     padding: 3rem;
   }
 `;
@@ -116,7 +121,7 @@ const FormLogin = styled.form`
 const FormSignup = styled.form`
   position: relative;
   width: 90%;
-  height: 80%;
+  height: 90%;
   background-color: rgba(255, 236, 153, 0.85);
   border-radius: 12px;
   text-align: center;
@@ -128,35 +133,44 @@ const FormSignup = styled.form`
   align-items: center;
   gap: 3rem;
 
-  @media (min-width: 1024px) {
+  @media (min-width: 768px) {
     width: 60%;
+    padding: 2rem;
     /* height: 80%; */
   }
 `;
 
-const Div = styled.div`
-  padding-bottom: 2rem;
-  width: 75%;
+const ModalContainer = styled.div`
+  padding: 1rem;
+  height: 100%;
+  width: 100%;
   display: flex;
   gap: 1rem;
   flex-direction: column;
   align-items: center;
 
+  @media (min-width: 768px) {
+    width: 75%;
+  }
   @media (min-width: 1024px) {
     /* width: 70%; */
     gap: 1.5rem;
   }
 `;
 
-const SmallerDiv = styled.div`
-  width: 75%;
+const SmallerContainer = styled.div`
+  width: 100%;
   /* font-size: 16px; */
   display: flex;
+  flex-direction: column;
   gap: 1rem;
   align-items: center;
   justify-content: ${({ $checkbox }) =>
     $checkbox === true ? "space-around" : "space-between"};
 
+  @media (min-width: 768px) {
+    /* width: 100%; */
+  }
   @media (min-width: 1024px) {
     gap: 2rem;
   }
@@ -292,29 +306,31 @@ function Modal({
     return (
       <Overlay>
         <FormLogin onSubmit={handleSubmit(onLoginFormSubmit, onError)}>
-          <Div $login={true}>
+          <ModalContainer $login={true}>
             <H2>Log back into your account</H2>
             <LoginFormRow label="username">
               <Input
+                $formInput
                 $login={true}
                 type="text"
                 id="username"
                 {...register("username", {
                   required: "required field",
                 })}
-              ></Input>
+              />
             </LoginFormRow>
             <LoginFormRow label="password">
               <Input
+                $formInput
                 $login={true}
                 type="password"
                 id="password"
                 {...register("password", {
                   required: "required field",
                 })}
-              ></Input>
+              />
             </LoginFormRow>
-          </Div>
+          </ModalContainer>
           <ButtonUI disabled={false}>LOG IN</ButtonUI>
         </FormLogin>
       </Overlay>
@@ -324,29 +340,31 @@ function Modal({
     return (
       <Overlay>
         <FormLogin onSubmit={handleSubmit(onLoginFormSubmit, onError)}>
-          <Div $login={true}>
+          <ModalContainer $login={true}>
             <H2>Log back into your account</H2>
             <LoginFormRow label="username">
               <Input
+                $formInput
                 $login={true}
                 type="text"
                 id="username"
                 {...register("username", {
                   required: "required field",
                 })}
-              ></Input>
+              />
             </LoginFormRow>
             <LoginFormRow label="password">
               <Input
+                $formInput
                 $login={true}
                 type="password"
                 id="password"
                 {...register("password", {
                   required: "required field",
                 })}
-              ></Input>
+              />
             </LoginFormRow>
-          </Div>
+          </ModalContainer>
           <ButtonUI disabled={false}>LOG IN</ButtonUI>
         </FormLogin>
       </Overlay>
@@ -356,25 +374,27 @@ function Modal({
     return (
       <Overlay>
         <FormSignup onSubmit={handleSubmit(onSignupFormSubmit, onError)}>
-          <Div>
+          <ModalContainer>
             <H2>Let&apos;s get you set up!</H2>
             <Label htmlFor="username">Choose username</Label>
             <Input
+              $formInput
               type="text"
               id="username"
               {...register("username", {
                 required: "required field",
               })}
-            ></Input>
+            />
             <Label htmlFor="password">Choose password</Label>
             <Input
+              $formInput
               type="text"
               id="password"
               {...register("password", {
                 required: "required field",
               })}
-            ></Input>
-            <SmallerDiv $checkbox={true}>
+            />
+            <SmallerContainer $checkbox={true}>
               <Label htmlFor="accountType">Store admin? </Label>
               <AdminCheckbox
                 type="checkbox"
@@ -382,9 +402,9 @@ function Modal({
                 id="accountType"
                 {...register("typeOfUser", {})}
               ></AdminCheckbox>
-            </SmallerDiv>
+            </SmallerContainer>
             {/* // ! ADDRESS */}
-            <SmallerDiv>
+            <SmallerContainer>
               <Label>Delivery address</Label>
               {currentAddress && (
                 <ClearButton onClick={(e) => handleInputReset(e)}>
@@ -394,11 +414,12 @@ function Modal({
               <GetPositionButton onClick={handleGetCurrentCity}>
                 Get Position
               </GetPositionButton>
-            </SmallerDiv>
+            </SmallerContainer>
 
-            <SmallerDiv>
+            <SmallerContainer>
               <Label htmlFor="streetAddress">Street address</Label>
               <Input
+                $formInput
                 type="text"
                 placeholder="e.g. 123 Main street"
                 id="streetAddress"
@@ -406,10 +427,11 @@ function Modal({
                   required: "required field",
                 })}
               />
-            </SmallerDiv>
-            <SmallerDiv>
+            </SmallerContainer>
+            <SmallerContainer>
               <Label htmlFor="city">City</Label>
               <Input
+                $formInput
                 defaultValue={currentAddress?.city || ""}
                 type="address"
                 placeholder="city"
@@ -418,8 +440,8 @@ function Modal({
                   required: "required field",
                 })}
               />
-            </SmallerDiv>
-            <SmallerDiv>
+            </SmallerContainer>
+            <SmallerContainer>
               <Label>State</Label>
               <Select defaultValue={currentAddress?.state}>
                 {states.map((s) => (
@@ -428,6 +450,7 @@ function Modal({
               </Select>
               <Label htmlFor="zipCode">Zip code</Label>
               <Input
+                $formInput
                 defaultValue={currentAddress?.zipCode || ""}
                 type="number"
                 placeholder="Zip code"
@@ -436,11 +459,13 @@ function Modal({
                   required: "required field",
                 })}
               />
-            </SmallerDiv>
-            <ButtonUI disabled={isSubmitting} className="submitFormBtn">
-              DONE
-            </ButtonUI>
-          </Div>
+            </SmallerContainer>
+            <div style={{ padding: "2rem" }}>
+              <ButtonUI disabled={isSubmitting} className="submitFormBtn">
+                CREATE ACCOUNT
+              </ButtonUI>
+            </div>
+          </ModalContainer>
         </FormSignup>
       </Overlay>
     );
