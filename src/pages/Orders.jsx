@@ -1,22 +1,22 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { H1 } from "../styles/reusableStyles";
+import { FoodPage, H1, H2 } from "../styles/reusableStyles";
 import Order from "../ui/Order";
 
 const StyledOrders = styled.div`
-  width: 85%;
   margin: 0 auto;
-  overflow-y: scroll;
-  padding: 4rem;
+  padding: 1rem;
+  font-size: 1rem;
 
   display: flex;
   flex-direction: column;
   /* gap: 3rem; */
 
+  @media (min-width: 480px) {
+    padding: 2rem;
+  }
   @media (min-width: 1024px) {
-    font-size: 20px;
-    padding: 2.5rem;
-    width: 60vw;
+    padding: 4rem;
   }
 `;
 const OrdersBox = styled.div`
@@ -28,7 +28,7 @@ const OrdersBox = styled.div`
   background-color: var(--color-brand-100);
   box-shadow: 5px 7px 28px var(--color-grey-500);
   border-radius: 18px;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   display: flex;
   flex-grow: 1;
@@ -46,14 +46,14 @@ function Orders() {
   if (currentAccount?.typeOfUser !== "admin") return;
 
   return (
-    <StyledOrders>
-      <H1>ORDERS</H1>
+    <FoodPage style={{ scrollbarWidth: "none" }}>
+      <H2 style={{ marginBottom: "3rem" }}>Orders</H2>
       <OrdersBox>
         {sortedOrders.map((o) => (
           <Order order={o} key={Math.random() + +o.orderID} />
         ))}
       </OrdersBox>
-    </StyledOrders>
+    </FoodPage>
   );
 }
 

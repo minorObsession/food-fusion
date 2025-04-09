@@ -52,7 +52,7 @@ export const FoodPage = styled.section`
   width: 100svw;
   height: 100svh;
   height: 100%;
-  padding: 5em 1em;
+  padding: 5rem 1rem;
 
   overflow: hidden;
   display: flex;

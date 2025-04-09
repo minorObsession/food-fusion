@@ -61,7 +61,7 @@ const DescriptionDiv = styled.div`
 `;
 
 function Order({ order }) {
-  const [isOrderCollapsed, setIsOrderCollapsed] = useState(true);
+  const [isOrderCollapsed, setIsOrderCollapsed] = useState(false);
 
   // function to toggle the collapsed state
   function toggleOrderCollapse() {
