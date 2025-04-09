@@ -96,7 +96,7 @@ function App() {
             duration: 5000,
           },
         }}
-      />
+      ></Toaster>
     </QueryClientProvider>
   );
 }

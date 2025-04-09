@@ -80,7 +80,8 @@ export const FoodContainer = styled.div`
 
 export const StyledFoodItem = styled.article`
   width: 100%;
-
+  // ! to prevent layout shift  on mobile landscape
+  /* height: 20rem; */
   max-height: ${({ $isEditing }) => $isEditing && "fit-content"};
   padding-bottom: 2rem;
   border-bottom: 2px dotted var(--color-brand-500);
@@ -98,6 +99,8 @@ export const StyledFoodItem = styled.article`
     $isEditing &&
     css`
       /* flex-direction: row; */
+      height: auto;
+
       align-items: center;
       justify-content: center;
       grid-template-columns: 1fr !important;
@@ -106,7 +109,7 @@ export const StyledFoodItem = styled.article`
 
       @media (min-width: 768px) {
         grid-template-columns: 1fr 2fr 1fr !important;
-        grid-template-rows: 1fr !important;
+        grid-template-rows: 1fr;
 
         /* column-gap: 3rem; */
         /* grid-template-rows: 1fr; */
@@ -118,7 +121,8 @@ export const StyledFoodItem = styled.article`
 
   @media (min-width: 480px) {
     grid-template-columns: 1fr 1.5fr;
-    grid-template-rows: auto;
+    // ! was auto
+    grid-template-rows: 1fr;
     column-gap: 2rem;
     align-self: end;
   }
@@ -127,6 +131,7 @@ export const StyledFoodItem = styled.article`
     grid-template-columns: 1fr 1.5fr 1fr;
     /* column-gap: 3rem; */
     grid-template-rows: 1fr;
+    /* height: auto; */
   }
 
   @media (min-width: 1024px) {
@@ -158,7 +163,7 @@ export const Img = styled.img`
   transition: all 0.3s ease;
 
   @media (min-width: 480px) {
-    height: 12rem;
+    height: 13rem;
   }
 
   @media (min-width: 768px) {

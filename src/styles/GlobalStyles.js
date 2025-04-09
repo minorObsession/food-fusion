@@ -104,25 +104,6 @@ body, #root {
   position: relative;
 }
 
-/* Fix for mobile landscape mode */
-@media screen and (orientation: landscape) {
-  body, #root {
-    width: 100vw;
-    height: 100vh;
-    min-width: 100vw;
-    overflow-x: hidden;
-  }
-}
-/* Fix for mobile browsers */
-@media screen and (max-width: 768px) {
-  body, #root {
-    width: 100%;
-    min-height: 100vh;
-    overflow-x: hidden;
-    position: fixed;
-  }
-}
-
 input,
 button,
 select {

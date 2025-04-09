@@ -15,6 +15,7 @@ const StyledHomepage = styled.div`
   position: relative;
   width: 100svw;
   height: 100svh;
+  height: 100%;
 
   overflow-y: auto;
   overflow-x: hidden;
