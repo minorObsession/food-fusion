@@ -163,7 +163,7 @@ function FoodItem({ food }) {
 
     if (food) {
       food.soldOut = false;
-      updateFood(food, foodTypeFromUrl);
+      updateFood(food, food.isImgUpdated);
       toggleEditMode();
     }
   }

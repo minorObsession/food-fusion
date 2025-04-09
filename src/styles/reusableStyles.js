@@ -51,6 +51,7 @@ export const H2 = styled.h2`
 export const FoodPage = styled.section`
   width: 100svw;
   height: 100svh;
+  height: 100%;
   padding: 5em 1em;
 
   overflow: hidden;

@@ -15,8 +15,8 @@ export function useEditFood() {
 
   const queryClient = useQueryClient();
   const { mutate: modifyFoodItem, isPending: isEditingItem } = useMutation({
-    mutationFn: ({ editedFood, foodTypeFromUrl }) =>
-      apiUpdateFood(editedFood, foodTypeFromUrl),
+    mutationFn: ({ editedFood, isImgUpdated }) =>
+      apiUpdateFood(editedFood, isImgUpdated),
     onSuccess: () => {
       toast.success("Item was updated");
       queryClient.invalidateQueries({ queryKey: [foodTypeFromUrl] });

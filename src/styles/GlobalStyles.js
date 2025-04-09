@@ -64,9 +64,10 @@ const GlobalStyles = createGlobalStyle`
   padding: 0;
   margin: 0;
 
-  /* Creating animations for dark mode */
   transition: background-color 0.3s, border 0.3s;
 }
+
+
 
 html {
   font-size: 62.5%;
@@ -76,12 +77,18 @@ html {
 
 }
 
+html,
 body {
-  height: 100svh;
-  width: 100svw;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow-x: hidden;
 
-  height: -webkit-fill-available;
+// ! for the space on the sides (mobile)
+background-color: var(--color-brand-200);
 }
+
+
 
 body, #root {
   background-image: linear-gradient(to left, rgba(255, 243, 191, 0.85), rgba(249, 250, 251, 0.6)),
