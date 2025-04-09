@@ -45,9 +45,9 @@ function FoodProductPage({ queryKey }) {
   const [sortedFood, setSortedFood] = useState(
     sortFood(foodData, sortCriteria)
   );
-  const [params, setParams] = useSearchParams(
-    localStorage.getItem("sort") || "soldOut"
-  );
+
+  const initialSort = localStorage.getItem("sort") || "soldOut";
+  const [params, setParams] = useSearchParams({ sort: initialSort });
 
   function handleSortFood(e) {
     e.target.blur();
