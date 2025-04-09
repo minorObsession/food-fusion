@@ -81,7 +81,7 @@ export const StyledFoodItem = styled.article`
   column-gap: 1.5rem;
   row-gap: 2rem;
   grid-template-columns: 1fr 1.5fr;
-  grid-template-rows: 3fr 1fr;
+  grid-template-rows: 3fr 5rem;
 
   ${({ $isEditing }) =>
     $isEditing &&

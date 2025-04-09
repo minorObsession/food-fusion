@@ -16,7 +16,7 @@ import { capitalize } from "../helpers/helperFunctions";
 import { logOutOfAccount } from "../features/accountsSlice";
 
 const StyledSidebar = styled.nav`
-  display: flex;
+  /* display: flex; */
   position: fixed;
   top: 0;
   left: 0;
@@ -24,7 +24,7 @@ const StyledSidebar = styled.nav`
   width: ${({ $collapsed }) => ($collapsed ? "8rem" : "23rem")};
   background-color: var(--color-brand-200);
   border-right: 2px solid var(--color-grey-300);
-  padding: 1.5rem;
+  padding: 1rem;
   z-index: 500;
   transition: width 0.3s ease;
 
@@ -38,7 +38,7 @@ const StyledSidebar = styled.nav`
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 100vw;
     max-height: 5rem;
     z-index: 600;
     /* padding: 1rem; */
@@ -94,31 +94,45 @@ const LogoutBtn = styled.button`
   align-items: center;
   justify-content: center;
 `;
-
 const StyledNavLink = styled(NavLink)`
   font-weight: 600;
   display: flex;
   align-items: center;
   border-radius: var(--border-radius-lg);
   padding: 0.5rem 1rem;
-  padding-left: 3rem;
-  width: 100%;
+  transition: all 0.3s ease-in-out;
+  overflow: hidden;
+  width: ${({ $collapsed }) => ($collapsed ? "4rem" : "100%")};
+  position: relative;
 
-  /* // ! manually set so icons don't move/shake */
   svg {
     font-size: 2rem;
     min-width: 2rem;
+    transition: transform 0.3s ease-in-out;
+    /* Icon moves from center to left when expanded */
+    transform: translateX(
+      ${({ $collapsed }) => ($collapsed ? "0" : "-0.5rem")}
+    );
+    position: relative;
+    z-index: 1;
   }
 
   span {
     white-space: nowrap;
-    margin-left: ${({ $collapsed }) => ($collapsed ? "0" : "0.75rem")};
     opacity: ${({ $collapsed }) => ($collapsed ? "0" : "1")};
     max-width: ${({ $collapsed }) => ($collapsed ? "0" : "150px")};
     overflow: hidden;
-    transition: opacity 0.2s
-        ${({ $collapsed }) => ($collapsed ? "ease" : "ease 0.2s")},
-      max-width 0.3s ease, margin-left 0.3s ease;
+    transition: opacity 0.2s ease-in-out, max-width 0.3s ease-in-out;
+    transition-delay: ${({ $collapsed }) => ($collapsed ? "0s" : "0.05s")};
+    margin-left: 0.5rem;
+  }
+
+  @media (max-width: 480px) {
+    width: 4rem;
+
+    span {
+      display: none;
+    }
   }
 
   &:hover,
@@ -132,18 +146,7 @@ const StyledNavLink = styled(NavLink)`
     background-color: var(--color-grey-500);
     color: var(--color-grey-50);
   }
-
-  @media (min-width: 375px) {
-    padding-left: 3.5rem;
-  }
-  @media (min-width: 425px) {
-    padding-left: 4rem;
-  }
-  @media (min-width: 480px) {
-    padding-left: 1.2rem;
-  }
 `;
-
 const UsernameSidebar = styled.span`
   position: absolute;
   bottom: 7rem;

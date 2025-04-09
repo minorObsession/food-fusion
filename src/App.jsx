@@ -19,9 +19,7 @@ import FAQ from "./pages/FAQ";
 // ! to improve:
 
 // ! * SIDEBAR PADDING
-// ! FAQ - clik on button - scroll margin top!
 // * REACT QUERY LOADING!!! DOESN'T WORK WELL
-// * CART MOBILE (LAYOUT SHIFT WHEN HOVERING ACTION BTNS!!!
 // * FORM SUBMIT MOBILE!!
 
 function App() {

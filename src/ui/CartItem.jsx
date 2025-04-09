@@ -18,7 +18,7 @@ const StyledCartItem = styled.div`
   padding-bottom: 0.5rem;
   font-size: 16px;
 
-  border-bottom: 1px solid var(--color-brand-600);
+  border-bottom: 2px solid var(--color-brand-500);
 
   &:last-child {
     border-bottom: none;
@@ -62,7 +62,8 @@ export const ModifyDiv = styled.div`
   display: flex;
 
   gap: 1rem;
-  align-items: end;
+  align-items: center;
+
   align-self: center;
   font-weight: 600;
   background-color: var(--color-brand-200);

@@ -53,14 +53,14 @@ const Price = styled.span`
   }
 `;
 
-const TimeLeftUntilDelivery = styled.div`
+const DeliveryAddressAndTime = styled.div`
   background-color: var(--color-brand-200);
   padding: 2rem;
   border-radius: 10px;
   border: 2px solid var(--color-brand-500);
   display: flex;
 
-  align-items: center;
+  /* align-items: center; */
   justify-content: space-between;
 `;
 
@@ -142,16 +142,28 @@ function Order() {
   return (
     <FoodPage>
       <OrderContainer>
-        <H1>ORDER #{order?.orderID}</H1>
+        <H1>Your Order </H1>
         {/* // ! 1/3 - HOW LONG IS LEFT FOR DELIVERY */}
-        <TimeLeftUntilDelivery>
-          <div>
+        <DeliveryAddressAndTime>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
             <h3 style={{ fontWeight: "400" }}>We will deliver to:</h3>
-            <strong style={{ fontSize: "2rem" }}>
+            <strong style={{ fontSize: "2rem", flexGrow: "1" }}>
               {currentAccount?.streetAddress}
             </strong>
           </div>
-          <div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
             <p>ETA:</p>
             <strong style={{ fontSize: "2rem" }}>
               {new Date(
@@ -159,7 +171,7 @@ function Order() {
               ).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
             </strong>
           </div>
-        </TimeLeftUntilDelivery>
+        </DeliveryAddressAndTime>
         {/* // ! 2/3 ORDER BREAKDOWN */}
         <H2>Order Summary</H2>
         <OrderSummary>
@@ -177,7 +189,7 @@ function Order() {
 
         {/* // ! 3/3 GRAND TOTAL BREAKDOWN */}
         <GrandTotalBreakdown>
-          <h4 style={{ fontWeight: "500" }}>
+          <h4 style={{ fontWeight: "500", textAlign: "right" }}>
             To pay on delivery:
             <strong> {formatCurrency(order?.grandTotal)}</strong>
           </h4>

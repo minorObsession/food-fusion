@@ -249,15 +249,15 @@ function FoodItem({ foodType }) {
               >
                 -
               </ModifyButton>
-              {ModifyDiv}
+              <span style={{ width: "1rem" }}>{quantityInCart}</span>
               <ModifyButton
                 onClick={() => dispatch(increaseItemQuantity(foodType))}
               >
                 +
               </ModifyButton>
-              <ModifyDiv onClick={() => dispatch(deleteItemFromCart(foodType))}>
+              <DeleteBtn onClick={() => dispatch(deleteItemFromCart(foodType))}>
                 <IoTrashOutline />
-              </ModifyDiv>
+              </DeleteBtn>
             </ModifyDiv>
           </ButtonsDiv>
         ) : (

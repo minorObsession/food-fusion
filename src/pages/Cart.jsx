@@ -39,7 +39,7 @@ const CartDiv = styled.div`
 
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
 
   @media (min-width: 1024px) {
     padding: 1rem;
@@ -134,7 +134,6 @@ const DiscountDiv = styled.div`
 `;
 
 function Cart() {
-  // ! sync cart with local storage
   const { cart } = useSelector((store) => store.cart);
   const { orders } = useSelector((store) => store.order);
   const { currentAccount } = useSelector((store) => store.accounts);

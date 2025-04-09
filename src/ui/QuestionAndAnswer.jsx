@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { H2 } from "../styles/reusableStyles";
 import { useEffect, useRef } from "react";
 
-const QuestionAnswerDiv = styled.div`
+const QuestionAnswerDiv = styled.article`
   width: 100%;
   display: flex;
   padding: 0.5rem;
@@ -29,6 +29,7 @@ const Question = styled.div`
   padding: 1rem 2rem;
 
   display: flex;
+  gap: 1rem;
   align-items: center;
   justify-content: space-between;
 `;
@@ -68,14 +69,17 @@ function QuestionAndAnswer({
 
   useEffect(() => {
     if (isQExpanded && questionRef.current) {
-      questionRef.current.scrollIntoView({ behavior: "smooth" });
+      questionRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
     }
   }, [isQExpanded]);
 
   return (
     <QuestionAnswerDiv>
       <Question onClick={handleToggleExpand} ref={questionRef}>
-        <H2>{question}</H2>
+        <H2 style={{ fontSize: "2rem" }}>{question}</H2>
 
         <IoArrowDownCircleSharp
           size="4rem"
