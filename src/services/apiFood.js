@@ -54,6 +54,7 @@ export async function addNewFood(newFoodObject) {
 }
 
 export async function updateFood(updatedFoodObject, isImgUpdated = false) {
+  console.log(updatedFoodObject);
   // ! if no new image, update dish backend and return
   if (!isImgUpdated) {
     let { data: updatedFood, error } = await supabase
@@ -104,11 +105,11 @@ export async function updateFood(updatedFoodObject, isImgUpdated = false) {
   return updatedFood;
 }
 
-export async function deleteFood(foodObjectToDelete, foodType) {
+export async function deleteFood(foodObjectToDelete) {
   // console.log(foodObjectToDelete, foodType);
 
   let { data, error } = await supabase
-    .from(foodType)
+    .from(foodObjectToDelete.foodType)
     .delete()
     .eq("id", foodObjectToDelete?.id)
     .select();

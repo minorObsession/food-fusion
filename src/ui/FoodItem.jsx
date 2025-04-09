@@ -98,14 +98,6 @@ const EditContainer = styled.div`
 `;
 
 function FoodItem({ food }) {
-  const [foodTypeFromUrl, setFoodTypeFromUrl] = useState(
-    window.location.pathname.slice(1)
-  );
-
-  useEffect(() => {
-    setFoodTypeFromUrl(window.location.pathname.slice(1));
-  }, []);
-
   const dispatch = useDispatch();
 
   const { cart } = useSelector((store) => store.cart);
@@ -163,7 +155,7 @@ function FoodItem({ food }) {
 
     if (food) {
       food.soldOut = false;
-      updateFood(food, food.isImgUpdated);
+      updateFood(food);
       toggleEditMode();
     }
   }
@@ -175,13 +167,13 @@ function FoodItem({ food }) {
 
     if (food) {
       food.soldOut = true;
-      updateFood(food, foodTypeFromUrl);
+      updateFood(food);
       toggleEditMode();
     }
   }
 
   function deleteFood() {
-    deleteFoodItem({ foodObjectToDelete: food, foodTypeFromUrl });
+    deleteFoodItem({ foodObjectToDelete: food });
   }
 
   return (
