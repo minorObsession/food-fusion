@@ -121,7 +121,7 @@ const FormLogin = styled.form`
 const FormSignup = styled.form`
   position: relative;
   width: 90%;
-  height: 90%;
+  height: 80%;
   background-color: rgba(255, 236, 153, 0.85);
   border-radius: 12px;
   text-align: center;

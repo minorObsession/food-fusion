@@ -18,7 +18,6 @@ import FAQ from "./pages/FAQ";
 
 // ! to improve:
 
-// ! * SIDEBAR PADDING
 // * REACT QUERY LOADING!!! DOESN'T WORK WELL
 // * FORM SUBMIT MOBILE!!
 

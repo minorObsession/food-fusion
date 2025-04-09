@@ -19,7 +19,7 @@ const StyledHomepage = styled.div`
   overflow-x: hidden;
   margin: 0 auto;
   padding: 5rem;
-  padding-top: 7rem;
+  /* padding-top: 7rem; */
 
   display: flex;
   gap: 3rem;
