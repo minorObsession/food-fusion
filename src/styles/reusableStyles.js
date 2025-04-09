@@ -4,6 +4,11 @@ export const H1 = styled.h1`
   text-align: center;
   font-size: 3.5rem;
 
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
+
   padding: ${({ $foodPageTitle }) =>
     $foodPageTitle === true ? "2rem" : "2rem"};
 
@@ -24,25 +29,31 @@ export const H2 = styled.h2`
   font-size: 2.4rem;
   font-weight: 800;
   line-height: 3.2rem;
-  /* margin-bottom: 1rem; */
+  margin-bottom: 1rem;
+
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: normal;
+  hyphens: none;
 
   @media (min-width: 480px) {
     /* padding: 3rem; */
     font-size: 2.6rem;
-    /* margin-bottom: 1rem; */
+    margin-bottom: 1.5rem;
   }
   @media (min-width: 1024px) {
     /* padding: 5rem; */
     font-size: 3rem;
-    /* margin-bottom: 3rem; */
+    margin-bottom: 2rem;
   }
 `;
 
 export const FoodPage = styled.section`
-  width: 100vw;
-  padding: 1rem;
-  padding-top: 5rem;
+  width: 100svw;
+  height: 100svh;
+  padding: 5em 1em;
 
+  overflow: hidden;
   display: flex;
   /* justify-content: center; */
   align-items: center;

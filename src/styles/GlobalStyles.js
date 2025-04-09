@@ -1,17 +1,6 @@
-import { createGlobalStyle, keyframes } from "styled-components";
-
-export const lightTheme = {
-  color: "#1A1A1A",
-  background: "#FFFFFF",
-};
-
-export const darkTheme = {
-  color: "#F5F5F5",
-  background: "#000000",
-};
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyles = createGlobalStyle`
-
 :root {
   /* Indigo */
   --color-brand-50: #fff9db;
@@ -68,7 +57,6 @@ const GlobalStyles = createGlobalStyle`
   --image-opacity: 100%;
 }
 
-
 *,
 *::before,
 *::after {
@@ -82,64 +70,59 @@ const GlobalStyles = createGlobalStyle`
 
 html {
   font-size: 62.5%;
+  height: -webkit-fill-available;
+  height: 100svh;
+  width: 100svw;
+
 }
 
-body,#root {
-  background-image: linear-gradient(to left, rgba(255, 243, 191, 0.85)
+body {
+  height: 100svh;
+  width: 100svw;
 
+  height: -webkit-fill-available;
+}
 
-  , rgba(249, 250, 251, 0.6)
-
-),
+body, #root {
+  background-image: linear-gradient(to left, rgba(255, 243, 191, 0.85), rgba(249, 250, 251, 0.6)),
                   url('https://ioefjkssfcuhmvvolteu.supabase.co/storage/v1/object/public/other-photos/background-photo.jpg');
-
-                  background-size: cover;
-
-                  /* overflow: hidden; */
- background-position: center;
-  /* Centers the image */
+  background-size: cover;
+  background-position: center;
   background-repeat: no-repeat;
-  /* Prevents the image from repeating */
   background-attachment: fixed;
-  /* Fixes the image position */
 
   font-family: "Poppins", sans-serif;
   color: var(--color-grey-700);
-  /* background-color: var(--color-grey-100); */
-
   transition: color 0.3s, background-color 0.3s;
-  height: 100%; 
-  max-width:100%;
+  
+
+
   letter-spacing: 1.05px;
   line-height: 1.5;
   font-size: 1.6rem; 
   overflow-x: hidden;
-  margin: 0 auto;
+  position: relative;
 }
 
-
-.background-image {
-  /* height: calc(100vh - 5rem); */
-  /* margin: 2rem; */
-  background-image: linear-gradient(
-      rgba(36, 42, 46, 0.7),
-      rgba(36, 42, 46, 0.6)
-    ),
-    url("./img/depositphotos_92868544-stock-photo-healthy-food-background.jpg");
-  background-size: cover;
-  background-position: center;
-  /* Centers the image */
-  background-repeat: no-repeat;
-  /* Prevents the image from repeating */
-  background-attachment: fixed;
-  /* Fixes the image position */
-  /* padding: 2.5rem 3rem; */
-  width: 100%;
-  height: 100%;
-  /* display: flex;
-  justify-content: center;
-  align-items: center; */
+/* Fix for mobile landscape mode */
+@media screen and (orientation: landscape) {
+  body, #root {
+    width: 100vw;
+    height: 100vh;
+    min-width: 100vw;
+    overflow-x: hidden;
+  }
 }
+/* Fix for mobile browsers */
+@media screen and (max-width: 768px) {
+  body, #root {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: fixed;
+  }
+}
+
 input,
 button,
 select {
@@ -149,32 +132,24 @@ select {
 
 button {
   cursor: pointer;
-  
   letter-spacing: 1.1px;
   border-radius: 20px;
   border: solid 2px var(--color-grey-600);
   height: 3rem;
   background-color: var(--color-brand-200);
-    font-weight: 800;
+  font-weight: 800;
   white-space: nowrap;
   display: flex;
   justify-content: center;
   align-items: center;
-
   transition: all 0.15s ease-in-out;
 
   &:hover,
   &:active {
-
-
     box-shadow: 0 0 10px var(--color-grey-500);
     outline: 2px solid var(--color-brand-500);
-
     background-color: var(--color-brand-500);
-
   }
-
-
 }
 
 *:disabled {
@@ -191,8 +166,7 @@ input:focus,
 button:focus,
 select:focus {
   outline-offset: 1px;
-      outline: 3px solid var(--color-brand-500);
-
+  outline: 3px solid var(--color-brand-500);
 }
 
 a {
@@ -217,35 +191,33 @@ h6 {
 
 img {
   max-width: 100%;
-
 }
 
 /* Scrollbar Customization */
 ::-webkit-scrollbar {
-  width: 15px; /* Width of the vertical scrollbar */
-  height: 12px; /* Height of the horizontal scrollbar */
+  width: 15px;
+  height: 12px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-grey-200); /* Background of the scrollbar track */
-  border-radius: 10px; /* Rounded corners for the scrollbar track */
+  background: var(--color-grey-200);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: var(--color-brand-500); /* Scrollbar thumb color */
-  border-radius: 10px; /* Rounded corners for the scrollbar thumb */
-  border: 3px solid var(--color-grey-200); /* Padding around the thumb to create some spacing */
+  background-color: var(--color-brand-500);
+  border-radius: 10px;
+  border: 3px solid var(--color-grey-200);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background-color: var(--color-brand-700); /* Scrollbar thumb color on hover */
-  border: 3px solid var(--color-grey-300); /* Border color on hover */
+  background-color: var(--color-brand-700);
+  border: 3px solid var(--color-grey-300);
 }
 
 ::-webkit-scrollbar-corner {
-  background: var(--color-grey-100); /* Color of the corner where horizontal and vertical scrollbars meet */
+  background: var(--color-grey-100);
 }
-
 `;
 
 export default GlobalStyles;

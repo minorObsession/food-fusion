@@ -18,8 +18,12 @@ import FAQ from "./pages/FAQ";
 
 // ! to improve:
 
-// * REACT QUERY LOADING!!! DOESN'T WORK WELL
-// * FORM SUBMIT MOBILE!!
+// * going to url (signup e.g.) DIRECTLY DOESN'T WORK
+
+// ! WHEN ADDING TO CARD, UNFOCUS AFTER CLICK
+// * WHITE SPACES ON MOBILE!!!!!!!!!!!!!!!
+// * WHITE SPACES ON MOBILE!!!!!!!!!!!!!!!
+// * WHITE SPACES ON MOBILE!!!!!!!!!!!!!!!
 
 function App() {
   const queryClient = new QueryClient({

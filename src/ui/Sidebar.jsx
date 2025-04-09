@@ -20,7 +20,7 @@ const StyledSidebar = styled.nav`
   position: fixed;
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 100svh;
   width: ${({ $collapsed }) => ($collapsed ? "8rem" : "23rem")};
   background-color: var(--color-brand-200);
   border-right: 2px solid var(--color-grey-300);

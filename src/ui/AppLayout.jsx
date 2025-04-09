@@ -5,8 +5,8 @@ import LoginSignup from "./LoginSignup";
 
 const StyledAppLayout = styled.div`
   display: flex;
-  height: 100vh;
-  width: 100vw;
+  height: 100svh;
+  width: 100svw;
 `;
 
 function AppLayout() {

@@ -79,7 +79,15 @@ function QuestionAndAnswer({
   return (
     <QuestionAnswerDiv>
       <Question onClick={handleToggleExpand} ref={questionRef}>
-        <H2 style={{ fontSize: "2rem" }}>{question}</H2>
+        <H2
+          style={{
+            fontSize: "2rem",
+            margin: "auto 0",
+            textAlign: "center",
+          }}
+        >
+          {question}
+        </H2>
 
         <IoArrowDownCircleSharp
           size="4rem"

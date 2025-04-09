@@ -142,7 +142,7 @@ function Order() {
   return (
     <FoodPage>
       <OrderContainer>
-        <H1>Your Order </H1>
+        <H2>Your Order</H2>
         {/* // ! 1/3 - HOW LONG IS LEFT FOR DELIVERY */}
         <DeliveryAddressAndTime>
           <div

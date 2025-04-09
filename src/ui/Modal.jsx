@@ -73,8 +73,8 @@ const Overlay = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100svw;
+  height: 100svh;
   background-color: rgba(0, 0, 0, 0.35); // Dark semi-transparent background
   backdrop-filter: blur(5px); // Apply blur effect
   z-index: 1; // Ensure it's on top of other content
@@ -90,9 +90,9 @@ const H2 = styled.h2`
 
 const FormLogin = styled.form`
   position: relative;
-  width: 90%;
-  /* height: 0%; */
-  /* height: 60%; */
+  /* max-height: 100svh; */
+  width: 90svw;
+
   padding: 2rem;
   background-color: rgba(255, 236, 153, 0.85);
   border-radius: 12px;
@@ -120,23 +120,26 @@ const FormLogin = styled.form`
 
 const FormSignup = styled.form`
   position: relative;
-  width: 90%;
-  height: 80%;
+  width: 90svw;
+  height: 70svh;
+
   background-color: rgba(255, 236, 153, 0.85);
   border-radius: 12px;
   text-align: center;
+  overflow-x: hidden;
   overflow-y: auto;
   box-shadow: 5px 5px 15px var(--color-grey-400);
 
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: start;
   gap: 3rem;
+  padding: 2rem;
 
   @media (min-width: 768px) {
     width: 60%;
     padding: 2rem;
-    /* height: 80%; */
+    height: 80%;
   }
 `;
 

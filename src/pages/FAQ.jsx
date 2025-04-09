@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { FoodPage, H1 } from "../styles/reusableStyles";
+import { FoodPage, H2 } from "../styles/reusableStyles";
 import QuestionAndAnswer from "../ui/QuestionAndAnswer";
 
 const Accordion = styled.div`
@@ -92,8 +92,8 @@ function FAQ() {
 
   return (
     <FoodPage>
-      <H1>Frequently Asked Questions</H1>
-      <Accordion>
+      <H2 style={{ wordBreak: "break-word" }}>Frequently Asked Questions</H2>
+      <Accordion style={{ wordWrap: "break-word", overflowWrap: "break-word" }}>
         {questions.map((q) => (
           <QuestionAndAnswer
             key={q.id}

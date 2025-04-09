@@ -13,12 +13,13 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const StyledHomepage = styled.div`
   position: relative;
-  width: 100vw;
-  height: 100%;
-  overflow-y: hidden;
+  width: 100svw;
+  height: 100svh;
+  overflow-y: auto;
   overflow-x: hidden;
   margin: 0 auto;
   padding: 5rem;
+  /* padding-bottom: 20rem; */
   /* padding-top: 7rem; */
 
   display: flex;
@@ -28,7 +29,7 @@ const StyledHomepage = styled.div`
   align-items: center;
 
   @media (min-width: 480px) {
-    padding-top: 0;
+    /* padding-top: 0; */
   }
 `;
 
