@@ -23,12 +23,13 @@ import styled, { css } from "styled-components";
 import { useEffect, useState } from "react";
 import { Input } from "./Input";
 
-import { useEditFood } from "../hooks/useEditFood";
+import { useKeyPress } from "../hooks/useKeyPress";
+
 import { useDeleteFood } from "../hooks/useDeleteFood";
 import FileInput from "./FileInput";
 import { NavLink } from "react-router-dom";
 import { updateFood } from "../services/apiFood";
-import { useKeyPress } from "../hooks/useKeyPress";
+import { useEditFood } from "../hooks/useEditFood";
 
 const ButtonsDiv = styled.div`
   align-self: flex-end;
@@ -93,11 +94,10 @@ const EditContainer = styled.div`
   justify-content: center;
   align-items: center;
   gap: 1rem;
-
   grid-row: 2 / span 2;
 `;
 
-function FoodItem({ foodType }) {
+function FoodItem({ food }) {
   const [foodTypeFromUrl, setFoodTypeFromUrl] = useState(
     window.location.pathname.slice(1)
   );
@@ -110,21 +110,19 @@ function FoodItem({ foodType }) {
 
   const { cart } = useSelector((store) => store.cart);
   const { currentAccount } = useSelector((store) => store.accounts);
-  const itemInCart = cart.map((item) => item.name).includes(foodType.name);
-  const quantityInCart = cart.find(
-    (item) => item.name === foodType.name
-  )?.quantity;
+  const itemInCart = cart.map((item) => item.name).includes(food.name);
+  const quantityInCart = cart.find((item) => item.name === food.name)?.quantity;
 
   // ? edit/delete
   const { isEditingItem, modifyFoodItem } = useEditFood();
   const { isDeletingItem, deleteFoodItem } = useDeleteFood();
-  const [editedFood, setEditedFood] = useState(foodType);
+  const [editedFood, setEditedFood] = useState(food);
   const [isEditing, setIsEditing] = useState(false);
 
   useKeyPress("Escape", () => setIsEditing(false));
 
-  const inStock = !foodType.soldOut;
-  const isSoldOut = foodType.soldOut;
+  const inStock = !food.soldOut;
+  const isSoldOut = food.soldOut;
 
   function toggleEditMode() {
     setIsEditing(!isEditing);
@@ -133,25 +131,28 @@ function FoodItem({ foodType }) {
   function saveChanges(e) {
     handleInputChange(e);
     // Dispatch an action to update the foodType
-    modifyFoodItem({ editedFood, foodTypeFromUrl });
+    // ! if image is updated
+    if (editedFood.image instanceof File) {
+      modifyFoodItem({ editedFood, isImgUpdated: true });
+    } else modifyFoodItem({ editedFood });
+
     // Turn off editing mode
     setTimeout(() => {
       setIsEditing(false);
+      setEditedFood(food);
     }, 1000);
   }
 
   function handleInputChange(e) {
     const { name, value } = e.target;
-    setEditedFood({ ...editedFood, [name]: value });
+
+    if (name === "unitPrice")
+      setEditedFood({ ...editedFood, unitPrice: +value });
+    else setEditedFood({ ...editedFood, [name]: value });
   }
 
   function handleImageUpload(e) {
     const file = e.target.files[0];
-    console.log(file.name);
-    // const imageName = `${supabaseUrl}/storage/v1/object/public/${foodTypeFromUrl}-photos/${file.name}`;
-
-    // console.log(file);
-
     setEditedFood({ ...editedFood, image: file });
   }
 
@@ -159,9 +160,10 @@ function FoodItem({ foodType }) {
     if (inStock) return;
 
     if (!isEditing) toggleEditMode();
-    if (foodType) {
-      foodType.soldOut = false;
-      updateFood(foodType, foodTypeFromUrl);
+
+    if (food) {
+      food.soldOut = false;
+      updateFood(food, foodTypeFromUrl);
       toggleEditMode();
     }
   }
@@ -170,24 +172,25 @@ function FoodItem({ foodType }) {
     if (!inStock) return;
 
     if (!isEditing) toggleEditMode();
-    if (foodType) {
-      foodType.soldOut = true;
-      updateFood(foodType, foodTypeFromUrl);
+
+    if (food) {
+      food.soldOut = true;
+      updateFood(food, foodTypeFromUrl);
       toggleEditMode();
     }
   }
 
   function deleteFood() {
-    deleteFoodItem({ foodObjectToDelete: foodType, foodTypeFromUrl });
+    deleteFoodItem({ foodObjectToDelete: food, foodTypeFromUrl });
   }
 
   return (
     <StyledFoodItem
       className="food-item"
-      $soldOut={foodType.soldOut}
+      $soldOut={food.soldOut}
       $isEditing={isEditing}
     >
-      <Img src={foodType.image} alt={`image of ${foodType.name}`} />
+      <Img src={food.image} alt={`image of ${food.name}`} />
       <NameIngPriceDiv $isEditing={isEditing}>
         {isEditing ? (
           <EditContainer $isEditing={isEditing}>
@@ -223,7 +226,7 @@ function FoodItem({ foodType }) {
               disabled={isEditingItem}
             />
             <Input
-              type="number"
+              type="text"
               name="unitPrice"
               value={editedFood.unitPrice}
               onChange={handleInputChange}
@@ -234,9 +237,9 @@ function FoodItem({ foodType }) {
         ) : (
           // ! not editing
           <>
-            <Name>{foodType.name}</Name>
-            <Ingredients>{foodType.ingredients.join(", ")}</Ingredients>
-            <Price>${foodType.unitPrice}</Price>
+            <Name>{food.name}</Name>
+            <Ingredients>{food.ingredients.join(", ")}</Ingredients>
+            <Price>${food.unitPrice}</Price>
           </>
         )}
       </NameIngPriceDiv>
@@ -245,24 +248,24 @@ function FoodItem({ foodType }) {
           <ButtonsDiv>
             <ModifyDiv>
               <ModifyButton
-                onClick={() => dispatch(decreaseItemQuantity(foodType))}
+                onClick={() => dispatch(decreaseItemQuantity(food))}
               >
                 -
               </ModifyButton>
               <span style={{ width: "1rem" }}>{quantityInCart}</span>
               <ModifyButton
-                onClick={() => dispatch(increaseItemQuantity(foodType))}
+                onClick={() => dispatch(increaseItemQuantity(food))}
               >
                 +
               </ModifyButton>
-              <DeleteBtn onClick={() => dispatch(deleteItemFromCart(foodType))}>
+              <DeleteBtn onClick={() => dispatch(deleteItemFromCart(food))}>
                 <IoTrashOutline />
               </DeleteBtn>
             </ModifyDiv>
           </ButtonsDiv>
         ) : (
           <ButtonsDiv>
-            <Button onClick={() => dispatch(addItemToCart(foodType))}>
+            <Button onClick={() => dispatch(addItemToCart(food))}>
               Add to cart
             </Button>
           </ButtonsDiv>
@@ -291,10 +294,10 @@ function FoodItem({ foodType }) {
         (!currentAccount && (
           <LoginSignupDiv>
             <NavLink to="/loginCustomer">
-              <Button $className="">Log In</Button>
+              <Button>Log In</Button>
             </NavLink>
             <NavLink to="/signup">
-              <Button $className="">Sign Up</Button>
+              <Button>Sign Up</Button>
             </NavLink>
           </LoginSignupDiv>
         ))

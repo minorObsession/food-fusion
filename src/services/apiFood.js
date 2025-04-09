@@ -53,23 +53,28 @@ export async function addNewFood(newFoodObject) {
   return newFoodItem;
 }
 
-// !
-// !
-// !
-// !
-// !
-// !
-// ! FIGURE OUT FUCKING IMAGE PATH
-export async function updateFood(updatedFoodObject, foodType) {
+export async function updateFood(updatedFoodObject, isImgUpdated = false) {
+  // ! if no new image, update dish backend and return
+  if (!isImgUpdated) {
+    let { data: updatedFood, error } = await supabase
+      .from(updatedFoodObject.foodType)
+      .update(updatedFoodObject)
+      .eq("id", updatedFoodObject?.id)
+      .select();
+
+    return updatedFood;
+  }
+
+  // ! if new image, update dish backend and upload image
   const imageFile = updatedFoodObject.image;
   const imageName = imageFile.name.replaceAll("/", "").replaceAll(" ", "-");
 
-  let imagePath = `${supabaseUrl}/storage/v1/object/public/${foodType}-photos/${imageName}`;
+  let imagePath = `${supabaseUrl}/storage/v1/object/public/${updatedFoodObject.foodType}-photos/${imageName}`;
 
   const preparedFoodObject = { ...updatedFoodObject, image: imagePath };
 
   let { data: updatedFood, error } = await supabase
-    .from(foodType)
+    .from(updatedFoodObject.foodType)
     .update(preparedFoodObject)
     .eq("id", updatedFoodObject?.id)
     .select();
@@ -80,14 +85,14 @@ export async function updateFood(updatedFoodObject, foodType) {
   }
 
   // Replace image field with the new image name or path
-  imagePath = `${supabaseUrl}/storage/v1/object/public/${foodType}-photos/${imageName}`;
+  imagePath = `${supabaseUrl}/storage/v1/object/public/${updatedFoodObject.foodType}-photos/${imageName}`;
 
   if (!(imageFile instanceof File)) {
     throw new Error("Uploaded file is not valid");
   }
 
   const { data, error: storageError } = await supabase.storage
-    .from(`${foodType}-photos`)
+    .from(`${updatedFoodObject.foodType}-photos`)
     .upload(imageName, imageFile, {
       upsert: true,
     });

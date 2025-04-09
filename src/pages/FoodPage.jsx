@@ -118,7 +118,7 @@ function FoodProductPage({ queryKey }) {
           </Button>
         </SortBox>
         {sortedFood?.map((p, i) => (
-          <FoodItem foodType={p} key={Math.random() + i} />
+          <FoodItem food={p} key={Math.random() + i} />
         ))}
       </FoodContainer>
       {currentAccount?.typeOfUser === "admin" && (
