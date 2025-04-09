@@ -19,8 +19,7 @@ import FAQ from "./pages/FAQ";
 // ! to improve:
 
 // * going to url (signup e.g.) DIRECTLY DOESN'T WORK
-
-// ! WHEN ADDING TO CARD, UNFOCUS AFTER CLICK
+// ! WHEN ADDING TO CART, UNFOCUS AFTER CLICK
 // * WHITE SPACES ON MOBILE!!!!!!!!!!!!!!!
 // * WHITE SPACES ON MOBILE!!!!!!!!!!!!!!!
 // * WHITE SPACES ON MOBILE!!!!!!!!!!!!!!!
@@ -67,8 +66,8 @@ function App() {
               <Route path="faq" element={<FAQ />} />
               <Route path="order/:orderID" element={<Order />} />
               <Route path="orders" element={<Orders />}></Route>
+              <Route path="*" element={<PageNotFound />} />
             </Route>
-            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </ModalProvider>
       </BrowserRouter>

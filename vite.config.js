@@ -10,4 +10,8 @@ export default defineConfig({
   build: {
     target: "esnext", // or a more recent ES version like 'es2022'
   },
+
+  server: {
+    historyApiFallback: true, // for local dev if needed
+  },
 });
