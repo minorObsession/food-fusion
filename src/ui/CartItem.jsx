@@ -144,11 +144,21 @@ function CartItem({ item }) {
       </NameAndQuantity>
       <Price>${item.quantity * item.unitPrice}</Price>
       <ModifyDiv>
-        <ModifyButton onClick={() => dispatch(decreaseItemQuantity(item))}>
+        <ModifyButton
+          onClick={(e) => {
+            dispatch(decreaseItemQuantity(item));
+            e.currentTarget.blur();
+          }}
+        >
           -
         </ModifyButton>
-        <span style={{ width: "1rem" }}>{item.quantity}</span>
-        <ModifyButton onClick={() => dispatch(increaseItemQuantity(item))}>
+        <span>{item.quantity}</span>
+        <ModifyButton
+          onClick={(e) => {
+            dispatch(decreaseItemQuantity(item));
+            e.currentTarget.blur();
+          }}
+        >
           +
         </ModifyButton>
         <DeleteBtn onClick={() => dispatch(deleteItemFromCart(item))}>

@@ -16,14 +16,6 @@ import Orders from "./pages/Orders";
 import FoodProductPage from "./pages/FoodPage";
 import FAQ from "./pages/FAQ";
 
-// ! to improve:
-
-// * going to url (signup e.g.) DIRECTLY DOESN'T WORK
-// ! WHEN ADDING TO CART, UNFOCUS AFTER CLICK
-// * WHITE SPACES ON MOBILE!!!!!!!!!!!!!!!
-// * WHITE SPACES ON MOBILE!!!!!!!!!!!!!!!
-// * WHITE SPACES ON MOBILE!!!!!!!!!!!!!!!
-
 function App() {
   const queryClient = new QueryClient({
     defaultOptions: {

@@ -22,7 +22,21 @@
     />
   </head>
   <body>
+    <style>
+      body {
+        visibility: hidden;
+      }
+    </style>
     <div class="background-image" id="root"></div>
+    <script defer>
+      const img = new Image();
+      img.src =
+        "https://ioefjkssfcuhmvvolteu.supabase.co/storage/v1/object/public/other-photos/background-photo.jpg";
+
+      img.onload = () => {
+        document.body.style.visibility = "visible";
+      };
+    </script>
     <script defer type="module" src="/src/main.jsx"></script>
   </body>
 </html>

@@ -84,47 +84,30 @@ const OrderClearBtns = styled.div`
   }
 `;
 
-const OrderBtn = styled.button`
+const ButtonBase = styled.button`
   padding: 2rem;
 
   @media (min-width: 1024px) {
-    padding: 2.5rem;
-    font-size: 18px;
+    padding: 2rem;
+    font-size: 1.5rem;
+  }
+  @media (min-width: 1024px) {
+    padding: 2rem 3.5rem;
+    font-size: 2rem;
   }
 
   &:active,
   &:focus {
     box-shadow: var(--shadow-md);
-    background-color: var(--color-brand -500);
-    font-weight: 600;
-    outline: 2px solid var(--color-brand-300);
-  }
-
-  &:hover {
     background-color: var(--color-brand-500);
+    /* font-weight: 600; */
+    outline: 2px solid var(--color-brand-300);
   }
 `;
 
-const ClearBtn = styled.button`
-  padding: 2rem;
+const OrderBtn = styled(ButtonBase)``;
+const ClearBtn = styled(ButtonBase)`
   background-color: var(--color-grey-200);
-
-  @media (min-width: 1024px) {
-    padding: 2.5rem;
-    font-size: 18px;
-  }
-
-  &:active,
-  &:focus {
-    box-shadow: var(--shadow-md);
-    background-color: var(--color-brand -500);
-    font-weight: 600;
-    outline: 2px solid var(--color-brand-300);
-  }
-
-  &:hover {
-    background-color: var(--color-brand-500);
-  }
 `;
 
 const DiscountDiv = styled.div`

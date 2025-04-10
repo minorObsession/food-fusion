@@ -24,7 +24,7 @@ const StyledSidebar = styled.nav`
   width: ${({ $collapsed }) => ($collapsed ? "8rem" : "23rem")};
   background-color: var(--color-brand-200);
   border-right: 2px solid var(--color-grey-300);
-  padding: 1rem;
+  padding: 2rem;
   z-index: 500;
   transition: width 0.3s ease;
 
@@ -59,9 +59,8 @@ const LogoutBox = styled.div`
   align-items: center;
   opacity: ${({ $collapsed }) => ($collapsed ? "0" : "1")};
 
-  transition: opacity 0.2s
-      ${({ $collapsed }) => ($collapsed ? "ease" : "ease 0.2s")},
-    max-width 0.3s ease, margin-left 0.3s ease;
+  transition: opacity 0.8s ease, max-width 0.8s ease, margin-left 0.8s ease;
+
   &:hover {
     cursor: pointer;
   }
@@ -85,22 +84,13 @@ const CollapseBtn = styled.button`
   }
 `;
 
-const LogoutBtn = styled.button`
-  border-radius: 50%;
-  color: var(--color-grey-50);
-  width: 3rem;
-  background-color: var(--color-grey-500);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`;
 const StyledNavLink = styled(NavLink)`
   font-weight: 600;
   display: flex;
   align-items: center;
   border-radius: var(--border-radius-lg);
   padding: 0.5rem 1rem;
-  transition: all 0.3s ease-in-out;
+  transition: width 0.5s ease-in-out, color 0.3s ease;
   overflow: hidden;
   width: ${({ $collapsed }) => ($collapsed ? "4rem" : "100%")};
   position: relative;
@@ -163,6 +153,16 @@ const UsernameSidebar = styled.span`
     max-width 0.3s ease, margin-left 0.3s ease;
 `;
 
+const LogoutBtn = styled.button`
+  border-radius: 50%;
+  color: var(--color-grey-50);
+  width: 3rem;
+  background-color: var(--color-grey-500);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
 function Sidebar() {
   const [collapsed, setCollapsed] = useState(true);
   const { currentAccount } = useSelector((store) => store.accounts);
@@ -190,7 +190,10 @@ function Sidebar() {
 
       <CollapseBtn
         $collapsed={collapsed}
-        onClick={() => setCollapsed((s) => !s)}
+        onClick={(e) => {
+          setCollapsed((s) => !s);
+          e.currentTarget.blur();
+        }}
       >
         {collapsed ? ">" : "<"}
       </CollapseBtn>

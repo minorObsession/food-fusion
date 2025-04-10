@@ -64,27 +64,22 @@ const ButtonsDiv = styled.div`
 `;
 
 const LoginSignupDiv = styled.div`
-  /* align-self: flex-end; */
+  justify-self: center;
+
   display: flex;
-  /* flex-direction: column; */
+  align-self: end;
 
   gap: 1rem;
   grid-column: 1 / span 2;
-  justify-self: center;
 
   @media (min-width: 480px) {
-    /* grid-template-columns: 30% 35% 35%; */
-    flex-direction: row;
-    align-self: end;
-
     justify-self: end;
+
+    flex-direction: row;
   }
   @media (min-width: 768px) {
-    /* grid-template-columns: 30% 35% 35%; */
     flex-direction: column;
-
     grid-column: 3;
-    /* justify-self: end; */
   }
 `;
 
@@ -240,13 +235,19 @@ function FoodItem({ food }) {
           <ButtonsDiv>
             <ModifyDiv>
               <ModifyButton
-                onClick={() => dispatch(decreaseItemQuantity(food))}
+                onClick={(e) => {
+                  dispatch(decreaseItemQuantity(food));
+                  e.currentTarget.blur();
+                }}
               >
                 -
               </ModifyButton>
               <span style={{ width: "1rem" }}>{quantityInCart}</span>
               <ModifyButton
-                onClick={() => dispatch(increaseItemQuantity(food))}
+                onClick={(e) => {
+                  dispatch(increaseItemQuantity(food));
+                  e.currentTarget.blur();
+                }}
               >
                 +
               </ModifyButton>
@@ -286,10 +287,10 @@ function FoodItem({ food }) {
         (!currentAccount && (
           <LoginSignupDiv>
             <NavLink to="/loginCustomer">
-              <Button>Log In</Button>
+              <Button style={{ width: "100%" }}>Log In</Button>
             </NavLink>
             <NavLink to="/signup">
-              <Button>Sign Up</Button>
+              <Button style={{ width: "100%" }}>Sign Up</Button>
             </NavLink>
           </LoginSignupDiv>
         ))
