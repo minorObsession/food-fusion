@@ -22,16 +22,18 @@ export function formatCurrency(value) {
   }).format(value);
 }
 
-export const formatDate = (date) =>
-  new Intl.DateTimeFormat("en", {
-    day: "numeric",
-    month: "short",
-    year: "numeric",
-    weekday: "short",
-    time: "short",
-    hour: "numeric",
-    minute: "numeric",
-  }).format(new Date(date));
+export const formatDate = (date, options = null) =>
+  options
+    ? new Intl.DateTimeFormat("en", options).format(new Date(date))
+    : new Intl.DateTimeFormat("en", {
+        day: "numeric",
+        month: "short",
+        year: "numeric",
+        weekday: "short",
+        time: "short",
+        hour: "numeric",
+        minute: "numeric",
+      }).format(new Date(date));
 
 async function reverseGeocodingCurrentPosition(latitude, longitude) {
   try {

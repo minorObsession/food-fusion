@@ -4,47 +4,50 @@ const StyledOrderItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* flex-grow: 1; */
-  /* gap: 2rem; */
+
+  border-bottom: 1px dotted black;
+
+  ${({ isLastItem }) =>
+    isLastItem &&
+    `
+border:none;
+  `}
+`;
+
+const ItemName = styled.span`
+  width: 40%;
+  white-space: pre-wrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 `;
 
 const NumbersBreakdownDiv = styled.div`
-  display: flex;
-  gap: 0.5rem;
+  white-space: nowrap;
+  justify-self: end;
+
+  width: 13rem;
 `;
 
-const UnitPrice = styled.span`
-  /* grid-column: 3; */
-  /* justify-self: end; */
-  /* width: 7%; */
-`;
-const UnitQuantity = styled.span`
-  /* grid-column: 3; */
-  /* justify-self: end; */
-  /* width:1rem; */
-`;
+const UnitPrice = styled.span``;
+const UnitQuantity = styled.span``;
 
 const TotalForItem = styled.span`
   font-weight: 500;
 `;
-const PriceQuantity = styled.div``;
 
-function OrderItem({ item }) {
-  // console.log(item);
-
+function OrderItem({ item, isOrderCollapsed, isLastItem }) {
   return (
-    <StyledOrderItem>
-      <span>{item.name}</span>
-      <NumbersBreakdownDiv>
-        <PriceQuantity>
-          <UnitQuantity>{item.quantity} x </UnitQuantity>
-          <UnitPrice>${item.unitPrice}</UnitPrice>
-        </PriceQuantity>
-        <TotalForItem> = ${item.quantity * item.unitPrice}</TotalForItem>
+    <StyledOrderItem isLastItem={isLastItem}>
+      <ItemName>{item.name}</ItemName>
+      <NumbersBreakdownDiv $isOrderCollapsed={isOrderCollapsed}>
+        <UnitQuantity>{item.quantity}&nbsp;x&nbsp;</UnitQuantity>
+        <UnitPrice> ${item.unitPrice}</UnitPrice>
+        <TotalForItem $isOrderCollapsed={isOrderCollapsed}>
+          = ${item.quantity * item.unitPrice}
+        </TotalForItem>
       </NumbersBreakdownDiv>
     </StyledOrderItem>
   );
-  //  <div>{item.name}</div>
 }
 
 export default OrderItem;

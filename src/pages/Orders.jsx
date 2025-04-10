@@ -1,24 +1,8 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
-import { FoodPage, H1, H2 } from "../styles/reusableStyles";
+import { FoodPage, H2 } from "../styles/reusableStyles";
 import Order from "../ui/Order";
 
-const StyledOrders = styled.div`
-  margin: 0 auto;
-  padding: 1rem;
-  font-size: 1rem;
-
-  display: flex;
-  flex-direction: column;
-  /* gap: 3rem; */
-
-  @media (min-width: 480px) {
-    padding: 2rem;
-  }
-  @media (min-width: 1024px) {
-    padding: 4rem;
-  }
-`;
 const OrdersBox = styled.div`
   width: 100%;
   height: 80%;
@@ -34,6 +18,13 @@ const OrdersBox = styled.div`
   flex-grow: 1;
   flex-direction: column;
   gap: 2rem;
+
+  @media (min-width: 768px) {
+    max-width: 70vw;
+  }
+  @media (min-width: 1024px) {
+    max-width: 60vw;
+  }
 `;
 
 function Orders() {
